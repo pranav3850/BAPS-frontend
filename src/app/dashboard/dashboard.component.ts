@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardModel.contact = 9574315756
     this.getMandalType();
   }  
-  adminRole: any;
+  Role: any;
   relationList;
   mandalList;
   mandalTypeList;
@@ -42,10 +42,16 @@ export class DashboardComponent implements OnInit {
   selectedMandalType = 'Select Mandal Type';
   selectedRelation = 'Self';
   selectedMandal = 'Select Mandal';
+  totalFamily:number=0;
+  totalHaribhakt:number=0;
+  totalRedTick:number=0;
+  totalYelloTick:number=0;
+  totalGreenTick:number=0;
   constructor(
     private dashboardService: DashboardService,
     private apiService:ApiService
    ) {
+    this.Role='Admin';
    }
 
  getrelation(){
