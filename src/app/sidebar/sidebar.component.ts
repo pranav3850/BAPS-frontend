@@ -31,62 +31,13 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'nc-icon nc-bank',
     roles: "Admin",
 },
-{
-    path: '/register',
-    title: 'Register',
-    type: 'link',
-    icontype: 'fa fa-user',
-    roles: "Admin",
-},
+
+
+
+
+
 // {
-//     path: '/employee',
-//     title: 'Employee',
-//     type: 'link',
-//     icontype: 'fa fa-users',
-//     roles: "Admin",
-// },
-// {
-//     path: '/services',
-//     title: 'Services',
-//     type: 'link',
-//     icontype: 'fa fa-scissors',
-//     roles: "Admin",
-// },
-// {
-//     path: '/expenses',
-//     title: 'Expenses',
-//     type: 'link',
-//     icontype: 'fa fa-calculator',
-//     roles: "Admin",
-// },
-// {
-//     path: '/enquiry',
-//     title: 'Enquiry',
-//     type: 'link',
-//     icontype: 'fa fa-question',
-//     roles: "Admin",
-// },
-// {
-//     path: '/offer',
-//     title: 'Offer',
-//     type: 'link',
-//     icontype: 'fa fa-gift',
-//     roles: "Admin",
-// },
-// {
-//     path: '/stock',
-//     title: 'Stock',
-//     type: 'link',
-//     icontype: 'fa fa-cubes',
-//     roles: "Admin",
-// },
-// {
-//     path: '/products',
-//     title: 'Products',
-//     type: 'link',
-//     icontype: 'fa fa-product-hunt',
-//     roles: "Admin",
-// },
+
 
 ];
 export const Employee: RouteInfo[] = [
@@ -97,85 +48,17 @@ export const Employee: RouteInfo[] = [
         icontype: 'nc-icon nc-bank',
         roles: "Admin",
     },
-    // {
-    //     path: '/customer',
-    //     title: 'Sanchalak',
-    //     type: 'link',
-    //     icontype: 'fa fa-user',
-    //     roles: "Admin",
-    // },
     
-    // {
-    //     path: '/enquiry',
-    //     title: 'Enquiry',
-    //     type: 'link',
-    //     icontype: 'fa fa-question',
-    //     roles: "Admin",
-    // },
-    
-    // {
-    //     path: '/offer',
-    //     title: 'Offer',
-    //     type: 'link',
-    //     icontype: 'fa fa-gift',
-    //     roles: "Admin",
-    // },
-    
-    // {
-    //     path: '/stock',
-    //     title: 'Stock',
-    //     type: 'link',
-    //     icontype: 'fa fa-cubes',
-    //     roles: "Admin",
-    // },
+
 ];
-export const Sanchalak: RouteInfo[] = [
-    {
-        path: '/dashboard',
-        title: 'Dashboard',
-        type: 'link',
-        icontype: 'nc-icon nc-bank',
-        roles: "Admin",
-    },
-    {
-        path: '/sanchalak',
-        title: 'Sanchalak',
-        type: 'link',
-        icontype: 'fa fa-user',
-        roles: "Admin",
-    },
+
+
     /*
-    {
-        path: '/customer',
-        title: 'Sanchalak',
-        type: 'link',
-        icontype: 'fa fa-user',
-        roles: "Admin",
-    },
-    {
-        path: '/enquiry',
-        title: 'Enquiry',
-        type: 'link',
-        icontype: 'fa fa-question',
-        roles: "Admin",
-    },
-    {
-        path: '/stock',
-        title: 'Stock',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
-    {
-        path: '/products',
-        title: 'Products',
-        type: 'link',
-        icontype: 'fa fa-cubes',
-        roles: "Admin",
-    },
+
+
     */
     
-];
+
 @Component({
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
@@ -184,7 +67,7 @@ export const Sanchalak: RouteInfo[] = [
 export class SidebarComponent {
     public menuItems: any[];
     public subAdminMenuItems: any;
-    public sanchalakMenuItems: any;
+
     public Rolees = localStorage.getItem("role");
     public userName = localStorage.getItem("UserName");
     Roles:any ;
@@ -214,8 +97,8 @@ export class SidebarComponent {
         this.Roles = localStorage.getItem("role");
         this.uid=localStorage.getItem("UserId");
         this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.sanchalakMenuItems = Sanchalak.filter((menuItem) => menuItem);
-        this.subAdminMenuItems = Employee.filter((menuItem) => menuItem);
+
+        
     }
     ngAfterViewInit() {
     }
