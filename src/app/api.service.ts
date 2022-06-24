@@ -23,6 +23,8 @@ export class ApiService {
   public static getAllMandalListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalList/'
   public static getAllMandalTypeListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalTypeList'
   public static getAllRelationListURL: string = ApiService.HOST_URL + '/admin/GetAllRelationList'
+  public static saveMemberListURL: string = ApiService.HOST_URL + '/admin/SaveMemberList'
+  public static getAllSavedMembersListURL: string = ApiService.HOST_URL + '/admin/GetAllSavedMembersList'
   
   public static saveSanchalakListURL: string = ApiService.HOST_URL + '/admin/SaveSanchalakDetails'
   public static getAllSanchalakURL: string = ApiService.HOST_URL + '/admin/GetAllSanchalakDetails'
