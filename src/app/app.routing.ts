@@ -89,6 +89,11 @@ export const AppRoutes: Routes = [{
         path:'',
         loadChildren:'./register/register.module#RegisterModule',
        //  canActivate: [AuthGuard]
+    },
+    {
+        path:'',
+        loadChildren:'./profession-information/profession-information.module',
+       //  canActivate: [AuthGuard]
     }
     ]
 }, {
