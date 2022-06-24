@@ -177,7 +177,6 @@ export const Sanchalak: RouteInfo[] = [
     
 ];
 @Component({
-    moduleId: module.id,
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
 })
