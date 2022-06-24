@@ -22,16 +22,22 @@ export class DashboardComponent implements OnInit {
     this.getrelation();
     this.getMandalType();
   }  
-  adminRole: any;
+  Role: any;
   relationList;
   mandalList;
   mandalTypeList;
   selectedMandalType = 'Select Mandal Type';
   selectedRelation = 'Select Relation';
   selectedMandal = 'Select Mandal';
+  totalFamily:number=0;
+  totalHaribhakt:number=0;
+  totalRedTick:number=0;
+  totalYelloTick:number=0;
+  totalGreenTick:number=0;
   constructor(
     private dashboardService: DashboardService,
    ) {
+    this.Role='Admin';
    }
   familyinc(){
     this.tot_mem++
