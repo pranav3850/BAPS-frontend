@@ -23,12 +23,21 @@ export class ApiService {
   public static getAllMandalListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalList/'
   public static getAllMandalTypeListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalTypeList'
   public static getAllRelationListURL: string = ApiService.HOST_URL + '/admin/GetAllRelationList'
-
-
-
-
-
-
+  public static saveMemberListURL: string = ApiService.HOST_URL + '/admin/SaveMemberList'
+  public static getAllSavedMembersListURL: string = ApiService.HOST_URL + '/admin/GetAllSavedMembersList'
+  
+  public static saveSanchalakListURL: string = ApiService.HOST_URL + '/admin/SaveSanchalakDetails'
+  public static getAllSanchalakURL: string = ApiService.HOST_URL + '/admin/GetAllSanchalakDetails'
+  public static removeSanchalakURL: string = ApiService.HOST_URL + '/admin/RemoveSanchalakDetails/'
+  public static updateSanchalakListURL: string = ApiService.HOST_URL + '/admin/UpdateSanchalakDetails/'
+  
+  public static saveServicesListURL: string = ApiService.HOST_URL + '/admin/SaveServicesList';
+  public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
+  public static updateServicesListURL: string = ApiService.HOST_URL + '/admin/UpdateServicesList/';
+  public static saveEmployeeListURL: string = ApiService.HOST_URL + '/admin/SaveEmployeeList';
+  public static getAllEmployeeURL: string = ApiService.HOST_URL + '/admin/GetAllEmployee';
+  public static removeEmployeeListURL: string = ApiService.HOST_URL + '/admin/RemoveEmployeeList/';
+  public static saveCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveCustomerList';
   public static saveLoginUserURL: string = ApiService.HOST_URL + '/authenticate/UserLogin';
 
 
