@@ -8,8 +8,6 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from 'app/material/material.module';
-import { CustomerModule } from 'app/customer/customer.module';
-import { CustomerComponent } from 'app/customer/customer.component';
 import { ProfessionInformationComponent } from 'app/profession-information/profession-information.component';
 
 @NgModule({
@@ -20,13 +18,11 @@ import { ProfessionInformationComponent } from 'app/profession-information/profe
     MaterialModule,
     NgxPaginationModule,
     ProfessionInformationModule,
-    CustomerModule,
    
   ],
   declarations: [DashboardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[
-    CustomerComponent,
     ProfessionInformationComponent
   ]
 })
