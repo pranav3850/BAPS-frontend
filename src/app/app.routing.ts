@@ -21,6 +21,7 @@ export const AppRoutes: Routes = [{
         loadChildren: './password/password.module#PasswordModule',
        //  canActivate: [AuthGuard]
     },
+<<<<<<< HEAD
     {
         path: '',
         loadChildren: './userpage/user.module#UserModule',
@@ -95,6 +96,18 @@ export const AppRoutes: Routes = [{
         loadChildren:'./profession-information/profession-information.module',
        //  canActivate: [AuthGuard]
     }
+
+   
+   
+
+ 
+   
+   
+ 
+  
+
+   
+
     ]
 }, {
     path: '',
