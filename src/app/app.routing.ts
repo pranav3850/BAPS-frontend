@@ -20,11 +20,9 @@ export const AppRoutes: Routes = [{
         loadChildren:'./password/password.module#PasswordModule'
         
     },
-  
-  
     {
         path:'',
-        loadChildren:'./profession-information/profession-information.module',
+        loadChildren:'./profession-information/profession-information.module#ProfessionInformationModule',
        //  canActivate: [AuthGuard]
     }
 
