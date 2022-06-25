@@ -21,9 +21,7 @@ export class DashboardComponent implements OnInit {
   public relationModel:Relation[] = [];
   public memberlist;
   tot_mem :number= 1; 
-  public myForm:Array<Object> = [
-    {contact: 9313376199, name: 'Kush Vijaykumar Shah'},
-  ]
+
   public ngOnInit() {
     $(document).ready(function(){
       $("#exampleModalCenter").modal('show');

@@ -5,7 +5,7 @@ import { PasswordComponent } from './password.component';
 export const PasswordRoutes: Routes = [{
     path: '',
     children: [{
-        path: '',
+        path: 'password',
         component: PasswordComponent
     }]
 }];
