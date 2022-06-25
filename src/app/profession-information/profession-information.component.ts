@@ -15,7 +15,7 @@ export class ProfessionInformationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    debugger
+
   }
 
 }

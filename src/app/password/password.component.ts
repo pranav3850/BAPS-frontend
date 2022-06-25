@@ -28,7 +28,7 @@ export class PasswordComponent implements OnInit {
     }
     debugger
     this.loginService.CheckPassword(data).subscribe((res: any) => {
-      debugger
+
       if (res.length >= 1) {
         this.oldpass = false;
       }
