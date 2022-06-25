@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { MaterialModule } from 'app/material/material.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RouterModule } from '@angular/router';
+import {ProfessionRouter } from './'
 
 
 
@@ -13,6 +15,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     CommonModule,
     FormsModule,
+  RouterModule.forChild(ProfessionRoutes),
     NgxPaginationModule,
     AngularMultiSelectModule,
     MaterialModule,
