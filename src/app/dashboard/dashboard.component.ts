@@ -5,6 +5,7 @@ import {Relation} from './relation.model'
 
 import { DashboardService } from './dashboard.service';
 import { ApiService } from 'app/api.service';
+import { Profession } from './profession.model';
 
 declare const $: any;
 
@@ -16,6 +17,7 @@ declare const $: any;
 export class DashboardComponent implements OnInit {
 
   public dashboardModelarr :Dashboard[] = [];
+  public professionModel : Profession[] = [];
   public dashboardModel: Dashboard = new Dashboard;
   public mandalModel:Mandal[] = [];
   public relationModel:Relation[] = [];
@@ -35,8 +37,8 @@ export class DashboardComponent implements OnInit {
   mandalList;
   mandalTypeList;
   addedMembers;
-  strpArray:any=[];
-
+ public  strpArray:any=[];
+  basicInfo:any=[];
   selectedMandalType = 'Select Mandal Type';
   selectedRelation = 'Self';
   selectedMandal = 'Select Mandal';
@@ -62,6 +64,21 @@ export class DashboardComponent implements OnInit {
     this.mandalTypeList = data;
   });
  }
+ getmandal(type){
+  this.mandalList=[];
+   this.dashboardService.getAllMandalList(type).subscribe((data: any) =>{  
+     this.mandalList = data;
+   });
+ }
+ selectedmandaltype(type,ind) {
+  this.mandalTypeList.forEach(element => {
+    if (element.mandaltype == type) {
+      this.dashboardModelarr[ind].mandaltype = element.mandaltype;
+      this.getmandal(element.mandaltype);
+    }
+  })
+ 
+}
 
   selectedrelation(id,ind) {
     this.relationList.forEach(element => {
@@ -71,39 +88,38 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-  saveDraft(data){
+
+  saveDraft(data,ind){
     let test=[];
     test.push(data);
      // //  this.dashboardModel.index = 
      this.dashboardService.saveData(test).subscribe((res) =>{
-      if(res.length >0){
+      debugger
+      if(res == 'Contactno is not unique'){
+        this.apiService.showNotification('top', 'right', 'Contact Number is not Unique.', 'danger');
+      }
+      else if(res.length >0){
         data.status=res[0].status;
         data.userId=res[0].id;
         this.strpArray.push(data);
         this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
+        this.dashboardModelarr.splice(ind,1);
+        this.openProffesionalForm();
       }
      })
+  }
+  openProffesionalForm(){
+   this.professionModel=this.strpArray;
+   this.professionModel
+    debugger
   }
   getSavedMembers(){
     this.dashboardService.getSavedMembersList().subscribe((data:any) =>{
       this.addedMembers = data;
     })
   }
-  selectedmandaltype(type,ind) {
-    this.mandalTypeList.forEach(element => {
-      if (element.mandaltype == type) {
-        this.dashboardModelarr[ind].mandaltype = element.mandaltype;
-        this.getmandal(element.mandaltype);
-      }
-    })
-   
-  }
-  getmandal(type){
-   this.mandalList=[];
-    this.dashboardService.getAllMandalList(type).subscribe((data: any) =>{  
-      this.mandalList = data;
-    });
-  }
+  
+  
 
   selectedmandal(id,ind) {
     this.mandalList.forEach(element => {
