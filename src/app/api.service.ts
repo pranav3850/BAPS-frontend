@@ -7,7 +7,7 @@ declare var $: any;
 export class ApiService {
   public static HOST_URL: string = "http://localhost:8090";
   // public static HOST_URL: string = "http://31.220.111.153:8090";
- 
+
 
   constructor(
 
@@ -27,19 +27,21 @@ export class ApiService {
   public static getAllRelationListURL: string = ApiService.HOST_URL + '/admin/GetAllRelationList'
   public static saveMemberListURL: string = ApiService.HOST_URL + '/admin/SaveMemberList'
   public static getAllSavedMembersListURL: string = ApiService.HOST_URL + '/admin/GetAllSavedMembersList';
-  public static  SaveProffesionInfoURL: string = ApiService.HOST_URL + '/admin/SaveProffesionInfo';
-  public static  createFamilyURL: string = ApiService.HOST_URL + '/admin/createFamily';
-  public static  getOldDetailsURL: string = ApiService.HOST_URL + '/admin/getOldDetails';
-  public static  getAllFamilyListURL: string = ApiService.HOST_URL + '/admin/getAllFamilyList';
-  
+  public static SaveProffesionInfoURL: string = ApiService.HOST_URL + '/admin/SaveProffesionInfo';
+  public static createFamilyURL: string = ApiService.HOST_URL + '/admin/createFamily';
+  public static getOldDetailsURL: string = ApiService.HOST_URL + '/admin/getOldDetails';
+  public static getAllFamilyListURL: string = ApiService.HOST_URL + '/admin/getAllFamilyList';
+  public static removeHaribhaktDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveHaribhaktDetails/';
+  public static removeMandalDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveMandalDetails/';
+  public static getHaribhaktInfoURL: string = ApiService.HOST_URL + '/admin/GetHaribhaktInfo';
 
 
-  public static  getRedtickCountURL: string = ApiService.HOST_URL + '/admin/getRedtickCount'
-  public static  getYellowtickCountURL: string = ApiService.HOST_URL + '/admin/getYellowtickCount'
-  public static  getGreentickCountURL: string = ApiService.HOST_URL + '/admin/getGreentickCount'
- 
- 
-  
+  public static getRedtickCountURL: string = ApiService.HOST_URL + '/admin/getRedtickCount'
+  public static getYellowtickCountURL: string = ApiService.HOST_URL + '/admin/getYellowtickCount'
+  public static getGreentickCountURL: string = ApiService.HOST_URL + '/admin/getGreentickCount'
+
+
+
   public static saveSanchalakListURL: string = ApiService.HOST_URL + '/admin/SaveSanchalakDetails'
   public static getAllSanchalakURL: string = ApiService.HOST_URL + '/admin/GetAllSanchalakDetails'
   public static removeSanchalakURL: string = ApiService.HOST_URL + '/admin/RemoveSanchalakDetails/'
@@ -47,7 +49,7 @@ export class ApiService {
 
 
   public static getAllHaribhaktURL: string = ApiService.HOST_URL + '/admin/getAllHaribhakt'
-  
+
 
 
 

@@ -1,8 +1,8 @@
 <div class="main-content">
+    <!-- Cards for all Counting Start -->
     <div class="row">
-
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="Role == 'Admin'">
-            <div class="card card-stats" (click)="openCustomer()">
+            <div class="card card-stats" (click)="openTotalFamilies()">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
@@ -13,7 +13,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Total</p>
-                                <p class="card-title">Families: {{totalFamily.length}}
+                                <p class="card-title">Families: {{tFamily.length}}
                                 </p>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="Role == 'Admin'">
-            <div class="card card-stats" (click)="openServices()">
+            <div class="card card-stats" (click)="openTotalHaribhakt()">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
@@ -39,7 +39,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Total</p>
-                                <p class="card-title">Haribhakt: {{ totalHaribhakt.length}}
+                                <p class="card-title">Haribhakt: {{ tHaribhakt.length}}
                                 </p>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="Role == 'Admin'">
-            <div class="card card-stats" (click)="openServCustom()">
+            <div class="card card-stats" (click)="openTotalMandal()">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
@@ -65,7 +65,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Total</p>
-                                <p class="card-title">Mandal: {{ allMandalList.length}}
+                                <p class="card-title">Mandal: {{ tMandal.length}}
                                 </p>
                             </div>
                         </div>
@@ -79,9 +79,8 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="Role == 'Admin'">
-            <div class="card card-stats" (click)="openEniquiry()">
+            <div class="card card-stats" (click)="opentotalRedtick()">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
@@ -159,6 +158,365 @@
             </div>
         </div>
     </div>
+    <!-- Cards for all Counting End -->
+
+    <!-- DataTable for openFamilies Start -->
+    <div class="row" *ngIf="openFamiliesFlag">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title">Families List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                                By</label>
+                        </div>
+                        <div class="col-md-3 ml-md-auto">
+                            <div class="form-group" style="margin-top: 8px !important;">
+                                <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
+                                    [(ngModel)]="search" (keyup)="searchFamiliesList($event.target.value)"
+                                    aria-label="Search" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Family Id</th>
+                                <th class="text-center">Contact Number</th>
+                                <th class="text-center">Total Members</th>
+                                <th class="text-right">Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of totalFamily | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.familyId }}</td>
+                                    <td class="text-center">{{ item.mobNo }}</td>
+                                    <td class="text-center">{{ item.noOfFamilyMem }}</td>
+                                    <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" data-toggle="modal" data-target="#familyModal"
+                                                (click)="viewFamilyMembersDetails(item.familyId)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <!-- <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" ></i>
+                                        </button> -->
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeOfferList(item.id)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
+                                responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="familyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">View Family Members</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Mandal Name</th>
+                                <th class="text-center">Relationship</th>
+                                <th class="text-center">Contact Number</th>
+                                <!-- <th class="text-right">Actions</th> -->
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of viewMembers | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.firstName}} {{item.lastName}}</td>
+                                    <td class="text-center">{{ item.mandalName }}</td>
+                                    <td class="text-center">{{ item.relationship }}</td>
+                                    <td class="text-center">{{ item.contactNo }}</td>
+                                    <!-- <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
+                                                (click)="viewOfferDetails(item)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeOfferList(item.id)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <!-- <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                    (click)="updateOfferDetails()">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                </button> -->
+                    <button type="button" class="btn btn-secondary btn-round" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- DataTable for openFamilies End -->
+
+    <!-- DataTable for openFamilies Start -->
+    <div class="row" *ngIf="openHaribhaktFlag">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title">Haribhakt List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                                By</label>
+                        </div>
+                        <div class="col-md-3 ml-md-auto">
+                            <div class="form-group" style="margin-top: 8px !important;">
+                                <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
+                                    [(ngModel)]="search" (keyup)="searchHaribhaktList($event.target.value)"
+                                    aria-label="Search" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Mandal Name</th>
+                                <th class="text-center">Relationship</th>
+                                <th class="text-center">Contact Number</th>
+                                <th class="text-right">Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of totalHaribhakt | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.firstName}} {{item.lastName}}</td>
+                                    <td class="text-center">{{ item.mandalName }}</td>
+                                    <td class="text-center">{{ item.relationship }}</td>
+                                    <td class="text-center">{{ item.contactNo }}</td>
+                                    <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
+                                                (click)="viewOfferDetails(item)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeHaribhaktList(item.userId)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
+                                responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- DataTable for openFamilies End -->
+
+    <!-- DataTable for openMandal Start -->
+    <div class="row" *ngIf="openMandalFlag">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title">Mandal List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                                By</label>
+                        </div>
+                        <div class="col-md-3 ml-md-auto">
+                            <div class="form-group" style="margin-top: 8px !important;">
+                                <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
+                                    [(ngModel)]="search" (keyup)="searchManadalList($event.target.value)"
+                                    aria-label="Search" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Mandal Type</th>
+                                <th class="text-center">Mandal Name</th>
+                                <th class="text-right">Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of allMandalList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.mandaltype }}</td>
+                                    <td class="text-center">{{ item.name}}</td>
+                                    <td class="text-right">
+                                        <!-- <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
+                                                (click)="viewOfferDetails(item)"></i>
+                                        </button>
+                                        &nbsp; -->
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeMandalList(item.userId)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
+                                responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DataTable for openMandal End -->
+
+    <!-- DataTable for RedTick Start -->
+    <div class="row" *ngIf="openRedtickFlag">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title">Mandal List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                                By</label>
+                        </div>
+                        <div class="col-md-3 ml-md-auto">
+                            <div class="form-group" style="margin-top: 8px !important;">
+                                <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
+                                    [(ngModel)]="search" (keyup)="searchManadalList($event.target.value)"
+                                    aria-label="Search" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Mandal Type</th>
+                                <th class="text-center">Mandal Name</th>
+                                <th class="text-right">Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of allMandalList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.mandaltype }}</td>
+                                    <td class="text-center">{{ item.name}}</td>
+                                    <td class="text-right">
+                                        <!-- <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
+                                                (click)="viewOfferDetails(item)"></i>
+                                        </button>
+                                        &nbsp; -->
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeMandalList(item.userId)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
+                                responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
 
@@ -166,6 +524,20 @@
 
 
     <div *ngIf="strpArray.length>0">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="card-title" style="margin-top: 10px !important;">Registerd Members List</h4>
+                </div>
+
+                <div class="col-md-3 ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round" (click)="newUser()">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New Members
+                    </button>
+                </div>
+
+            </div>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
@@ -179,8 +551,8 @@
                         <th class="text-center">Actions</th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of strpArray |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:strpArray.length };let ind=index"
-                           >
+                        <tr
+                            *ngFor="let item of strpArray |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:strpArray.length };let ind=index">
                             <td class="text-left">{{ind+1}}</td>
                             <td class="text-center">
                                 <i class="fa fa-circle text-danger" style="font-size: large;" aria-hidden="true"
@@ -196,7 +568,7 @@
                             <td class="text-left">{{item.relationship}}</td>
                             <td class="text-center">
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                                    <i class="fa fa-eye"  (click)="openViewInfo(item)" ></i>
+                                    <i class="fa fa-eye" (click)="openViewInfo(item)"></i>
                                 </button>
                             </td>
 
@@ -204,16 +576,24 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
-
-
     <!--Family Member form loop -->
     <div *ngIf="dashboardModelarr.length>0">
         <div *ngFor="let i of dashboardModelarr; let ind=index">
             <div class="card">
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-11">
+                        <h5 class="text-center" >Member {{ind+1}} </h5>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm">
+                            <i class="fa fa-close" (click)="removeItem(ind)"></i>
+                        </button>
+                    </div>
+                </div>
                 <form class="loopforms">
-                    <h5 class="text-center">Member {{ind+1}} </h5>
                     <div class="row">
                         <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
                             <label>
@@ -352,7 +732,16 @@
         <div *ngFor="let item of professionModel; let ind=index">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="text-center">Profession Information</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="text-center">Profession Information</h5>
+                        </div>
+                        <!-- <div class="col-md-1">
+                            <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm">
+                                <i class="fa fa-close" (click)="openViewInfo(item)"></i>
+                            </button>
+                        </div> -->
+                    </div>
                     <h6 class="small text-muted text-center">For Member {{ind+1}}</h6>
                 </div>
                 <div class="card-body">
@@ -707,431 +1096,437 @@
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <br />
-            <h5 class="modal-title text-center">
-                Add Number of Family Members
-                <br>
-                <small class="text-muted">(Including You)</small>
-            </h5>
-            <div class="modal-body">
-                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                    <input type="text" class="form-control" id="family" [(ngModel)]="tot_mem" name="family" value=""
-                        pattern="[0-9]{0,10}" (focus)="focus = true" #noofmem="ngModel" />
-                </div>
-                <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
-                    <div [hidden]="!family.errors('pattern')">
-                        Enter Valid Numbers
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <br />
+                <h5 class="modal-title text-center">
+                    Add Number of Family Members
+                    <br>
+                    <small class="text-muted">(Including You)</small>
+                </h5>
+                <div class="modal-body">
+                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                        <input type="text" class="form-control" id="family" [(ngModel)]="tot_mem" name="family" value=""
+                            pattern="[0-9]{0,10}" (focus)="focus = true" #noofmem="ngModel" />
+                    </div>
+                    <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
+                        <div [hidden]="!family.errors('pattern')">
+                            Enter Valid Numbers
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ml-md-auto">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="AddMoreMember()">Save
-                    changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="ml-md-auto">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="AddMoreMember()">Save
+                        changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<!-- Edit modal -->
-<div class="modal fade" id="DuplicateNoModalCenter" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <br />
-            <h5 class="modal-title text-center">
-                {{duplicateUser.firstName}} {{duplicateUser.middleName}} {{duplicateUser.lastName}} Already registered
-                <br>
-                <small class="text-muted">Enter otp to add in family</small>
-            </h5>
-            <div class="modal-body">
-                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                    <input type="text" class="form-control" [(ngModel)]="otp" name="otp" />
-                </div>
-                <!-- <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
+    <!-- Edit modal -->
+    <div class="modal fade" id="DuplicateNoModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <br />
+                <h5 class="modal-title text-center">
+                    {{duplicateUser.firstName}} {{duplicateUser.middleName}} {{duplicateUser.lastName}} Already
+                    registered
+                    <br>
+                    <small class="text-muted">Enter otp to add in family</small>
+                </h5>
+                <div class="modal-body">
+                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                        <input type="text" class="form-control" [(ngModel)]="otp" name="otp" />
+                    </div>
+                    <!-- <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
                     <div [hidden]="!family.errors('pattern')">
                         Enter Valid Numbers
                     </div>
                 </div> -->
-            </div>
-            <div class="ml-md-auto">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal"
-                    (click)="AddExistUser()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="ml-md-auto">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                        (click)="AddExistUser()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-notice">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <i class="nc-icon nc-simple-remove"></i>
-                </button>
-                <h5 class="modal-title" id="myModalLabel">Add New Customer</h5>
-            </div>
-            <div class="modal-body">
-              
-                            <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label class="labeltext">
-                                            <h6>First Name</h6>
-                                        </label>
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">Add New Customer</h5>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label class="labeltext">
+                                    <h6>First Name</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="fname" name="fname"
+                                        [(ngModel)]="professionViewModel.firstName" placeholder=" Enter First Name "
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #fname="ngModel" />
+                                </div>
+                                <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
+                                    <div *ngIf="fname.errors.required">
+                                        First Name is required
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="fname" name="fname"
-                                                [(ngModel)]="professionViewModel.firstName" placeholder=" Enter First Name " required value=""
-                                                pattern="[A-Za-z]{1,32}" (focus)="focus = true" #fname="ngModel"  />
-                                        </div>
-                                        <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
-                                            <div *ngIf="fname.errors.required">
-                                                First Name is required
-                                            </div>
-                                            <div [hidden]="!fname.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
-                                        </div>
+                                    <div [hidden]="!fname.errors('pattern')">
+                                        Numbers and Special Characters not allowed
                                     </div>
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Middle Name</h6>
-                                        </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Middle Name</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="mname" name="mname"
+                                        [(ngModel)]="professionViewModel.middleName" placeholder=" Enter Middle Name "
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #mname="ngModel" />
+                                </div>
+                                <div *ngIf="mname.errors && (mname.dirty || mname.touched)" class="alert alert-danger">
+                                    <div *ngIf="mname.errors.required">
+                                        Middle Name is required
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="mname" name="mname"
-                                                [(ngModel)]="professionViewModel.middleName" placeholder=" Enter Middle Name " required
-                                                value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true" #mname="ngModel"
-                                                 />
-                                        </div>
-                                        <div *ngIf="mname.errors && (mname.dirty || mname.touched)" class="alert alert-danger">
-                                            <div *ngIf="mname.errors.required">
-                                                Middle Name is required
-                                            </div>
-                                            <div [hidden]="!mname.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
-                                        </div>
+                                    <div [hidden]="!mname.errors('pattern')">
+                                        Numbers and Special Characters not allowed
                                     </div>
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Last Name</h6>
-                                        </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Last Name</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="lname" name="lname"
+                                        [(ngModel)]="professionViewModel.lastName" placeholder=" Enter Last Name "
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #lname="ngModel" />
+                                </div>
+                                <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
+                                    <div *ngIf="lname.errors.required">
+                                        Last Name is required
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="lname" name="lname"
-                                                [(ngModel)]="professionViewModel.lastName" placeholder=" Enter Last Name " required value=""
-                                                pattern="[A-Za-z]{1,32}" (focus)="focus = true" #lname="ngModel"  />
-                                        </div>
-                                        <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
-                                            <div *ngIf="lname.errors.required">
-                                                Last Name is required
-                                            </div>
-                                            <div [hidden]="!lname.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
+                                    <div [hidden]="!lname.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Contact Number</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="contact"
+                                        [(ngModel)]="professionViewModel.contactNo" name="contact"
+                                        placeholder="Enter Contact Number" required value="" pattern="^[0-9].{9,9}$"
+                                        (focus)="focus = true" #contact="ngModel" />
+                                </div>
+                                <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="contact.errors.required">
+                                        Contact Address is required.
+                                    </div>
+                                    <div [hidden]="!contact.errors('pattern')">
+                                        Enter Only Numbers.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ professionViewModel.mandaltype }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right"
+                                        aria-labelledby="dropdownMenuButton2">
+                                        <div class="dropdown-header">Select Mandal Type</div>
+                                        <div *ngFor="let i of mandalTypeList">
+                                            <a class="dropdown-item"
+                                                (click)="selectedmandaltype(i.mandaltype)">{{i.mandaltype}}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Contact Number</h6>
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="contact" [(ngModel)]="professionViewModel.contactNo"
-                                                name="contact" placeholder="Enter Contact Number" required value=""
-                                                pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel"  />
-                                        </div>
-                                        <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="contact.errors.required">
-                                                Contact Address is required.
-                                            </div>
-                                            <div [hidden]="!contact.errors('pattern')">
-                                                Enter Only Numbers.
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                                        <div class="dropdown form-group">
-                                            <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                                name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false" >
-                                                {{ professionViewModel.mandaltype }}
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="dropdownMenuButton2">
-                                                <div class="dropdown-header">Select Mandal Type</div>
-                                                <div *ngFor="let i of mandalTypeList">
-                                                    <a class="dropdown-item"
-                                                        (click)="selectedmandaltype(i.mandaltype)">{{i.mandaltype}}</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                                        <div class="dropdown form-group">
-                                            <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                                name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false" >
-                                                {{ professionViewModel.mandalName }}
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="dropdownMenuButton2">
-                                                <div class="dropdown-header">Select Mandal </div>
-                                                <div *ngFor="let i of mandalList">
-                                                    <a class="dropdown-item" (click)="selectedmandal(i.id)">{{i.name}}</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                                        <div class="dropdown form-group">
-                                            <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                                name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false" >
-                                                {{ professionViewModel.relationship}}
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                <div class="dropdown-header">Select Relation</div>
-                                                <div *ngFor="let i of relationList">
-                                                    <a class="dropdown-item" (click)="selectedrelation(i.id)">{{i.name}}</a>
-                                                </div>
-                                            </div>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ professionViewModel.mandalName }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right"
+                                        aria-labelledby="dropdownMenuButton2">
+                                        <div class="dropdown-header">Select Mandal </div>
+                                        <div *ngFor="let i of mandalList">
+                                            <a class="dropdown-item" (click)="selectedmandal(i.id)">{{i.name}}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Address</h6>
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="address" name="address"
-                                                [(ngModel)]="professionViewModel.address" placeholder="Enter Address" value=""
-                                                pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
-                                                #address="ngModel" />
-                                        </div>
-                                        <div *ngIf="address.errors && (address.dirty || address.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="address.errors.required">
-                                                Address is required
-                                            </div>
-                                            <div [hidden]="!address.errors('pattern')">
-                                                Enter Only Numbers, Characters and Special Charatcters.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>City</h6>
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="city" city="city"
-                                                [(ngModel)]="professionViewModel.city" placeholder=" Enter city " required value=""
-                                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #city="ngModel" />
-                                        </div>
-                                        <div *ngIf="city.errors && (city.dirty || city.touched)" class="alert alert-danger">
-                                            <div *ngIf="city.errors.required">
-                                                city name is required
-                                            </div>
-                                            <div [hidden]="!city.errors('pattern')">
-                                                Enter Only Characters.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>pincode</h6>
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="pincode" [(ngModel)]="professionViewModel.pincode"
-                                                name="pincode" placeholder="Enter pincode " required value=""
-                                                pattern="^[0-9].{0,6}$" (focus)="focus = true" #pincode="ngModel" />
-                                        </div>
-                                        <div *ngIf="pincode.errors && (pincode.dirty || pincode.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="pincode.errors.required">
-                                                pincode Address is required.
-                                            </div>
-                                            <div [hidden]="!pincode.errors('pattern')">
-                                                Enter Only Numbers.
-                                            </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ professionViewModel.relationship}}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Relation</div>
+                                        <div *ngFor="let i of relationList">
+                                            <a class="dropdown-item" (click)="selectedrelation(i.id)">{{i.name}}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                                        <div class="dropdown form-group">
-                                            <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                                name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                {{ professionViewModel.profession }}
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                <div class="dropdown-header">Select profession</div>
-                                                <div *ngFor="let i of professionList">
-                                                    <a class="dropdown-item"
-                                                        (click)="selectedprofession(i.name,ind)">{{i.name}}</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Address</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="address" name="address"
+                                        [(ngModel)]="professionViewModel.address" placeholder="Enter Address" value=""
+                                        pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
+                                        #address="ngModel" />
+                                </div>
+                                <div *ngIf="address.errors && (address.dirty || address.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="address.errors.required">
+                                        Address is required
                                     </div>
-                                    <div *ngIf="professionViewModel.profession =='Job'"
-                                        class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Occupation</h6>
-                                        </label>
+                                    <div [hidden]="!address.errors('pattern')">
+                                        Enter Only Numbers, Characters and Special Charatcters.
                                     </div>
-                                    <div *ngIf="professionViewModel.profession =='Job'"
-                                        class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="occupation" name="occupation"
-                                                [(ngModel)]="professionViewModel.occupation" placeholder=" Enter occupation" required value=""
-                                                pattern="[A-Za-z]{1,32}" (focus)="focus = true" #occupation="ngModel" />
-                                        </div>
-                                        <div *ngIf="occupation.errors && (occupation.dirty || occupation.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="occupation.errors.required">
-                                                occupation is required
-                                            </div>
-                                            <div [hidden]="!occupation.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>City</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="city" city="city"
+                                        [(ngModel)]="professionViewModel.city" placeholder=" Enter city " required
+                                        value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #city="ngModel" />
+                                </div>
+                                <div *ngIf="city.errors && (city.dirty || city.touched)" class="alert alert-danger">
+                                    <div *ngIf="city.errors.required">
+                                        city name is required
                                     </div>
-                                    <div *ngIf="professionViewModel.profession =='Business'"
-                                        class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Type of Business</h6>
-                                        </label>
+                                    <div [hidden]="!city.errors('pattern')">
+                                        Enter Only Characters.
                                     </div>
-                                    <div *ngIf="professionViewModel.profession =='Business'"
-                                        class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="businessType" name="businessType"
-                                                [(ngModel)]="professionViewModel.businessType" placeholder=" Enter businessType" required
-                                                value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
-                                                #businessType="ngModel" />
-                                        </div>
-                                        <div *ngIf="businessType.errors && (businessType.dirty || businessType.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="businessType.errors.required">
-                                                businessType is required
-                                            </div>
-                                            <div [hidden]="!businessType.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>pincode</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="pincode"
+                                        [(ngModel)]="professionViewModel.pincode" name="pincode"
+                                        placeholder="Enter pincode " required value="" pattern="^[0-9].{0,6}$"
+                                        (focus)="focus = true" #pincode="ngModel" />
+                                </div>
+                                <div *ngIf="pincode.errors && (pincode.dirty || pincode.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="pincode.errors.required">
+                                        pincode Address is required.
                                     </div>
-        
-                                    <div *ngIf="professionViewModel.profession =='Student'"
-                                        class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Education</h6>
-                                        </label>
+                                    <div [hidden]="!pincode.errors('pattern')">
+                                        Enter Only Numbers.
                                     </div>
-                                    <div *ngIf="professionViewModel.profession =='Student'"
-                                        class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="education" name="education"
-                                                [(ngModel)]="professionViewModel.education" placeholder=" Enter education" required value=""
-                                                pattern="[A-Za-z]{1,32}" (focus)="focus = true" #education="ngModel" />
-                                        </div>
-                                        <div *ngIf="education.errors && (education.dirty || education.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="education.errors.required">
-                                                education is required
-                                            </div>
-                                            <div [hidden]="!education.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div *ngIf="professionViewModel.profession =='Other'"
-                                        class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Type of Work</h6>
-                                        </label>
-                                    </div>
-                                    <div *ngIf="professionViewModel.profession =='Other'"
-                                        class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="workInfo" name="workInfo"
-                                                [(ngModel)]="professionViewModel.workInfo" placeholder=" Enter workInfo" required value=""
-                                                pattern="[A-Za-z]{1,32}" (focus)="focus = true" #workInfo="ngModel" />
-                                        </div>
-                                        <div *ngIf="workInfo.errors && (workInfo.dirty || workInfo.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="workInfo.errors.required">
-                                                workInfo is required
-                                            </div>
-                                            <div [hidden]="!workInfo.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
-                                        </div>
-                                    </div>
-        
-        
-        
-                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
-                                        <label>
-                                            <h6>Skills</h6>
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                            <input type="text" class="form-control" id="skills" name="skills"
-                                                [(ngModel)]="professionViewModel.skills" placeholder=" Enter skills " required value=""
-                                                pattern="[A-Za-z]{1,32}" (focus)="focus = true" #skills="ngModel" />
-                                        </div>
-                                        <div *ngIf="skills.errors && (skills.dirty || skills.touched)"
-                                            class="alert alert-danger">
-                                            <div *ngIf="skills.errors.required">
-                                                skills is required
-                                            </div>
-                                            <div [hidden]="!skills.errors('pattern')">
-                                                Numbers and Special Characters not allowed
-                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ professionViewModel.profession }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select profession</div>
+                                        <div *ngFor="let i of professionList">
+                                            <a class="dropdown-item"
+                                                (click)="selectedprofession(i.name,ind)">{{i.name}}</a>
                                         </div>
                                     </div>
                                 </div>
-        
-                                <div class="row">
-                                    <div class="ml-md-auto">
-                                        <div class="btn btn-success" >Save Edit</div>
-                                        <!-- <div class="btn btn-success">Submit</div> -->
-                                        &nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div *ngIf="professionViewModel.profession =='Job'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Occupation</h6>
+                                </label>
+                            </div>
+                            <div *ngIf="professionViewModel.profession =='Job'"
+                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="occupation" name="occupation"
+                                        [(ngModel)]="professionViewModel.occupation" placeholder=" Enter occupation"
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #occupation="ngModel" />
+                                </div>
+                                <div *ngIf="occupation.errors && (occupation.dirty || occupation.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="occupation.errors.required">
+                                        occupation is required
+                                    </div>
+                                    <div [hidden]="!occupation.errors('pattern')">
+                                        Numbers and Special Characters not allowed
                                     </div>
                                 </div>
-                            </form>
-                       
-            </div>
-           
-            <div class="modal-footer justify-content-center">
-                
+                            </div>
+                            <div *ngIf="professionViewModel.profession =='Business'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Type of Business</h6>
+                                </label>
+                            </div>
+                            <div *ngIf="professionViewModel.profession =='Business'"
+                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="businessType" name="businessType"
+                                        [(ngModel)]="professionViewModel.businessType" placeholder=" Enter businessType"
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #businessType="ngModel" />
+                                </div>
+                                <div *ngIf="businessType.errors && (businessType.dirty || businessType.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="businessType.errors.required">
+                                        businessType is required
+                                    </div>
+                                    <div [hidden]="!businessType.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="professionViewModel.profession =='Student'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Education</h6>
+                                </label>
+                            </div>
+                            <div *ngIf="professionViewModel.profession =='Student'"
+                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="education" name="education"
+                                        [(ngModel)]="professionViewModel.education" placeholder=" Enter education"
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #education="ngModel" />
+                                </div>
+                                <div *ngIf="education.errors && (education.dirty || education.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="education.errors.required">
+                                        education is required
+                                    </div>
+                                    <div [hidden]="!education.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="professionViewModel.profession =='Other'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Type of Work</h6>
+                                </label>
+                            </div>
+                            <div *ngIf="professionViewModel.profession =='Other'"
+                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="workInfo" name="workInfo"
+                                        [(ngModel)]="professionViewModel.workInfo" placeholder=" Enter workInfo"
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #workInfo="ngModel" />
+                                </div>
+                                <div *ngIf="workInfo.errors && (workInfo.dirty || workInfo.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="workInfo.errors.required">
+                                        workInfo is required
+                                    </div>
+                                    <div [hidden]="!workInfo.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Skills</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="skills" name="skills"
+                                        [(ngModel)]="professionViewModel.skills" placeholder=" Enter skills " required
+                                        value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true" #skills="ngModel" />
+                                </div>
+                                <div *ngIf="skills.errors && (skills.dirty || skills.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="skills.errors.required">
+                                        skills is required
+                                    </div>
+                                    <div [hidden]="!skills.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="ml-md-auto">
+                                <div class="btn btn-success">Save Edit</div>
+                                <!-- <div class="btn btn-success">Submit</div> -->
+                                &nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer justify-content-center">
+
+                </div>
             </div>
         </div>
     </div>
