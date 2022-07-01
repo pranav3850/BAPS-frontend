@@ -1,6 +1,6 @@
 export class Loginuser {
     constructor(
-        public pno?: number,
+        public pno?: any,
         public email?: any,
         public password?: any,
         public role?: any,

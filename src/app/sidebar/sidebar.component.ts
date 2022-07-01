@@ -97,6 +97,11 @@ export class SidebarComponent {
         this.Roles = localStorage.getItem("role");
         this.uid=localStorage.getItem("UserId");
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+        if(localStorage.getItem('role') == undefined){
+            this.userName='Haribhakt';
+        }else{
+            this.userName='Admin';
+        }
 
         
     }

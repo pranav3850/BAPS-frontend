@@ -2,13 +2,14 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ApiService } from 'app/api.service';
 import { LoginService } from './login.service';
 import { FormGroup } from '@angular/forms';
-import { Loginuser } from './login.model';
+
 import { Router } from '@angular/router';
+import { Loginuser } from './login.model';
 
 declare var $: any;
 
 @Component({
-    
+
     selector: 'login-cmp',
     templateUrl: './login.component.html'
 })
@@ -19,10 +20,10 @@ export class LoginComponent implements OnInit {
     focus2;
     test: Date = new Date();
     loginForm: FormGroup;
-    public loginModel: Loginuser[] = [];
-    public otp : any;
-    public OTPSent : boolean = false;
-    public submitButton : boolean = true;
+    public loginModel: Loginuser = new Loginuser;
+    public otp: any;
+    public OTPSent: boolean = false;
+    public submitButton: boolean = true;
     account_validation_messages = {
         'email': [
             { type: 'required', message: 'Email is required' },
@@ -35,9 +36,7 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private element: ElementRef,
-        private loginService: LoginService,
         private router: Router,
-        private apiService: ApiService
     ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -85,120 +84,17 @@ export class LoginComponent implements OnInit {
             body.classList.remove('nav-open');
         }
     }
-    verifybox(){
+    verifybox() {
         this.submitButton = false;
         this.OTPSent = true;
     }
-    gotodashboard(){
-        localStorage.setItem('role', 'Admin');
-        this.router.navigate(['dashboard']);
+    gotodashboard() {
+        this.router.navigate(['dashboard'],{
+            queryParams:{
+                mob:this.loginModel.pno
+            }
+        });
     }
-    // login(credentials) {
-    //     localStorage.clear();
-        
-    //     // credentials.role = this.selectedRole;
-    //     console.log("......data...." + credentials.email);
-        
-    //     this.loginService.userLogin(credentials).subscribe(data => {
-    //          debugger
-    //         if (data == 1) {
-    //             this.apiService.showNotification('top', 'right', 'Wrong Email!', 'danger');
-    //         }
-    //         else if (data == 2) {
-    //             this.apiService.showNotification('top', 'right', 'Wrong Password!', 'danger');
-    //         }
-    //         else {
-    //             if (data[0].role == 'Admin') {
-    //                  debugger
-    //                 this.apiService.showNotification('top', 'right', 'Admin successfully Login.', 'success');
-    //                 localStorage.setItem('authenticationToken', data[0].token);
-    //                 localStorage.setItem('UserId', data[0].id);
-    //                 localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
-    //                 localStorage.setItem('role', data[0].role);
-    //                 localStorage.setItem('lastOutTime',data[0].last_login);
-    //                 localStorage.setItem('lastInTime',data[0].last_login);
-    //                 this.router.navigate(['dashboard']);
-    //             }
-    //             else if (data[0].role == 'Sanchalak') {
-    //                  debugger
-    //                 this.apiService.showNotification('top', 'right', 'Sanchalak successfully Login.', 'success');
-    //                 localStorage.setItem('authenticationToken', data[0].token);
-    //                 localStorage.setItem('UserId', data[0].uid);
-    //                 localStorage.setItem('UserName', data[0].fname + ' ' + data[0].lname);
-    //                 // localStorage.setItem('standardid', data[0].standard);
-    //                 // localStorage.setItem('gender', data[0].gender);
-    //                 localStorage.setItem('role', data[0].role);
-    //                 localStorage.setItem('lastOutTime',data[0].out_time);
-    //                 localStorage.setItem('lastInTime',data[0].last_login);
-    //                 this.router.navigate(['dashboard']);
-    //             }
-    //             else if (data[0].role == 'Student') {
-                     
-    //                 this.apiService.showNotification('top', 'right', 'Student successfully Login.', 'success');
-    //                 localStorage.setItem('authenticationToken', data[0].token);
-    //                 localStorage.setItem('UserId', data[0].id);
-    //                 localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
-    //                 localStorage.setItem('standardid', data[0].standard);
-    //                 localStorage.setItem('gender', data[0].gender);
-    //                 localStorage.setItem('role', data[0].role);
-    //                 localStorage.setItem('lastOutTime',data[0].out_time);
-    //                 localStorage.setItem('lastInTime',data[0].last_login);
-    //                 this.router.navigate(['dashboard']);
-    //             }
-    //             else if (data[0].role == 'Visitor') {
-                     
-    //                 if (data[0].detailsupdated == false) {
-    //                     localStorage.setItem('authenticationToken', data[0].token);
-    //                     localStorage.setItem('UserId', data[0].id);
-    //                     localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
-    //                     localStorage.setItem('role', data[0].role);
-    //                     localStorage.setItem('standardid', data[0].standard);
-    //                     localStorage.setItem('lastOutTime',data[0].out_time);
-    //                     localStorage.setItem('lastInTime',data[0].last_login);
-    //                     this.router.navigate(['visitor/visitorreg']);
-                        
-    //                 }
-    //                 else {
-                         
-    //                     localStorage.setItem('authenticationToken', data[0].token);
-    //                     localStorage.setItem('UserId', data[0].id);
-    //                     localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
-    //                     localStorage.setItem('role', data[0].role);
-    //                     localStorage.setItem('standardid', data[0].standard);
-    //                     localStorage.setItem('gender', data[0].gender);
-    //                     localStorage.setItem('lastOutTime',data[0].out_time);
-    //                     localStorage.setItem('lastInTime',data[0].last_login);
-    //                     this.router.navigate(['visitor/visitortest']);
-    //                 }
-    //             }
-    //             else if (data[0].role == 'Parents') {
-                     
-    //                 this.apiService.showNotification('top', 'right', 'Parent successfully Login.', 'success');
-    //                 localStorage.setItem('authenticationToken', data[0].token);
-    //                 localStorage.setItem('UserId', data[0].id);
-    //                 localStorage.setItem('UserName', data[0].fname );
-    //                 localStorage.setItem('stuid', data[0].stuid);
-    //                 localStorage.setItem('role', data[0].role);
-    //                 localStorage.setItem('lastOutTime',data[0].out_time);
-    //                 localStorage.setItem('lastInTime',data[0].last_login);
-    //                 this.router.navigate(['dashboard']);
-    //             }
-    //            else if (data[0].role == 'Sub-Admin') {
-                     
-    //                 this.apiService.showNotification('top', 'right', 'Admin successfully Login.', 'success');
-    //                 localStorage.setItem('authenticationToken', data[0].token);
-    //                 localStorage.setItem('UserId', data[0].id);
-    //                 localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);
-    //                 localStorage.setItem('role', data[0].role);
-    //                 localStorage.setItem('lastOutTime',data[0].out_time);
-    //                 localStorage.setItem('lastInTime',data[0].last_login);
-    //                 this.router.navigate(['dashboard']);
-    //             }
-    //             else {
-    //                 this.router.navigate(['dashboard']);
-    //             }
-    //         }
-    //     });
-    // }
+
 
 }

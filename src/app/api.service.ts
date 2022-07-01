@@ -6,7 +6,8 @@ declare var $: any;
 })
 export class ApiService {
   public static HOST_URL: string = "http://localhost:8090";
-  // public static HOST_URL: string = "http://31.220.59.174:4500";
+  // public static HOST_URL: string = "http://31.220.111.153:8090";
+ 
 
   constructor(
 
@@ -20,49 +21,33 @@ export class ApiService {
   public static getUserLoginURL: string = ApiService.HOST_URL + '/admin/GetUsersLogin';
   public static updateLogoutDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateLogoutDetails'
 
+  public static getMandalListURL: string = ApiService.HOST_URL + '/admin/GetMandalList/'
   public static getAllMandalListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalList/'
   public static getAllMandalTypeListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalTypeList'
   public static getAllRelationListURL: string = ApiService.HOST_URL + '/admin/GetAllRelationList'
   public static saveMemberListURL: string = ApiService.HOST_URL + '/admin/SaveMemberList'
-  public static getAllSavedMembersListURL: string = ApiService.HOST_URL + '/admin/GetAllSavedMembersList'
+  public static getAllSavedMembersListURL: string = ApiService.HOST_URL + '/admin/GetAllSavedMembersList';
+  public static  SaveProffesionInfoURL: string = ApiService.HOST_URL + '/admin/SaveProffesionInfo';
+  public static  createFamilyURL: string = ApiService.HOST_URL + '/admin/createFamily';
+  public static  getOldDetailsURL: string = ApiService.HOST_URL + '/admin/getOldDetails';
+  public static  getAllFamilyListURL: string = ApiService.HOST_URL + '/admin/getAllFamilyList';
+  
+
+
+  public static  getRedtickCountURL: string = ApiService.HOST_URL + '/admin/getRedtickCount'
+  public static  getYellowtickCountURL: string = ApiService.HOST_URL + '/admin/getYellowtickCount'
+  public static  getGreentickCountURL: string = ApiService.HOST_URL + '/admin/getGreentickCount'
+ 
+ 
   
   public static saveSanchalakListURL: string = ApiService.HOST_URL + '/admin/SaveSanchalakDetails'
   public static getAllSanchalakURL: string = ApiService.HOST_URL + '/admin/GetAllSanchalakDetails'
   public static removeSanchalakURL: string = ApiService.HOST_URL + '/admin/RemoveSanchalakDetails/'
   public static updateSanchalakListURL: string = ApiService.HOST_URL + '/admin/UpdateSanchalakDetails/'
+
+
+  public static getAllHaribhaktURL: string = ApiService.HOST_URL + '/admin/getAllHaribhakt'
   
-  public static saveServicesListURL: string = ApiService.HOST_URL + '/admin/SaveServicesList';
-  public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
-  public static updateServicesListURL: string = ApiService.HOST_URL + '/admin/UpdateServicesList/';
-  public static saveEmployeeListURL: string = ApiService.HOST_URL + '/admin/SaveEmployeeList';
-  public static getAllEmployeeURL: string = ApiService.HOST_URL + '/admin/GetAllEmployee';
-  public static removeEmployeeListURL: string = ApiService.HOST_URL + '/admin/RemoveEmployeeList/';
-  public static saveCustomerListURL: string = ApiService.HOST_URL + '/admin/SaveCustomerList';
-  public static saveLoginUserURL: string = ApiService.HOST_URL + '/authenticate/UserLogin';
-
-
-
-  public static getDailyTotalURL: string = ApiService.HOST_URL + '/admin/GetDailyTotal';
-  public static getMonthlyTotalURL: string = ApiService.HOST_URL + '/admin/GetMonthlyTotal';
-
-
-  public static forgotPasswordURL: string = ApiService.HOST_URL + '/admin/ForgotPassword';
-  public static getOneTimePasswordURL: string = ApiService.HOST_URL + '/admin/GetOneTimePassword';
-  public static updatePasswordURL: string = ApiService.HOST_URL + '/admin/updatePasswordAccordingRole';
-  public static updateActiveStatusURL: string = ApiService.HOST_URL + '/admin/UpdateActiveStatus';
-
-
-
-
-
-  public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
-  public static ChackForPasswordURL: string = ApiService.HOST_URL + '/admin/ChackForPassword';
-
-
-
-
-
-
 
 
 

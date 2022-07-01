@@ -14,8 +14,14 @@ export class DashboardService {
     constructor(
         private httpClient: HttpClient
     ) { }
-    getAllMandalList(type): Observable<Mandal[]> {
-        return this.httpClient.get<any>(ApiService.getAllMandalListURL + type);
+    getMandalList(type): Observable<Mandal[]> {
+        return this.httpClient.get<any>(ApiService.getMandalListURL + type);
+    }
+    getAllMandalList(): Observable<Mandal[]> {
+        return this.httpClient.get<any>(ApiService.getAllMandalListURL);
+    }
+    getAllFamilyList(){
+        return this.httpClient.get<any>(ApiService.getAllFamilyListURL);
     }
     getAllMandaltypeList(): Observable<Mandal[]> {
         return this.httpClient.get<any>(ApiService.getAllMandalTypeListURL);
@@ -28,5 +34,27 @@ export class DashboardService {
     }
     getSavedMembersList(): Observable<Dashboard[]> {
         return this.httpClient.get<any>(ApiService.getAllSavedMembersListURL);
+    }
+    getAllHaribhakt(){
+        debugger
+        return this.httpClient.get(ApiService.getAllHaribhaktURL);
+    }
+    saveProffesionInfo(data){
+        return this.httpClient.post(ApiService.SaveProffesionInfoURL,data);
+    }
+    getRedtickCount(){
+        return this.httpClient.get(ApiService.getRedtickCountURL);
+    }
+    getYellowtickCount(){
+        return this.httpClient.get(ApiService.getYellowtickCountURL);
+    }
+    getGreentickCount(){
+        return this.httpClient.get(ApiService.getGreentickCountURL);
+    }
+    createFamily(data){
+        return this.httpClient.post(ApiService.createFamilyURL,data);
+    }
+    getOldDetails(data){
+        return this.httpClient.post(ApiService.getOldDetailsURL,data);
     }
 }

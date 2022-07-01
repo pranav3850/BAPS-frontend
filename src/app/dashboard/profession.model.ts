@@ -8,8 +8,9 @@ export class Profession {
         public education?: string,
         public profession?: string,
         public occupation?: string,
-        public businesstype?: string,
-        public skills?: string,
+        public businessType?: string,
+        public skill?: string,
+        public workInfo?: string,
 //  Dashboard model variables
         public contact?: number,
         public fname?: string,

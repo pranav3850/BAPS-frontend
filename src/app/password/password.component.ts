@@ -20,34 +20,6 @@ export class PasswordComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  focusOutFunction(val) {
-    let data = {
-      id: localStorage.getItem('AdminId'),
-      pass: val,
-      role: localStorage.getItem('role')
-    }
-    debugger
-    this.loginService.CheckPassword(data).subscribe((res: any) => {
+ 
 
-      if (res.length >= 1) {
-        this.oldpass = false;
-      }
-      else {
-        this.oldpass = true;
-      }
-    })
-  }
-
-  updatePassword(val){
-    let data = {
-      id: localStorage.getItem('AdminId'),
-      role: localStorage.getItem('role'),
-      password: val
-    };
-    this.loginService.changePassword(data).subscribe((req) => {
-      localStorage.clear();
-      this.apiService.showNotification('top', 'right', 'Password changed Successfully. Login with new Password', 'success');
-      this.router.navigate(['/pages/login']);
-    })
-  }
 }

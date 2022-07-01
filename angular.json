@@ -18,7 +18,8 @@
             "polyfills": "src/polyfills.ts",
             "allowedCommonJsDependencies": [
               "chart.js",
-              "rxjs/add/operator/filter"
+              "rxjs/add/operator/filter",
+              "lodash"
             ],
             "assets": [
               "src/assets",
