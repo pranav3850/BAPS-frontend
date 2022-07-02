@@ -10,6 +10,9 @@ import { Relation } from './relation.model';
     providedIn: 'root'
 })
 export class DashboardService {
+    saveMandalDetails(MandalModel: Mandal) {
+      throw new Error('Method not implemented.');
+    }
 
     constructor(
         private httpClient: HttpClient
@@ -57,9 +60,7 @@ export class DashboardService {
     getOldDetails(data) {
         return this.httpClient.post(ApiService.getOldDetailsURL, data);
     }
-    getHaribhaktDetailsById(): Observable<any[]> {
-        return this.httpClient.get<any>(ApiService.getHaribhaktInfoURL);
-    }
+   
     removeHaribhaktDetails(id) {
         return this.httpClient.get<any>(ApiService.removeHaribhaktDetailsURL + id);
     }

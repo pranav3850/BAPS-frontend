@@ -1,0 +1,235 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-4 col-xl-4 col-lg-4 col-sm-4">
+                    <h4 class="card-title">Add Mandal</h4>
+                </div>
+                <div class=" ml-md-auto">
+                    <button type="cancel" class="btn btn-danger btn-round" routerLink='/dashboard'>
+                        <i class="fa fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" name="CustForm" #CustForm="ngForm">
+                <div class="row">
+                    <label class="col-sm-4 col-md-2 col-xl-2 col-lg-2 col-form-label" *ngIf="!openMandalTypeText">Select
+                        MandalType</label>
+                    <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4" *ngIf="!openMandalTypeText">
+                        <div class="dropdown form-group">
+                            <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                                name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                {{ selectedName }}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-header">Select Category</div>
+                                <div *ngFor="let pos of mandalTypeList">
+                                    <a class="dropdown-item" (click)="selectedMandalType(pos.mandaltype)">{{pos.mandaltype}}</a>
+                                </div>
+                                <a class="dropdown-item" (click)="addMandalType()"><i class="fa fa-plus"
+                                        aria-hidden="true"> Add New Type</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="col-sm-4 col-md-2 col-xl-2 col-lg-2 col-form-label" *ngIf="openMandalTypeText">Enter
+                        Mandal Type</label>
+                    <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4" *ngIf="openMandalTypeText">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                            <input type="text" class="form-control" id="mandaltype" name="mandaltype"
+                                [(ngModel)]="MandalModel.mandaltype" placeholder="Enter Mandal Type " required value=""
+                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #mandaltype="ngModel" />
+                        </div>
+                        <div *ngIf="mandaltype.errors && (mandaltype.dirty || mandaltype.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="mandaltype.errors.required">
+                                First Name is required
+                            </div>
+                            <div [hidden]="!fname.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
+                        </div>
+                    </div>
+                    <label class="col-sm-4 col-md-2 col-xl-2 col-lg-2 col-form-label">Enter Mandal Name</label>
+                    <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4">
+                        <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="MandalModel.name"
+                                placeholder="Enter Mandal Name " required value="" pattern="^[a-zA-Z]+$"
+                                (focus)="focus = true" #name="ngModel" />
+                        </div>
+                        <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
+                            <div *ngIf="name.errors.required">
+                                First Name is required
+                            </div>
+                            <div [hidden]="!fname.errors('pattern')">
+                                Enter Only Characters.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <button type="submit" class="btn btn-info btn-round" [disabled]="!CustForm.form.valid"
+                        (click)="saveMandalList()">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                    </button>
+                    <button type="submit" class="btn btn-danger btn-round" routerLink='/dashboard'>
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="card-title">Mandal List</h4>
+                </div>
+                <div class="ml-md-auto">
+                    <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                        By</label>
+                </div>
+                <div class="col-md-3 ml-md-auto">
+                    <div class="form-group" style="margin-top: 8px !important;">
+                        <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
+                            [(ngModel)]="search" (keyup)="searchManadalList($event.target.value)" aria-label="Search" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="text-primary">
+                        <th class="text-center">#</th>
+                        <th class="text-center">Mandal Type</th>
+                        <th class="text-center">Mandal Name</th>
+                        <th class="text-right">Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of allMandalList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                            <td class="text-center">{{ item.index }}</td>
+                            <td class="text-center">{{ item.mandaltype }}</td>
+                            <td class="text-center">{{ item.name}}</td>
+                            <td class="text-right">
+                                <!-- <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                    <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                </button>
+                                &nbsp; -->
+                                <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                    <i class="fa fa-edit" data-toggle="modal" data-target="#exampleModalCenter"
+                                        (click)="updateMandalDetails(item)"></i>
+                                </button>
+                                &nbsp;
+                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                    (click)="removeMandalList(item.id)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="ml-md-auto">
+                    <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true" responsive="true">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <h5 class="modal-title" id="myModalLabel">View/Edit Products</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="instruction">
+                        <div class="row">
+                            <label class="col-sm-4 col-md-2 col-xl-2 col-lg-2 col-form-label" *ngIf="!openMandalTypeText">Select
+                                MandalType</label>
+                            <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4" *ngIf="!openMandalTypeText">
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ selectedName }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Category</div>
+                                        <div *ngFor="let pos of mandalTypeList">
+                                            <a class="dropdown-item" (click)="selectedMandalType(pos.mandaltype)">{{pos.mandaltype}}</a>
+                                        </div>
+                                        <a class="dropdown-item" (click)="addMandalType()"><i class="fa fa-plus"
+                                                aria-hidden="true"> Add New Type</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="col-sm-4 col-md-2 col-xl-2 col-lg-2 col-form-label" *ngIf="openMandalTypeText">Enter
+                                Mandal Type</label>
+                            <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4" *ngIf="openMandalTypeText">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="mandaltype" name="mandaltype"
+                                        [(ngModel)]="updateMandalModel.mandaltype" placeholder="Enter Mandal Type " required value=""
+                                        pattern="^[a-zA-Z]+$" (focus)="focus = true" #mandaltype="ngModel" />
+                                </div>
+                                <div *ngIf="mandaltype.errors && (mandaltype.dirty || mandaltype.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="mandaltype.errors.required">
+                                        First Name is required
+                                    </div>
+                                    <div [hidden]="!fname.errors('pattern')">
+                                        Enter Only Characters.
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="col-sm-4 col-md-2 col-xl-2 col-lg-2 col-form-label">Enter Mandal Name</label>
+                            <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="updateMandalModel.name"
+                                        placeholder="Enter Mandal Name " required value="" pattern="^[a-zA-Z]+$"
+                                        (focus)="focus = true" #name="ngModel" />
+                                </div>
+                                <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
+                                    <div *ngIf="name.errors.required">
+                                        First Name is required
+                                    </div>
+                                    <div [hidden]="!fname.errors('pattern')">
+                                        Enter Only Characters.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-info btn-round"
+                    (click)="updateMandalList()" data-dismiss="modal">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i> Submit
+                </button>
+                <button type="submit" class="btn btn-danger btn-round" data-dismiss="modal" >
+                    <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

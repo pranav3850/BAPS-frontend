@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from 'app/material/material.module';
+import { MandalModule } from 'app/mandal/mandal.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { MaterialModule } from 'app/material/material.module';
     RouterModule.forChild(DashboardRoutes),
     FormsModule,
     MaterialModule,
-    NgxPaginationModule,   
+    NgxPaginationModule,
+    MandalModule   
   ],
   declarations: [DashboardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

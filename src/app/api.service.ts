@@ -33,16 +33,17 @@ export class ApiService {
   public static getAllFamilyListURL: string = ApiService.HOST_URL + '/admin/getAllFamilyList';
   public static removeHaribhaktDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveHaribhaktDetails/';
   public static removeMandalDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveMandalDetails/';
-  public static getHaribhaktInfoURL: string = ApiService.HOST_URL + '/admin/GetHaribhaktInfo';
-
+  public static saveMandalListURL: string = ApiService.HOST_URL + '/admin/SaveMandalList';
+  public static updateMandalListURL: string = ApiService.HOST_URL+'/admin/UpdateMandalList';
 
   public static getRedtickCountURL: string = ApiService.HOST_URL + '/admin/getRedtickCount'
   public static getYellowtickCountURL: string = ApiService.HOST_URL + '/admin/getYellowtickCount'
   public static getGreentickCountURL: string = ApiService.HOST_URL + '/admin/getGreentickCount'
-  
+
   public static getEditDataforSecondStageURL: string = ApiService.HOST_URL + '/admin/getEditDataforSecondStage'
   public static updateHaribhaktURL: string = ApiService.HOST_URL + '/admin/updateHaribhakt'
   
+
 
 
 
