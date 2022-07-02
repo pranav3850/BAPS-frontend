@@ -66,4 +66,7 @@ export class DashboardService {
     removeMandalDetails(id) {
         return this.httpClient.get<any>(ApiService.removeMandalDetailsURL + id);
     }
+    getEditDataofSecondstage(data){
+        return this.httpClient.post(ApiService.getEditDataforSecondStageURL,data);
+    }
 }

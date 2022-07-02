@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
         mob: this.mainMob
       }
       this.getOldDetails(obj);
-      debugger
+      
 
     })
     this.tot_mem = 0;
@@ -112,6 +112,7 @@ export class DashboardComponent implements OnInit {
         this.strpArray = res;
         this.strpArray.forEach(element => {
           if (element.status == 1) {
+            element.city='';
             this.professionModel.push(element);
           }
         });
@@ -265,8 +266,9 @@ export class DashboardComponent implements OnInit {
   // }
   getRedTickListForAll() {
 
-    this.dashboardService.getHaribhaktDetailsById().subscribe((data: any) => {
+    this.dashboardService.getRedtickCount().subscribe((data: any) => {
       this.tRedList = data;
+      debugger
       // this.offer = data;
       for (let i = 0; i < this.tRedList.length; i++) {
         this.tRedList[i].index = i + 1;
@@ -475,6 +477,9 @@ export class DashboardComponent implements OnInit {
   }
   openProffesionalForm() {
     this.professionModel = this.strpArray;
+    this.professionModel.forEach((element:any)=>{
+      element.city='';
+    })
   }
   getSavedMembers() {
     this.dashboardService.getSavedMembersList().subscribe((data: any) => {
@@ -511,6 +516,7 @@ export class DashboardComponent implements OnInit {
     }
   }
   saveProffesionInfo(data, ind) {
+    debugger
     let test = [];
     test.push(data);
     this.dashboardService.saveProffesionInfo(test).subscribe((res) => {
@@ -521,14 +527,25 @@ export class DashboardComponent implements OnInit {
 
   openViewInfo(data) {
     debugger
-    this.professionViewModel = data;
+    
     if (data.status == 2) {
-
+      this.dashboardService.getEditDataofSecondstage(data).subscribe((res:any)=>{
+        
+        this.professionViewModel=res[0];
+        this.professionViewModel.status=2;
+        
+        $(document).ready(function () {
+          $("#addCustomerModal").modal('show');
+        });
+      })
+    }else{
+      this.professionViewModel = data;
+      $(document).ready(function () {
+        $("#addCustomerModal").modal('show');
+      });
     }
-    debugger
-    $(document).ready(function () {
-      $("#addCustomerModal").modal('show');
-    });
+    
+   
   }
   openTotalFamilies() {
     this.openFamiliesFlag = true;

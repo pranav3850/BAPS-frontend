@@ -11,6 +11,7 @@ export class Profession {
         public businessType?: string,
         public skill?: string,
         public workInfo?: string,
+        public status?:number,
 //  Dashboard model variables
         public contact?: number,
         public fname?: string,

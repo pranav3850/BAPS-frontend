@@ -452,7 +452,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="card-title">Mandal List</h4>
+                            <h4 class="card-title">Redtick Haribhakt List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
@@ -473,18 +473,22 @@
                         <table class="table">
                             <thead class="text-primary">
                                 <th class="text-center">#</th>
-                                <th class="text-center">Mandal Type</th>
+                                <th class="text-center">Name</th>
                                 <th class="text-center">Mandal Name</th>
+                                <th class="text-center">Relationship</th>
+                                <th class="text-center">Contact Number</th>
                                 <th class="text-right">Actions</th>
                             </thead>
                             <tbody>
                                 <tr
-                                    *ngFor="let item of allMandalList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    *ngFor="let item of tRedList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                     <td class="text-center">{{ item.index }}</td>
-                                    <td class="text-center">{{ item.mandaltype }}</td>
-                                    <td class="text-center">{{ item.name}}</td>
+                                    <td class="text-center">{{ item.firstName}} {{item.lastName}}</td>
+                                    <td class="text-center">{{ item.mandalName }}</td>
+                                    <td class="text-center">{{ item.relationship }}</td>
+                                    <td class="text-center">{{ item.contactNo }}</td>
                                     <td class="text-right">
-                                        <!-- <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                             <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
                                         </button>
                                         &nbsp;
@@ -492,9 +496,9 @@
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
                                                 (click)="viewOfferDetails(item)"></i>
                                         </button>
-                                        &nbsp; -->
+                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
-                                            (click)="removeMandalList(item.userId)">
+                                            (click)="removeHaribhaktList(item.userId)">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
@@ -1163,7 +1167,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         <i class="nc-icon nc-simple-remove"></i>
                     </button>
-                    <h5 class="modal-title" id="myModalLabel">Add New Customer</h5>
+                    <h5 class="modal-title" id="myModalLabel">View/Edit Information</h5>
                 </div>
                 <div class="modal-body">
 
@@ -1306,7 +1310,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="professionViewModel.status>1">
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Address</h6>
@@ -1372,7 +1376,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="professionViewModel.status>1">
                             <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
