@@ -37,3 +37,37 @@
     line-height: 3.5;
     border-radius: 8px;
 }
+
+#dropdown{
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    opacity: 0.7;
+}
+.row{
+    margin-top: 10px;
+}
+#birthday{
+    width: 100%;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    opacity: 0.7;
+}
+#satsang{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#detailForm{
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    opacity: 0.7;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}

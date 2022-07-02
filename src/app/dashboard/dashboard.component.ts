@@ -109,6 +109,7 @@ export class DashboardComponent implements OnInit {
   getOldDetails(data) {
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
       if (res != 'no family') {
+        this.familyId = res[0].familyId;
         this.strpArray = res;
         this.strpArray.forEach(element => {
           if (element.status == 1) {
@@ -138,6 +139,7 @@ export class DashboardComponent implements OnInit {
   }
   removeItem(i) {
     this.dashboardModelarr.splice(i, 1);
+    this.tot_mem=this.dashboardModelarr.length;
   }
   getAllFamily() {
     this.dashboardService.getAllFamilyList().subscribe((res: any) => {
@@ -168,7 +170,6 @@ export class DashboardComponent implements OnInit {
     }
   }
   transform(totalFamily: any[], searchValue: string) {
-
     this.totalFamily = [];
     totalFamily.forEach(element => {
       if (element.mobNo.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
@@ -199,7 +200,6 @@ export class DashboardComponent implements OnInit {
     }
   }
   transformHaribhakt(totalHaribhakt: any[], searchValue: string) {
-
     this.totalHaribhakt = [];
     totalHaribhakt.forEach(element => {
       if (element.contactNo.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
@@ -258,18 +258,10 @@ export class DashboardComponent implements OnInit {
       this.totalRedTick = res;
     })
   }
-  // getRedTickListForAll(){
-  //   this.dashboardService.getHaribhaktDetailsById().subscribe((res) => {
-  //     this.tRedList = res;
-  //     debugger
-  //   })
-  // }
   getRedTickListForAll() {
 
     this.dashboardService.getRedtickCount().subscribe((data: any) => {
       this.tRedList = data;
-      debugger
-      // this.offer = data;
       for (let i = 0; i < this.tRedList.length; i++) {
         this.tRedList[i].index = i + 1;
       }
@@ -294,7 +286,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getAllMandaltypeList().subscribe((data: any) => {
       this.mandalTypeList = data;
     });
-
   }
   getmandal(type) {
     this.mandalList = [];
@@ -320,7 +311,6 @@ export class DashboardComponent implements OnInit {
     }
   }
   transformMandal(allMandalList: any[], searchValue: string) {
-
     this.allMandalList = [];
     allMandalList.forEach(element => {
       if (element.mandaltype.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
@@ -449,7 +439,6 @@ export class DashboardComponent implements OnInit {
       this.dashboardService.saveData(test).subscribe((res) => {
         if (res[0].isDuplicate) {
           this.duplicateUser = res[0];
-          debugger
           this.duplicateUser.index = ind;
           $(document).ready(function () {
             $("#DuplicateNoModalCenter").modal('show');
@@ -476,10 +465,14 @@ export class DashboardComponent implements OnInit {
     this.professionModel[index].profession = name;
   }
   openProffesionalForm() {
-    this.professionModel = this.strpArray;
-    this.professionModel.forEach((element:any)=>{
-      element.city='';
+    // this.professionModel = this.strpArray;
+    this.professionModel=[];
+    this.strpArray.forEach((ele:any)=>{
+      if(ele.status ==1){
+        this.professionModel.push(ele);
+      }
     })
+  
   }
   getSavedMembers() {
     this.dashboardService.getSavedMembersList().subscribe((data: any) => {
@@ -500,23 +493,10 @@ export class DashboardComponent implements OnInit {
   }
 
   AddMoreMember() {
-    this.dashboardModelarr = [];
-    for (let i = 0; i < this.tot_mem; i++) {
-      let data: any = {
-        mandalName: this.selectedMandal,
-        mandaltype: this.selectedMandalType,
-        relationship: this.selectedRelation,
-        contactNo: '',
-        firstName: '',
-        middleName: '',
-        lastName: ''
-      }
-      this.dashboardModelarr.push(data);
-      this.dashboardModelarr[0].contactNo = this.mainMob;
-    }
+    this.professionModel = [];
+    this.professionModel.length=this.tot_mem;
   }
   saveProffesionInfo(data, ind) {
-    debugger
     let test = [];
     test.push(data);
     this.dashboardService.saveProffesionInfo(test).subscribe((res) => {
@@ -526,14 +506,11 @@ export class DashboardComponent implements OnInit {
   }
 
   openViewInfo(data) {
-    debugger
-    
     if (data.status == 2) {
       this.dashboardService.getEditDataofSecondstage(data).subscribe((res:any)=>{
-        
         this.professionViewModel=res[0];
+        debugger
         this.professionViewModel.status=2;
-        
         $(document).ready(function () {
           $("#addCustomerModal").modal('show');
         });
@@ -544,8 +521,11 @@ export class DashboardComponent implements OnInit {
         $("#addCustomerModal").modal('show');
       });
     }
-    
-   
+  }
+  updateHaribhaktInfo(data){
+    this.dashboardService.updateHaribhakt(data).subscribe((res:any)=>{
+      
+    })
   }
   openTotalFamilies() {
     this.openFamiliesFlag = true;

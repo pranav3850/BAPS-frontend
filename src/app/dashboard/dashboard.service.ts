@@ -69,4 +69,7 @@ export class DashboardService {
     getEditDataofSecondstage(data){
         return this.httpClient.post(ApiService.getEditDataforSecondStageURL,data);
     }
+    updateHaribhakt(data){
+        return this.httpClient.post(ApiService.updateHaribhaktURL,data);
+    }
 }

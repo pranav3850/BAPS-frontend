@@ -1,5 +1,17 @@
 export class Profession {
     constructor(
+       
+//  Dashboard model variables
+        public contactNo?: number,
+        public firstName?: string,
+        public middleName?: string,
+        public lastName?: string,
+        public mandalId?: number,
+        public mandalName?: string,
+        public mandaltype?: string,
+        public relationship?: string,
+        public index?: number,
+        public familyId?:number,
         public address?: string,
         public city?: string,
         public pincode?: number,
@@ -12,13 +24,14 @@ export class Profession {
         public skill?: string,
         public workInfo?: string,
         public status?:number,
-//  Dashboard model variables
-        public contact?: number,
-        public fname?: string,
-        public mname?: string,
-        public lname?: string,
-        public mandalname?: string,
-        public mandaltype?: string,
-        public relation?: string,
+        public email?: string,
+        public bloodGroup?: string,
+        public dob?: string,
+        public gender?: string,
+        public marritalStatus?: string,
+        public isForeignCountry?: string,
+        public foreignCountry?: string,
+        public foreignCity?: string,
+        public foreignContact?: string,
     ){}
 }

@@ -41,6 +41,7 @@ export class ApiService {
   public static getGreentickCountURL: string = ApiService.HOST_URL + '/admin/getGreentickCount'
   
   public static getEditDataforSecondStageURL: string = ApiService.HOST_URL + '/admin/getEditDataforSecondStage'
+  public static updateHaribhaktURL: string = ApiService.HOST_URL + '/admin/updateHaribhakt'
   
 
 
