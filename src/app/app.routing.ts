@@ -14,13 +14,17 @@ export const AppRoutes: Routes = [{
     children: [{
         path: '',
         loadChildren: './dashboard/dashboard.module#DashboardModule',
-        ////  canActivate: [AuthGuard]
-    },{
-        path:'',
-        loadChildren:'./password/password.module#PasswordModule'
-        
     },
-   
+    {
+        path: '',
+        loadChildren: './password/password.module#PasswordModule'
+
+    },
+    {
+        path: '',
+        loadChildren: './mandal/mandal.module#MandalModule',
+    },
+
 
     ]
 }, {
@@ -29,6 +33,7 @@ export const AppRoutes: Routes = [{
     children: [{
         path: 'pages',
         loadChildren: './pages/pages.module#PagesModule'
-    }]
+    },
+    ]
 }
 ];

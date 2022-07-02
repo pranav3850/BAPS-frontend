@@ -373,7 +373,12 @@
     <!-- DataTable for openFamilies End -->
 
     <!-- DataTable for openMandal Start -->
-    <div class="row" *ngIf="openMandalFlag">
+    <div style="margin-top: -93px !important; padding: 0 0 1px 1px !important;" *ngIf="openMandalFlag">
+
+        <app-mandal ></app-mandal>
+
+    </div>
+    <!-- <div class="row" *ngIf="openMandalFlag">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
@@ -411,15 +416,7 @@
                                     <td class="text-center">{{ item.mandaltype }}</td>
                                     <td class="text-center">{{ item.name}}</td>
                                     <td class="text-right">
-                                        <!-- <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
-                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
-                                        </button>
-                                        &nbsp;
-                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
-                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
-                                                (click)="viewOfferDetails(item)"></i>
-                                        </button>
-                                        &nbsp; -->
+                                        
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                                             (click)="removeMandalList(item.userId)">
                                             <i class="fa fa-times"></i>
@@ -441,10 +438,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- DataTable for openMandal End -->
-
     <!-- DataTable for RedTick Start -->
     <div class="row" *ngIf="openRedtickFlag">
         <div class="col-lg-12">
@@ -519,13 +515,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
 
     <div *ngIf="strpArray.length>0">
         <div class="card-header">
@@ -1535,3 +1524,4 @@
         </div>
     </div>
 </div>
+

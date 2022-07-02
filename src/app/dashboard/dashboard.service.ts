@@ -57,9 +57,7 @@ export class DashboardService {
     getOldDetails(data) {
         return this.httpClient.post(ApiService.getOldDetailsURL, data);
     }
-    getHaribhaktDetailsById(): Observable<any[]> {
-        return this.httpClient.get<any>(ApiService.getHaribhaktInfoURL);
-    }
+   
     removeHaribhaktDetails(id) {
         return this.httpClient.get<any>(ApiService.removeHaribhaktDetailsURL + id);
     }
@@ -68,5 +66,11 @@ export class DashboardService {
     }
     getEditDataofSecondstage(data){
         return this.httpClient.post(ApiService.getEditDataforSecondStageURL,data);
+    }
+    saveMandalDetails(admin: Mandal): Observable<any> {
+        return this.httpClient.post<any>(ApiService.saveMandalListURL, admin);
+    }
+    updateMandalList(admin: Mandal): Observable<any[]> {
+        return this.httpClient.post<any>(ApiService.updateMandalListURL, admin);
     }
 }

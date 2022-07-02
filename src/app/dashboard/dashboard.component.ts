@@ -258,12 +258,7 @@ export class DashboardComponent implements OnInit {
       this.totalRedTick = res;
     })
   }
-  // getRedTickListForAll(){
-  //   this.dashboardService.getHaribhaktDetailsById().subscribe((res) => {
-  //     this.tRedList = res;
-  //     debugger
-  //   })
-  // }
+
   getRedTickListForAll() {
 
     this.dashboardService.getRedtickCount().subscribe((data: any) => {
