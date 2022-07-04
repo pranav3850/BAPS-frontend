@@ -10,9 +10,7 @@ import { Relation } from './relation.model';
     providedIn: 'root'
 })
 export class DashboardService {
-    saveMandalDetails(MandalModel: Mandal) {
-      throw new Error('Method not implemented.');
-    }
+    
 
     constructor(
         private httpClient: HttpClient
