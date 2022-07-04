@@ -725,132 +725,7 @@
 
         </div>
     </div>
-    <!--Family Member form loop -->
-    <!-- <div *ngIf="dashboardModelarr.length>0">
-        <div *ngFor="let i of dashboardModelarr; let ind=index">
-            <div class="card">
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-md-11">
-                        <h5 class="text-center" >Member {{ind+1}} </h5>
-                    </div>
-                    <div class="col-md-1">
-                        <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm" (click)="removeItem(ind)">
-                            <i class="fa fa-close" ></i>
-                        </button>
-                    </div>
-                </div>
-                <form class="loopforms">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
-                            <label>
-                                <h6>First Name</h6>
-                            </label>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                <input type="text" class="form-control" id="fname" name="fname"
-                                    [(ngModel)]="i.firstName" placeholder=" Enter First Name " required value=""
-                                    pattern="[A-Za-z]{1,32}" (focus)="focus = true" #fname="ngModel" />
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
-                            <label>
-                                <h6>Middle Name</h6>
-                            </label>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="i.middleName"
-                                    placeholder=" Enter Middle Name " required value="" pattern="[A-Za-z]{1,32}"
-                                    (focus)="focus = true" #mname{{ind+1}}="ngModel" />
-                            </div>
-
-                        </div>
-                        <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
-                            <label>
-                                <h6>Last Name</h6>
-                            </label>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="i.lastName"
-                                    placeholder=" Enter Last Name " required value="" pattern="[A-Za-z]{1,32}"
-                                    (focus)="focus = true" #lname="ngModel" />
-                            </div>
-                          
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
-                            <label>
-                                <h6>Contact Number</h6>
-                            </label>
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                <input type="text" class="form-control" id="contact" [(ngModel)]="i.contactNo"
-                                    name="contact" placeholder="Enter Contact Number" required value=""
-                                    pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                            <div class="dropdown form-group">
-                                <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                    name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    {{ i.mandaltype }}
-                                </button>
-                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton2">
-                                    <div class="dropdown-header">Select Mandal Type</div>
-                                    <div *ngFor="let j of mandalTypeList">
-                                        <a class="dropdown-item"
-                                            (click)="selectedmandaltype(j.mandaltype,ind)">{{j.mandaltype}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                            <div class="dropdown form-group">
-                                <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                    name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    {{ i.mandalName }}
-                                </button>
-                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton2">
-                                    <div class="dropdown-header">Select Mandal </div>
-                                    <div *ngFor="let j of mandalList">
-                                        <a class="dropdown-item" (click)="selectedmandal(j.id,ind)">{{j.name}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                            <div class="dropdown form-group">
-                                <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                    name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    {{ i.relationship }}
-                                </button>
-                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                                    <div class="dropdown-header">Select Relation</div>
-                                    <div *ngFor="let j of relationList">
-                                        <a class="dropdown-item" (click)="selectedrelation(j.id,ind)">{{j.name}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="ml-md-auto">
-                            <div class="btn btn-warning" (click)="saveDraft(i,ind)">Save Draft</div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> -->
+    
     <!--Member Information-->
     <div *ngIf="professionModel.length>0">
         <div *ngFor="let item of professionModel; let ind=index">
@@ -878,15 +753,15 @@
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" id="fname" name="fname"
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
                                         [(ngModel)]="item.firstName" placeholder=" Enter First Name " required value=""
-                                        pattern="[A-Za-z]{1,32}" (focus)="focus = true" #fname="ngModel" />
+                                        pattern="[A-Za-z]{1,32}" (focus)="focus = true" #firstName="ngModel" />
                                 </div>
-                                <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
-                                    <div *ngIf="fname.errors.required">
+                                <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                                    <div *ngIf="firstName.errors.required">
                                         First Name is required
                                     </div>
-                                    <div [hidden]="!fname.errors('pattern')">
+                                    <div [hidden]="!firstName.errors('pattern')">
                                         Numbers and Special Characters not allowed
                                     </div>
                                 </div>
@@ -942,8 +817,9 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="contact" [(ngModel)]="item.contactNo"
                                         name="contact" placeholder="Enter Contact Number" required value=""
-                                        pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
+                                        pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" (keyup)="verifyNumber(ind)" />
                                 </div>
+
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
                                     class="alert alert-danger">
                                     <div *ngIf="contact.errors.required">
@@ -956,24 +832,12 @@
                             </div>
 
                             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                                <div class="dropdown form-group">
-                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                        name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        {{ item.mandaltype }}
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <div class="dropdown-header">Select Category</div>
-                                        <div *ngFor="let pos of mandalTypeList">
-                                            <a class="dropdown-item"  (click)="selectedMandalType(pos.mandaltype)">{{pos.mandaltype}}</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        {{ i.mandaltype }}
+                                        {{ i.mandalType }}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <div class="dropdown-header">Select MandalType</div>
@@ -1310,7 +1174,7 @@
                             <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="skills" name="skills"
-                                        [(ngModel)]="item.skills" placeholder=" Enter skills " required value=""
+                                        [(ngModel)]="item.skill" placeholder=" Enter skills " required value=""
                                         pattern="[A-Za-z]{1,32}" (focus)="focus = true" #skills="ngModel" />
                                 </div>
                                 <div *ngIf="skills.errors && (skills.dirty || skills.touched)"
@@ -1378,7 +1242,7 @@
                 </h5>
                 <div class="modal-body">
                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                        <input type="text" class="form-control" id="family" [(ngModel)]="tot_mem" name="family" value=""
+                        <input type="number" class="form-control" id="family" [(ngModel)]="tot_mem" name="family" value=""
                             pattern="[0-9]{0,10}" (focus)="focus = true" #noofmem="ngModel" />
                     </div>
                     <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">

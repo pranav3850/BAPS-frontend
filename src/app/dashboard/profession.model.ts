@@ -29,13 +29,13 @@ export class Profession {
         public dob?: string,
         public gender?: string,
         public maritalStatus?: string,
-        public isForeignCountry?: string,
+        public isForeignCountry?: boolean,
         public foreignCountry?: string,
         public foreignCity?: string,
         public foreignContact?: string,
         public userId?:string,
         public tag?:string,
-        public prepareIelts?:string,
+        public prepareIelts?:boolean,
        
     ){}
 }
