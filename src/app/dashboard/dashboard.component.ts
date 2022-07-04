@@ -143,6 +143,12 @@ export class DashboardComponent implements OnInit {
 
     }
   }
+  viewEditHaribhakatDetails(data) {
+    this.professionViewModel = data;
+    $(document).ready(function () {
+      $("#editCustomerModal").modal('show');
+    });
+  }
   removeItem(i) {
     this.dashboardModelarr.splice(i, 1);
     this.tot_mem = this.dashboardModelarr.length;
@@ -150,6 +156,7 @@ export class DashboardComponent implements OnInit {
   getAllFamily() {
     this.dashboardService.getAllFamilyList().subscribe((res: any) => {
       this.totalFamily = res;
+      debugger
       this.tFamily = res;
       for (let i = 0; i < this.totalFamily.length; i++) {
         this.totalFamily[i].index = i + 1;
@@ -349,7 +356,7 @@ export class DashboardComponent implements OnInit {
   isForigenOpen(data) {
     this.isCountry = true;
   }
-  isForigenClose(data){
+  isForigenClose(data) {
     this.isCountry = false;
 
   }
@@ -611,6 +618,37 @@ export class DashboardComponent implements OnInit {
     }
   }
   updateHaribhaktInfo(data) {
+    if(this.professionViewModel.general==true){
+      this.professionViewModel.medium=false;
+      this.professionViewModel.vip=false;
+      this.professionViewModel.mvip=false;
+      this.professionViewModel.politician=false;
+    }
+    else if(this.professionViewModel.medium==true){
+      this.professionViewModel.general=false;
+      this.professionViewModel.vip=false;
+      this.professionViewModel.mvip=false;
+      this.professionViewModel.politician=false;
+    }
+    else if(this.professionViewModel.vip==true){
+      this.professionViewModel.general=false;
+      this.professionViewModel.medium=false;
+      this.professionViewModel.mvip=false;
+      this.professionViewModel.politician=false;
+    }
+    else if(this.professionViewModel.mvip==true){
+      this.professionViewModel.general=false;
+      this.professionViewModel.medium=false;
+      this.professionViewModel.vip=false;
+      this.professionViewModel.politician=false;
+    }
+    else if(this.professionViewModel.politician==true){
+      this.professionViewModel.general=false;
+      this.professionViewModel.medium=false;
+      this.professionViewModel.vip=false;
+      this.professionViewModel.mvip=false;
+    }
+    debugger
     this.dashboardService.updateHaribhakt(data).subscribe((res: any) => {
 
     })

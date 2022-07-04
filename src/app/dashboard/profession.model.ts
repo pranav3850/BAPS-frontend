@@ -36,6 +36,13 @@ export class Profession {
         public userId?:string,
         public tag?:string,
         public prepareIelts?:string,
+        public general?:boolean,
+        public medium?:boolean,
+        public vip?:boolean,
+        public mvip?:boolean,
+        public politician?:boolean,
+
+
        
     ){}
 }
