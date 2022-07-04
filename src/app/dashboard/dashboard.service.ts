@@ -10,6 +10,8 @@ import { Relation } from './relation.model';
     providedIn: 'root'
 })
 export class DashboardService {
+    
+
     constructor(
         private httpClient: HttpClient
     ) { }
