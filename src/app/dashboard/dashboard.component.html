@@ -699,7 +699,7 @@
         </div>
     </div> -->
     <!--Member Information-->
-    <div *ngIf="strpArray.length>0">
+    <div *ngIf="professionModel.length>0">
         <div *ngFor="let item of professionModel; let ind=index">
             <div class="card">
                 <div class="card-header">
@@ -805,18 +805,30 @@
 
                             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                                 <div class="dropdown form-group">
-                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
-                                        name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false" >
-                                        {{ item.mandaltype }}
+                                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ selectedName }}
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right"
-                                        aria-labelledby="dropdownMenuButton2">
-                                        <div class="dropdown-header">Select Mandal Type</div>
-                                        <div *ngFor="let i of mandalTypeList">
-                                            <a class="dropdown-item"
-                                                (click)="selectedmandaltype(i.mandaltype)">{{i.mandaltype}}</a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Category</div>
+                                        <div *ngFor="let pos of mandalTypeList">
+                                            <a class="dropdown-item"  (click)="selectedMandalType(pos.mandaltype)">{{pos.mandaltype}}</a>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ i.mandaltype }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select MandalType</div>
+                                        <div *ngFor="let pos of mandalTypeList">
+                                            <a class="dropdown-item" (click)="selectedmandaltype(pos.mandaltype,ind)">{{pos.mandaltype}}</a>
+                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -824,14 +836,13 @@
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false" >
-                                        {{ item.mandalName }}
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ i.mandalName }}
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right"
-                                        aria-labelledby="dropdownMenuButton2">
+                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton2">
                                         <div class="dropdown-header">Select Mandal </div>
-                                        <div *ngFor="let i of mandalList">
-                                            <a class="dropdown-item" (click)="selectedmandal(i.id)">{{i.name}}</a>
+                                        <div *ngFor="let j of mandalList">
+                                            <a class="dropdown-item" (click)="selectedmandal(j.id,ind)">{{j.name}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -840,13 +851,13 @@
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false" >
-                                        {{ item.relationship}}
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ i.relationship }}
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
                                         <div class="dropdown-header">Select Relation</div>
-                                        <div *ngFor="let i of relationList">
-                                            <a class="dropdown-item" (click)="selectedrelation(i.id)">{{i.name}}</a>
+                                        <div *ngFor="let j of relationList">
+                                            <a class="dropdown-item" (click)="selectedrelation(j.id,ind)">{{j.name}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -926,7 +937,9 @@
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Email Id"
-                                        required value="" pattern="^[0-9].{9,9}$">
+                                        required value=""   [(ngModel)]="item.email"
+                                        name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                        (focus)="focus = true" #email="ngModel">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
@@ -936,18 +949,35 @@
                                     </h6>
                                 </label>
                             </div>
-                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex">
-                                <!-- <div class="col-xl-2 text-left"></div> -->
-                                <input type="radio" name="gender" value="male"> Male
-                                <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2 justify-content-center"></div>
-                                <input type="radio" name="gender" value="female"> Female
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="col-md-1" >
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="title"
+                                                id="Present" value="male"
+                                                [(ngModel)]="item.gender"> MALE
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1" >
+                                    <div class="form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="title"
+                                                id="Abscent" value="female"
+                                                [(ngModel)]="item.gender"> FEMALE
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </div> 
                             </div>
+                          
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
                                 <label>
                                     <h6 style="margin-left: 5px;">Blood Group</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <div >
                                 <div class="dropdown">
                                     <div class="btn-group bootstrap-select w-100">
                                         <select class="selectpicker w-100" data-size="7" data-style="btn btn-primary btn-round"

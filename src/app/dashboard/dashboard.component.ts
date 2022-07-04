@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   addedMembers;
   public strpArray: any = [];
   basicInfo: any = [];
-  selectedMandalType = 'Select Mandal Type';
+  // selectedMandalType = 'Select Mandal Type';
   selectedRelation = 'Self';
   selectedMandal = 'Select Mandal';
   totalFamily: any = [];
@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
   familyId: number;
   redId: any;
   oldUser: boolean = false;
-
+  selectedName: any;
 
   openFamiliesFlag: boolean = false;
   openHaribhaktFlag: boolean = false;
@@ -110,11 +110,12 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
       if (res != 'no family') {
         this.familyId = res[0].familyId;
-        this.strpArray = res;
-        this.strpArray.forEach(element => {
+        this.strpArray=res;
+        res.forEach(element => {
           if (element.status == 1) {
             element.city='';
             this.professionModel.push(element);
+            
           }
         });
         this.oldUser = true;
@@ -356,12 +357,23 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  selectedmandaltype(type, ind) {
+  // selectedmandaltype(type, ind) {
+  //   this.mandalTypeList.forEach(element => {
+  //     if (element.mandaltype == type) {
+  //       this.professionModel[ind].mandaltype = element.mandaltype;
+  //       this.getmandal(element.mandaltype);
+  //     }
+  //   })
+
+  // }
+
+  selectedMandalType(mandaltype) {
+    debugger
     this.mandalTypeList.forEach(element => {
-      if (element.mandaltype == type) {
-        this.dashboardModelarr[ind].mandaltype = element.mandaltype;
-        this.getmandal(element.mandaltype);
+      if (element.mandaltype == mandaltype) {
+        this.selectedName = element.mandaltype;
       }
+      // this.MandalModel.mandaltype = this.selectedName;
     })
 
   }
@@ -370,7 +382,7 @@ export class DashboardComponent implements OnInit {
     this.relationList.forEach(element => {
       if (element.id == id) {
         this.selectedRelation = element.name;
-        this.dashboardModelarr[ind].relationship = element.name;
+        this.professionModel[ind].relationship = element.name;
       }
     })
   }
@@ -486,8 +498,8 @@ export class DashboardComponent implements OnInit {
     this.mandalList.forEach(element => {
       if (element.id == id) {
         this.selectedMandal = element.name;
-        this.dashboardModelarr[ind].mandalName = element.name;
-        this.dashboardModelarr[ind].mandalId = element.id;
+        this.professionModel[ind].mandalName = element.name;
+        this.professionModel[ind].mandalId = element.id;
       }
     })
   }
@@ -509,7 +521,8 @@ export class DashboardComponent implements OnInit {
     if (data.status == 2) {
       this.dashboardService.getEditDataofSecondstage(data).subscribe((res:any)=>{
         this.professionViewModel=res[0];
-        debugger
+        
+        
         this.professionViewModel.status=2;
         $(document).ready(function () {
           $("#addCustomerModal").modal('show');

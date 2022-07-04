@@ -25,13 +25,17 @@ export class Profession {
         public workInfo?: string,
         public status?:number,
         public email?: string,
-        public bloodGroup?: string,
+        public bloodGrp?: string,
         public dob?: string,
         public gender?: string,
-        public marritalStatus?: string,
+        public maritalStatus?: string,
         public isForeignCountry?: string,
         public foreignCountry?: string,
         public foreignCity?: string,
         public foreignContact?: string,
+        public userId?:string,
+        public tag?:string,
+        public prepareIelts?:string,
+       
     ){}
 }
