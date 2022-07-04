@@ -43,10 +43,10 @@ export class DashboardComponent implements OnInit {
   totalHaribhakt: any = [];
   tHaribhakt: any = [];
   tMandal: any = [];
-
+  tYellow: any = [];
   totalRedTick: any = [];
   tRedList: any = [];
-
+  tGreen:any=[];
   totalYelloTick: any = [];
   totalGreenTick: any = [];
   search: string = '';
@@ -65,6 +65,8 @@ export class DashboardComponent implements OnInit {
   openHaribhaktFlag: boolean = false;
   openMandalFlag: boolean = false;
   openRedtickFlag: boolean = false;
+  openYellowtickFlag: boolean = false;
+  openGreentickFlag: boolean = false;
   constructor(
     private dashboardService: DashboardService,
     private apiService: ApiService,
@@ -77,7 +79,7 @@ export class DashboardComponent implements OnInit {
         mob: this.mainMob
       }
       this.getOldDetails(obj);
-      
+
 
     })
     this.tot_mem = 0;
@@ -113,7 +115,7 @@ export class DashboardComponent implements OnInit {
         this.strpArray = res;
         this.strpArray.forEach(element => {
           if (element.status == 1) {
-            element.city='';
+            element.city = '';
             this.professionModel.push(element);
           }
         });
@@ -139,7 +141,7 @@ export class DashboardComponent implements OnInit {
   }
   removeItem(i) {
     this.dashboardModelarr.splice(i, 1);
-    this.tot_mem=this.dashboardModelarr.length;
+    this.tot_mem = this.dashboardModelarr.length;
   }
   getAllFamily() {
     this.dashboardService.getAllFamilyList().subscribe((res: any) => {
@@ -270,11 +272,74 @@ export class DashboardComponent implements OnInit {
   getYellowTickCount() {
     this.dashboardService.getYellowtickCount().subscribe((res: any) => {
       this.totalYelloTick = res;
+      this.tYellow=res;
+      for (let i = 0; i < this.totalYelloTick.length; i++) {
+        this.totalYelloTick[i].index = i + 1;
+      }
+    })
+  }
+  searchYellowList(val) {
+    if (this.search == '') {
+      this.totalYelloTick = this.tYellow;
+    } else {
+      this.transformYellow(this.tYellow, val);
+    }
+  }
+  transformYellow(totalYelloTick: any[], searchValue: string) {
+    this.totalYelloTick = [];
+    totalYelloTick.forEach(element => {
+      if (element.firstName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalYelloTick.push(element);
+      }
+      else if (element.lastName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalYelloTick.push(element);
+      }
+      else if (element.mandalName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalYelloTick.push(element);
+      }
+      else if (element.relationship.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalYelloTick.push(element);
+      }
+      else if (element.contactNo.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalYelloTick.push(element);
+      }
     })
   }
   getGreenTickCount() {
     this.dashboardService.getGreentickCount().subscribe((res: any) => {
       this.totalGreenTick = res;
+      this.tGreen=res;
+      for (let i = 0; i < this.totalGreenTick.length; i++) {
+        this.totalGreenTick[i].index = i + 1;
+      }
+    })
+  }
+  
+  searchGreenList(val) {
+    if (this.search == '') {
+      this.totalGreenTick = this.tGreen;
+    } else {
+      this.transformGreen(this.tGreen, val);
+    }
+  }
+  transformGreen(totalGreenTick: any[], searchValue: string) {
+    this.totalGreenTick = [];
+    totalGreenTick.forEach(element => {
+      if (element.firstName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalGreenTick.push(element);
+      }
+      else if (element.lastName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalGreenTick.push(element);
+      }
+      else if (element.mandalName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalGreenTick.push(element);
+      }
+      else if (element.relationship.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalGreenTick.push(element);
+      }
+      else if (element.contactNo.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalGreenTick.push(element);
+      }
     })
   }
   getrelation() {
@@ -466,13 +531,13 @@ export class DashboardComponent implements OnInit {
   }
   openProffesionalForm() {
     // this.professionModel = this.strpArray;
-    this.professionModel=[];
-    this.strpArray.forEach((ele:any)=>{
-      if(ele.status ==1){
+    this.professionModel = [];
+    this.strpArray.forEach((ele: any) => {
+      if (ele.status == 1) {
         this.professionModel.push(ele);
       }
     })
-  
+
   }
   getSavedMembers() {
     this.dashboardService.getSavedMembersList().subscribe((data: any) => {
@@ -494,7 +559,7 @@ export class DashboardComponent implements OnInit {
 
   AddMoreMember() {
     this.professionModel = [];
-    this.professionModel.length=this.tot_mem;
+    this.professionModel.length = this.tot_mem;
   }
   saveProffesionInfo(data, ind) {
     let test = [];
@@ -507,24 +572,24 @@ export class DashboardComponent implements OnInit {
 
   openViewInfo(data) {
     if (data.status == 2) {
-      this.dashboardService.getEditDataofSecondstage(data).subscribe((res:any)=>{
-        this.professionViewModel=res[0];
+      this.dashboardService.getEditDataofSecondstage(data).subscribe((res: any) => {
+        this.professionViewModel = res[0];
         debugger
-        this.professionViewModel.status=2;
+        this.professionViewModel.status = 2;
         $(document).ready(function () {
           $("#addCustomerModal").modal('show');
         });
       })
-    }else{
+    } else {
       this.professionViewModel = data;
       $(document).ready(function () {
         $("#addCustomerModal").modal('show');
       });
     }
   }
-  updateHaribhaktInfo(data){
-    this.dashboardService.updateHaribhakt(data).subscribe((res:any)=>{
-      
+  updateHaribhaktInfo(data) {
+    this.dashboardService.updateHaribhakt(data).subscribe((res: any) => {
+
     })
   }
   openTotalFamilies() {
@@ -532,6 +597,7 @@ export class DashboardComponent implements OnInit {
     this.openHaribhaktFlag = false;
     this.openMandalFlag = false;
     this.openRedtickFlag = false;
+    this.openYellowtickFlag = false;
   }
   openTotalHaribhakt() {
     this.openFamiliesFlag = false;
@@ -544,12 +610,33 @@ export class DashboardComponent implements OnInit {
     this.openFamiliesFlag = false;
     this.openHaribhaktFlag = false;
     this.openRedtickFlag = false;
+    this.openYellowtickFlag = false;
+    this.openGreentickFlag = false;
   }
   opentotalRedtick() {
+    this.openYellowtickFlag = false;
     this.openRedtickFlag = true;
     this.openMandalFlag = false;
     this.openFamiliesFlag = false;
     this.openHaribhaktFlag = false;
+    this.openGreentickFlag = false;
     this.getRedTickListForAll();
+  }
+  openTotalYellowTick() {
+    this.openYellowtickFlag = true;
+    this.openRedtickFlag = false;
+    this.openMandalFlag = false;
+    this.openFamiliesFlag = false;
+    this.openHaribhaktFlag = false;
+    this.openGreentickFlag = false;
+
+  }
+  openTotalGreenTick(){
+    this.openGreentickFlag = true;
+    this.openYellowtickFlag = false;
+    this.openRedtickFlag = false;
+    this.openMandalFlag = false;
+    this.openFamiliesFlag = false;
+    this.openHaribhaktFlag = false;
   }
 }

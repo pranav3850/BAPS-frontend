@@ -106,7 +106,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="Role == 'Admin'">
-            <div class="card card-stats" (click)="openMonthly()">
+            <div class="card card-stats" (click)="openTotalYellowTick()">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
@@ -117,7 +117,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Total</p>
-                                <p class="card-title">Yellow tick: {{totalYelloTick.length}}
+                                <p class="card-title">Yellow tick: {{tYellow.length}}
                                 </p>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6" *ngIf="Role == 'Admin'">
-            <div class="card card-stats" (click)="openEniquiry()">
+            <div class="card card-stats" (click)="openTotalGreenTick()">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
@@ -143,7 +143,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Total</p>
-                                <p class="card-title">Green tick: {{totalGreenTick.length}}
+                                <p class="card-title">Green tick: {{tGreen.length}}
                                 </p>
                             </div>
                         </div>
@@ -375,7 +375,7 @@
     <!-- DataTable for openMandal Start -->
     <div style="margin-top: -93px !important; padding: 0 0 1px 1px !important;" *ngIf="openMandalFlag">
 
-        <app-mandal ></app-mandal>
+        <app-mandal></app-mandal>
 
     </div>
     <!-- <div class="row" *ngIf="openMandalFlag">
@@ -441,6 +441,7 @@
     </div> -->
 
     <!-- DataTable for openMandal End -->
+
     <!-- DataTable for RedTick Start -->
     <div class="row" *ngIf="openRedtickFlag">
         <div class="col-lg-12">
@@ -515,6 +516,158 @@
             </div>
         </div>
     </div>
+    <!-- DataTable for RedTick End -->
+
+    <!-- DataTable for YellowTick Start -->
+    <div class="row" *ngIf="openYellowtickFlag">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title">Yellowtick Haribhakt List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                                By</label>
+                        </div>
+                        <div class="col-md-3 ml-md-auto">
+                            <div class="form-group" style="margin-top: 8px !important;">
+                                <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
+                                    [(ngModel)]="search" (keyup)="searchYellowList($event.target.value)"
+                                    aria-label="Search" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Mandal Name</th>
+                                <th class="text-center">Relationship</th>
+                                <th class="text-center">Contact Number</th>
+                                <th class="text-right">Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of totalYelloTick | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.firstName}} {{item.lastName}}</td>
+                                    <td class="text-center">{{ item.mandalName }}</td>
+                                    <td class="text-center">{{ item.relationship }}</td>
+                                    <td class="text-center">{{ item.contactNo }}</td>
+                                    <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
+                                                (click)="viewOfferDetails(item)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeHaribhaktList(item.userId)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
+                                responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- DataTable for YellowTick End -->
+    <!-- DataTable for GreenTick Start -->
+    <div class="row" *ngIf="openGreentickFlag">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title">GreenTick Haribhakt List</h4>
+                        </div>
+                        <div class="ml-md-auto">
+                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
+                                By</label>
+                        </div>
+                        <div class="col-md-3 ml-md-auto">
+                            <div class="form-group" style="margin-top: 8px !important;">
+                                <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
+                                    [(ngModel)]="search" (keyup)="searchGreenList($event.target.value)"
+                                    aria-label="Search" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th class="text-center">#</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Mandal Name</th>
+                                <th class="text-center">Relationship</th>
+                                <th class="text-center">Contact Number</th>
+                                <th class="text-right">Actions</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let item of totalGreenTick | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <td class="text-center">{{ item.index }}</td>
+                                    <td class="text-center">{{ item.firstName}} {{item.lastName}}</td>
+                                    <td class="text-center">{{ item.mandalName }}</td>
+                                    <td class="text-center">{{ item.relationship }}</td>
+                                    <td class="text-center">{{ item.contactNo }}</td>
+                                    <td class="text-right">
+                                        <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
+                                            <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                            <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
+                                                (click)="viewOfferDetails(item)"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
+                                            (click)="removeHaribhaktList(item.userId)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="ml-md-auto">
+                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
+                                responsive="true">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- DataTable for GreenTick End -->
 
     <div *ngIf="strpArray.length>0">
         <div class="card-header">
@@ -727,7 +880,7 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="fname" name="fname"
                                         [(ngModel)]="item.firstName" placeholder=" Enter First Name " required value=""
-                                        pattern="[A-Za-z]{1,32}" (focus)="focus = true" #fname="ngModel"  />
+                                        pattern="[A-Za-z]{1,32}" (focus)="focus = true" #fname="ngModel" />
                                 </div>
                                 <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
                                     <div *ngIf="fname.errors.required">
@@ -747,8 +900,7 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="mname" name="mname"
                                         [(ngModel)]="item.middleName" placeholder=" Enter Middle Name " required
-                                        value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true" #mname="ngModel"
-                                         />
+                                        value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true" #mname="ngModel" />
                                 </div>
                                 <div *ngIf="mname.errors && (mname.dirty || mname.touched)" class="alert alert-danger">
                                     <div *ngIf="mname.errors.required">
@@ -768,7 +920,7 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="lname" name="lname"
                                         [(ngModel)]="item.lastName" placeholder=" Enter Last Name " required value=""
-                                        pattern="[A-Za-z]{1,32}" (focus)="focus = true" #lname="ngModel"  />
+                                        pattern="[A-Za-z]{1,32}" (focus)="focus = true" #lname="ngModel" />
                                 </div>
                                 <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
                                     <div *ngIf="lname.errors.required">
@@ -790,7 +942,7 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="contact" [(ngModel)]="item.contactNo"
                                         name="contact" placeholder="Enter Contact Number" required value=""
-                                        pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel"  />
+                                        pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" />
                                 </div>
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
                                     class="alert alert-danger">
@@ -807,7 +959,7 @@
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false" >
+                                        aria-haspopup="true" aria-expanded="false">
                                         {{ item.mandaltype }}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right"
@@ -824,7 +976,7 @@
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false" >
+                                        aria-haspopup="true" aria-expanded="false">
                                         {{ item.mandalName }}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right"
@@ -840,7 +992,7 @@
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false" >
+                                        aria-haspopup="true" aria-expanded="false">
                                         {{ item.relationship}}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
@@ -925,8 +1077,8 @@
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Email Id"
-                                        required value="" pattern="^[0-9].{9,9}$">
+                                    <input type="text" class="form-control" id="contact" name="contact"
+                                        placeholder="Enter Email Id" required value="" pattern="^[0-9].{9,9}$">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
@@ -950,8 +1102,8 @@
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown">
                                     <div class="btn-group bootstrap-select w-100">
-                                        <select class="selectpicker w-100" data-size="7" data-style="btn btn-primary btn-round"
-                                            title="Select...">
+                                        <select class="selectpicker w-100" data-size="7"
+                                            data-style="btn btn-primary btn-round" title="Select...">
                                             <option disabled selected>Select...</option>
                                             <option value="2">A Positive</option>
                                             <option value="3">A Negative</option>
@@ -984,8 +1136,8 @@
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown">
                                     <div class="btn-group bootstrap-select w-100">
-                                        <select class="selectpicker w-100" data-size="7" data-style="btn btn-primary btn-round"
-                                            title="Select...">
+                                        <select class="selectpicker w-100" data-size="7"
+                                            data-style="btn btn-primary btn-round" title="Select...">
                                             <option disabled selected>Select...</option>
                                             <option value="2">Married</option>
                                             <option value="3">Unmarried</option>
@@ -1004,7 +1156,7 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" placeholder=" Enter Native Place ">
                                 </div>
-            
+
                             </div>
                         </div>
                         <div class="row">
@@ -1096,7 +1248,8 @@
                                 </div>
                             </div>
 
-                            <div *ngIf="item.profession =='Other'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Other'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Type of Work</h6>
                                 </label>
@@ -1144,31 +1297,29 @@
                             </div>
                         </div>
 
-                       
+
                         <div class="row">
                             <div class="col-md-2">
                                 <label>
                                     <h6>Currently living in Foreingh country?</h6>
                                 </label>
-                               
+
                             </div>
-                            <div class="col-md-1" >
+                            <div class="col-md-1">
                                 <div class="form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="title"
-                                            id="Present" value="yes"
-                                            [(ngModel)]="attandanceModel.title"> YES
+                                        <input class="form-check-input" type="radio" name="title" id="Present"
+                                            value="yes" [(ngModel)]="attandanceModel.title"> YES
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-1" >
+                            <div class="col-md-1">
 
                                 <div class="form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="title"
-                                            id="Abscent" value="no"
-                                            [(ngModel)]="attandanceModel.title"> NO
+                                        <input class="form-check-input" type="radio" name="title" id="Abscent"
+                                            value="no" [(ngModel)]="attandanceModel.title"> NO
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
@@ -1592,8 +1743,7 @@
                                         [(ngModel)]="professionViewModel.skill" placeholder=" Enter skill " required
                                         value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true" #skill="ngModel" />
                                 </div>
-                                <div *ngIf="skill.errors && (skill.dirty || skill.touched)"
-                                    class="alert alert-danger">
+                                <div *ngIf="skill.errors && (skill.dirty || skill.touched)" class="alert alert-danger">
                                     <div *ngIf="skill.errors.required">
                                         skill is required
                                     </div>
@@ -1606,7 +1756,8 @@
 
                         <div class="row">
                             <div class="ml-md-auto">
-                                <div class="btn btn-success" (click)="updateHaribhaktInfo(professionViewModel)">Save Edit</div>
+                                <div class="btn btn-success" (click)="updateHaribhaktInfo(professionViewModel)">Save
+                                    Edit</div>
                                 <!-- <div class="btn btn-success">Submit</div> -->
                                 &nbsp;&nbsp;&nbsp;
                             </div>
@@ -1624,7 +1775,7 @@
 
 
 
-   
+
     <div class="card">
         <div class="card-body">
             <h6 class="text-center" id="satsang">Satsang Details</h6>
