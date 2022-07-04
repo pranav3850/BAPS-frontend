@@ -8,7 +8,7 @@ export class Profession {
         public lastName?: string,
         public mandalId?: number,
         public mandalName?: string,
-        public mandaltype?: string,
+        public mandalType?: string,
         public relationship?: string,
         public index?: number,
         public familyId?:number,

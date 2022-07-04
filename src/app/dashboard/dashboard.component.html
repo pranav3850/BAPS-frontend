@@ -378,68 +378,7 @@
         <app-mandal></app-mandal>
 
     </div>
-    <!-- <div class="row" *ngIf="openMandalFlag">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4 class="card-title">Mandal List</h4>
-                        </div>
-                        <div class="ml-md-auto">
-                            <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
-                                By</label>
-                        </div>
-                        <div class="col-md-3 ml-md-auto">
-                            <div class="form-group" style="margin-top: 8px !important;">
-                                <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
-                                    [(ngModel)]="search" (keyup)="searchManadalList($event.target.value)"
-                                    aria-label="Search" />
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="text-primary">
-                                <th class="text-center">#</th>
-                                <th class="text-center">Mandal Type</th>
-                                <th class="text-center">Mandal Name</th>
-                                <th class="text-right">Actions</th>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    *ngFor="let item of allMandalList | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                                    <td class="text-center">{{ item.index }}</td>
-                                    <td class="text-center">{{ item.mandaltype }}</td>
-                                    <td class="text-center">{{ item.name}}</td>
-                                    <td class="text-right">
-                                        
-                                        <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
-                                            (click)="removeMandalList(item.userId)">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="ml-md-auto">
-                            <pagination-controls (pageChange)="p = $event" maxSize="10" autoHide="true"
-                                responsive="true">
-                            </pagination-controls>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
+ 
     <!-- DataTable for openMandal End -->
 
     <!-- DataTable for RedTick Start -->
@@ -836,31 +775,17 @@
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        {{ item.mandaltype }}
+                                        {{ item.mandalType }}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <div class="dropdown-header">Select Category</div>
                                         <div *ngFor="let pos of mandalTypeList">
                                             <a class="dropdown-item"
-                                                (click)="selectedMandalType(pos.mandaltype)">{{pos.mandaltype}}</a>
+                                                (click)="selectedMandalType(pos.mandaltype,ind)">{{pos.mandaltype}}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="dropdown form-group">
-                                    <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
-                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        {{ i.mandalType }}
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <div class="dropdown-header">Select MandalType</div>
-                                        <div *ngFor="let pos of mandalTypeList">
-                                            <a class="dropdown-item"
-                                                (click)="selectedmandaltype(pos.mandaltype,ind)">{{pos.mandaltype}}</a>
-                                        </div>
-
-                                    </div>
-                                </div> -->
+                               
                             </div>
                             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                                 <div class="dropdown form-group">
@@ -1021,6 +946,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="row">

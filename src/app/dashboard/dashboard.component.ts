@@ -432,21 +432,15 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  // selectedmandaltype(type, ind) {
-  //   this.mandalTypeList.forEach(element => {
-  //     if (element.mandaltype == type) {
-  //       this.professionModel[ind].mandaltype = element.mandaltype;
-  //       this.getmandal(element.mandaltype);
-  //     }
-  //   })
+ 
 
-  // }
-
-  selectedMandalType(mandaltype) {
+  selectedMandalType(mandaltype,ind) {
     debugger
     this.mandalTypeList.forEach(element => {
       if (element.mandaltype == mandaltype) {
         this.selectedName = element.mandaltype;
+        this.professionModel[ind].mandalType=element.mandaltype;
+        this.getmandal(element.mandaltype);
       }
       // this.MandalModel.mandaltype = this.selectedName;
     })
