@@ -29,7 +29,7 @@ export class Profession {
         public dob?: string,
         public gender?: string,
         public maritalStatus?: string,
-        public isForeignCountry?: string,
+        public isForeignCountry?: boolean,
         public foreignCountry?: string,
         public foreignCity?: string,
         public foreignContact?: string,
@@ -41,8 +41,5 @@ export class Profession {
         public vip?:boolean,
         public mvip?:boolean,
         public politician?:boolean,
-
-
-       
     ){}
 }

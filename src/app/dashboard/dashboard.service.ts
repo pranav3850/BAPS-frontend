@@ -77,5 +77,11 @@ export class DashboardService {
     updateMandalList(admin: Mandal): Observable<any[]> {
         return this.httpClient.post<any>(ApiService.updateMandalListURL, admin);
     }
+    savePersonalInfo(data:any){
+        return this.httpClient.post(ApiService.savePersonalInfoURL,data);
+    }
+    verifyNumber(data){
+        return this.httpClient.post(ApiService.verifyNumberURL,data);
+    }
     
 }

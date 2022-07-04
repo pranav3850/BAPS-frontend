@@ -587,8 +587,38 @@ export class DashboardComponent implements OnInit {
   }
 
   AddMoreMember() {
-    this.professionModel = [];
-    this.professionModel.length = this.tot_mem;
+    
+    for(let i=0;i<this.tot_mem;i++){
+      let data={
+         contactNo:0 ,
+         firstName:'',
+         middleName:'',
+         lastName:'',
+         mandalName:'',
+         mandaltype:'',
+         relationship:'',
+         address:'',
+         city:'',
+         area:'',
+         education:'',
+         profession:'',
+         occupation:'',
+         businessType:'',
+         skill:'',
+         workInfo:'',
+         email:'',
+         bloodGrp:'',
+         dob:'',
+         gender:'',
+         maritalStatus:'',
+         foreignCountry:'',
+         foreignCity:'',
+         foreignContact:'',
+      }
+      this.professionModel.push(data);
+      
+    }
+    // this.professionModel.length = this.tot_mem;
   }
   saveProffesionInfo(data, ind) {
     debugger
@@ -597,6 +627,98 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.saveProffesionInfo(test).subscribe((res) => {
       this.strpArray[ind].status = res[0].status;
       this.professionModel.splice(1, ind);
+    })
+  }
+
+  savePersonalInfo(data,ind){
+    let test = [];
+    data.status=1;
+    data.tag='Nan';
+
+    if (data.relationship == 'Father') {
+      let obj = {
+        nooffammem: this.tot_mem,
+        mob: data.contactNo
+      }
+      this.dashboardService.createFamily(obj).subscribe((res: any) => {
+        this.familyId = res.insertId;
+        data.familyId = this.familyId;
+        test.push(data);
+        this.dashboardService.savePersonalInfo(test).subscribe((res:any) => {
+          if (res[0].isDuplicate) {
+            this.duplicateUser = res[0];
+            this.duplicateUser.index = ind;
+            $(document).ready(function () {
+              $("#DuplicateNoModalCenter").modal('show');
+            });
+          }
+          else if (res.length > 0) {
+            data.status = res[0].status;
+            data.userId = res[0].id;
+            this.strpArray.push(data);
+            this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
+            this.dashboardModelarr.splice(ind, 1);
+            this.openProffesionalForm();
+          }
+        })
+      })
+    } else if (data.relationship == 'Self' && this.familyId == undefined) {
+      let obj = {
+        nooffammem: this.tot_mem,
+        mob: data.contactNo
+      }
+      this.dashboardService.createFamily(obj).subscribe((res: any) => {
+        this.familyId = res.insertId;
+        data.familyId = this.familyId;
+        test.push(data);
+        this.dashboardService.savePersonalInfo(test).subscribe((res:any) => {
+          if (res[0].isDuplicate) {
+            this.duplicateUser = res[0];
+            this.duplicateUser.index = ind;
+            $(document).ready(function () {
+              $("#DuplicateNoModalCenter").modal('show');
+            });
+          }
+          else if (res.length > 0) {
+            data.status = res[0].status;
+            data.userId = res[0].id;
+            this.strpArray.push(data);
+            this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
+            this.dashboardModelarr.splice(ind, 1);
+            this.openProffesionalForm();
+          }
+        })
+      })
+    }
+    else {
+      data.familyId = this.familyId;
+      test.push(data);
+      this.dashboardService.savePersonalInfo(test).subscribe((res:any) => {
+        if (res[0].isDuplicate) {
+          this.duplicateUser = res[0];
+          this.duplicateUser.index = ind;
+          $(document).ready(function () {
+            $("#DuplicateNoModalCenter").modal('show');
+          });
+        }
+        else if (res.length > 0) {
+          data.status = res[0].status;
+          data.userId = res[0].id;
+          this.strpArray.push(data);
+          this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
+          this.dashboardModelarr.splice(ind, 1);
+          this.openProffesionalForm();
+        }
+      })
+    }
+
+  }
+  verifyNumber(data){
+    debugger
+    let val={mob:this.professionModel[data].contactNo}
+    this.dashboardService.verifyNumber(val).subscribe((res:any)=>{
+      this.duplicateUser=res[0];
+      debugger
     })
   }
 

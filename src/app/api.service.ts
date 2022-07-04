@@ -42,6 +42,10 @@ export class ApiService {
 
   public static getEditDataforSecondStageURL: string = ApiService.HOST_URL + '/admin/getEditDataforSecondStage'
   public static updateHaribhaktURL: string = ApiService.HOST_URL + '/admin/updateHaribhakt'
+  public static savePersonalInfoURL: string = ApiService.HOST_URL + '/admin/savePersonalInfo'
+  public static verifyNumberURL: string = ApiService.HOST_URL + '/admin/vetifyNumber'
+  
+  
   
 
 
