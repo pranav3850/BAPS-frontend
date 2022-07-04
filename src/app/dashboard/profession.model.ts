@@ -35,7 +35,11 @@ export class Profession {
         public foreignContact?: string,
         public userId?:string,
         public tag?:string,
-        public prepareIelts?:boolean,
-       
+        public prepareIelts?:string,
+        public general?:boolean,
+        public medium?:boolean,
+        public vip?:boolean,
+        public mvip?:boolean,
+        public politician?:boolean,
     ){}
 }
