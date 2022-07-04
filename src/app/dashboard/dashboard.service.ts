@@ -71,4 +71,11 @@ export class DashboardService {
     updateHaribhakt(data){
         return this.httpClient.post(ApiService.updateHaribhaktURL,data);
     }
+    saveMandalDetails(admin: Mandal): Observable<any> {
+        return this.httpClient.post<any>(ApiService.saveMandalListURL, admin);
+    }
+    updateMandalList(admin: Mandal): Observable<any[]> {
+        return this.httpClient.post<any>(ApiService.updateMandalListURL, admin);
+    }
+    
 }
