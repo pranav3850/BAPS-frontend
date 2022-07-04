@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
   tYellow: any = [];
   totalRedTick: any = [];
   tRedList: any = [];
-  tGreen:any=[];
+  tGreen: any = [];
   totalYelloTick: any = [];
   totalGreenTick: any = [];
   search: string = '';
@@ -60,7 +60,9 @@ export class DashboardComponent implements OnInit {
   redId: any;
   oldUser: boolean = false;
   selectedName: any;
+  formdate: Date = new Date();
 
+  isCountry: boolean = false;
   openFamiliesFlag: boolean = false;
   openHaribhaktFlag: boolean = false;
   openMandalFlag: boolean = false;
@@ -79,6 +81,7 @@ export class DashboardComponent implements OnInit {
         mob: this.mainMob
       }
       this.getOldDetails(obj);
+      this.formdate
 
 
     })
@@ -112,12 +115,12 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
       if (res != 'no family') {
         this.familyId = res[0].familyId;
-        this.strpArray=res;
+        this.strpArray = res;
         res.forEach(element => {
           if (element.status == 1) {
             element.city = '';
             this.professionModel.push(element);
-            
+
           }
         });
         this.oldUser = true;
@@ -273,7 +276,7 @@ export class DashboardComponent implements OnInit {
   getYellowTickCount() {
     this.dashboardService.getYellowtickCount().subscribe((res: any) => {
       this.totalYelloTick = res;
-      this.tYellow=res;
+      this.tYellow = res;
       for (let i = 0; i < this.totalYelloTick.length; i++) {
         this.totalYelloTick[i].index = i + 1;
       }
@@ -309,13 +312,13 @@ export class DashboardComponent implements OnInit {
   getGreenTickCount() {
     this.dashboardService.getGreentickCount().subscribe((res: any) => {
       this.totalGreenTick = res;
-      this.tGreen=res;
+      this.tGreen = res;
       for (let i = 0; i < this.totalGreenTick.length; i++) {
         this.totalGreenTick[i].index = i + 1;
       }
     })
   }
-  
+
   searchGreenList(val) {
     if (this.search == '') {
       this.totalGreenTick = this.tGreen;
@@ -342,6 +345,13 @@ export class DashboardComponent implements OnInit {
         this.totalGreenTick.push(element);
       }
     })
+  }
+  isForigenOpen(data) {
+    this.isCountry = true;
+  }
+  isForigenClose(data){
+    this.isCountry = false;
+
   }
   getrelation() {
     this.dashboardService.getAllRelationList().subscribe((data: any) => {
@@ -574,6 +584,7 @@ export class DashboardComponent implements OnInit {
     this.professionModel.length = this.tot_mem;
   }
   saveProffesionInfo(data, ind) {
+    debugger
     let test = [];
     test.push(data);
     this.dashboardService.saveProffesionInfo(test).subscribe((res) => {
@@ -643,7 +654,7 @@ export class DashboardComponent implements OnInit {
     this.openGreentickFlag = false;
 
   }
-  openTotalGreenTick(){
+  openTotalGreenTick() {
     this.openGreentickFlag = true;
     this.openYellowtickFlag = false;
     this.openRedtickFlag = false;

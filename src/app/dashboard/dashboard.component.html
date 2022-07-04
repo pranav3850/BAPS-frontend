@@ -965,11 +965,12 @@
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <div class="dropdown-header">Select Category</div>
                                         <div *ngFor="let pos of mandalTypeList">
-                                            <a class="dropdown-item"  (click)="selectedMandalType(pos.mandaltype)">{{pos.mandaltype}}</a>
+                                            <a class="dropdown-item"
+                                                (click)="selectedMandalType(pos.mandaltype)">{{pos.mandaltype}}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="dropdown form-group">
+                                <!-- <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-primary btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
@@ -978,11 +979,12 @@
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <div class="dropdown-header">Select MandalType</div>
                                         <div *ngFor="let pos of mandalTypeList">
-                                            <a class="dropdown-item" (click)="selectedmandaltype(pos.mandaltype,ind)">{{pos.mandaltype}}</a>
+                                            <a class="dropdown-item"
+                                                (click)="selectedmandaltype(pos.mandaltype,ind)">{{pos.mandaltype}}</a>
                                         </div>
-                                       
+
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                                 <div class="dropdown form-group">
@@ -1100,34 +1102,32 @@
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                <div class="col-md-1" >
+                                <div class="col-md-1">
                                     <div class="form-check-radio">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="title"
-                                                id="Present" value="male"
-                                                [(ngModel)]="item.gender"> MALE
+                                            <input class="form-check-input" type="radio" name="title" id="Present"
+                                                value="male" [(ngModel)]="item.gender"> MALE
                                             <span class="form-check-sign"></span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-1" >
+                                <div class="col-md-1">
                                     <div class="form-check-radio">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="title"
-                                                id="Abscent" value="female"
-                                                [(ngModel)]="item.gender"> FEMALE
+                                            <input class="form-check-input" type="radio" name="title" id="Abscent"
+                                                value="female" [(ngModel)]="item.gender"> FEMALE
                                             <span class="form-check-sign"></span>
                                         </label>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
-                          
+
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
                                 <label>
                                     <h6 style="margin-left: 5px;">Blood Group</h6>
                                 </label>
                             </div>
-                            <div >
+                            <div>
                                 <div class="dropdown">
                                     <div class="btn-group bootstrap-select w-100">
                                         <select class="selectpicker w-100" data-size="7"
@@ -1154,7 +1154,10 @@
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                <input type="date" id="birthday" name="birthday">
+                                <div class="form-group">
+                                    <input type="date" id="dob" [(ngModel)]="item.dob" name="dob" value="{{ formdate }}"
+                                        class="form-control">
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
                                 <label>
@@ -1337,7 +1340,8 @@
                                 <div class="form-check-radio">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="title" id="Present"
-                                            value="yes" [(ngModel)]="attandanceModel.title"> YES
+                                            value="yes" [(ngModel)]="item.isForeignCountry"
+                                            (click)="isForigenOpen('Yes')"> YES
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
@@ -1347,13 +1351,80 @@
                                 <div class="form-check-radio">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="title" id="Abscent"
-                                            value="no" [(ngModel)]="attandanceModel.title"> NO
+                                            value="no" [(ngModel)]="item.isForeignCountry"
+                                            (click)="isForigenClose('No')"> NO
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row" *ngIf="isCountry">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label class="labeltext">
+                                    <h6>Enter Country</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="foreignCountry" name="foreignCountry"
+                                        [(ngModel)]="item.foreignCountry" placeholder=" Enter Country Name " required
+                                        value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #foreignCountry="ngModel" />
+                                </div>
+                                <div *ngIf="foreignCountry.errors && (foreignCountry.dirty || foreignCountry.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="foreignCountry.errors.required">
+                                        First Name is required
+                                    </div>
+                                    <div [hidden]="!foreignCountry.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>City Name</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="foreignCity" name="foreignCity"
+                                        [(ngModel)]="item.foreignCity" placeholder=" Enter City Name " required value=""
+                                        pattern="[A-Za-z]{1,32}" (focus)="focus = true" #foreignCity="ngModel" />
+                                </div>
+                                <div *ngIf="foreignCity.errors && (foreignCity.dirty || foreignCity.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="foreignCity.errors.required">
+                                        Middle Name is required
+                                    </div>
+                                    <div [hidden]="!foreignCity.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Foriegn Number</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="foreignContact"
+                                        [(ngModel)]="item.foreignContact" name="foreignContact"
+                                        placeholder="Enter Foreign  Number" required value="" pattern="^[0-9].{9,9}$"
+                                        (focus)="focus = true" #foreignContact="ngModel" />
+                                </div>
+                                <div *ngIf="foreignContact.errors && (foreignContact.dirty || foreignContact.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="foreignContact.errors.required">
+                                        foreignContact Address is required.
+                                    </div>
+                                    <div [hidden]="!foreignContact.errors('pattern')">
+                                        Enter Only Numbers.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="ml-md-auto">
                                 <div class="btn btn-warning" (click)="saveProffesionInfo(item,ind)">Save Draft</div>
