@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   public dashboardModelarr: Dashboard[] = [];
   public professionModel: Profession[] = [];
   public professionViewModel: Profession = new Profession;
+  public duplicateUser:Profession = new Profession;
   public dashboardModel: Dashboard = new Dashboard;
   public mandalModel: Mandal[] = [];
   public relationModel: Relation[] = [];
@@ -51,7 +52,7 @@ export class DashboardComponent implements OnInit {
   search: string = '';
   haribhakt: any = [];
   mainMob: any;
-  duplicateUser: any = {}
+  
   otp: any;
   professionList: any = [];
   allMandalList: any = [];
@@ -69,7 +70,9 @@ export class DashboardComponent implements OnInit {
   openYellowtickFlag: boolean = false;
   openGreentickFlag: boolean = false;
   bloodGroupDataList: any = [];
-  maratialData: any = [];
+  maratialData:any=[];
+  isOpenForm:boolean=false;
+
   haribhaktTagsdata: any = [];
   updateHariDetail: any = [];
 
@@ -145,6 +148,7 @@ export class DashboardComponent implements OnInit {
       if (res != 'no family') {
         this.familyId = res[0].familyId;
         this.professionModel = res;
+        this.isOpenForm=false;
         debugger
 
         this.oldUser = true;
@@ -195,13 +199,11 @@ export class DashboardComponent implements OnInit {
   }
   removeItem(i) {
     this.dashboardModelarr.splice(i, 1);
-    this.tot_mem = this.dashboardModelarr.length;
+    // this.tot_mem = this.dashboardModelarr.length;
   }
   getAllFamily() {
-    debugger
     this.dashboardService.getAllFamilyList().subscribe((res: any) => {
       this.totalFamily = res;
-      debugger
       this.tFamily = res;
       for (let i = 0; i < this.totalFamily.length; i++) {
         this.totalFamily[i].index = i + 1;
@@ -212,12 +214,10 @@ export class DashboardComponent implements OnInit {
   viewFamilyMembersDetails(id) {
     this.viewMembers = [];
     this.totalHaribhakt.forEach((element, index) => {
-      debugger
       if (element.familyId == id) {
         element.index = index;
         this.viewMembers.push(element);
       }
-
     });
   }
   searchFamiliesList(val) {
@@ -252,7 +252,6 @@ export class DashboardComponent implements OnInit {
   }
   setGeneralTagbyAdmin() {
     this.professionViewModel.general;
-    debugger
   }
   searchHaribhaktList(val) {
     if (this.search == '') {
@@ -550,91 +549,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  saveDraft(data, ind) {
-    let test = [];
-
-    if (data.relationship == 'Father') {
-      let obj = {
-        nooffammem: this.tot_mem,
-        mob: data.contactNo
-      }
-      this.dashboardService.createFamily(obj).subscribe((res: any) => {
-        this.familyId = res.insertId;
-        data.familyId = this.familyId;
-        test.push(data);
-        this.dashboardService.saveData(test).subscribe((res) => {
-          if (res[0].isDuplicate) {
-            this.duplicateUser = res[0];
-            this.duplicateUser.index = ind;
-            $(document).ready(function () {
-              $("#DuplicateNoModalCenter").modal('show');
-            });
-          }
-          else if (res.length > 0) {
-            data.status = res[0].status;
-            data.userId = res[0].id;
-            this.strpArray.push(data);
-            this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
-            this.dashboardModelarr.splice(ind, 1);
-            this.openProffesionalForm();
-          }
-        })
-      })
-    } else if (data.relationship == 'Self' && this.familyId == undefined) {
-      let obj = {
-        nooffammem: this.tot_mem,
-        mob: data.contactNo
-      }
-      this.dashboardService.createFamily(obj).subscribe((res: any) => {
-        this.familyId = res.insertId;
-        data.familyId = this.familyId;
-        test.push(data);
-        this.dashboardService.saveData(test).subscribe((res) => {
-          if (res[0].isDuplicate) {
-            this.duplicateUser = res[0];
-            this.duplicateUser.index = ind;
-            $(document).ready(function () {
-              $("#DuplicateNoModalCenter").modal('show');
-            });
-          }
-          else if (res.length > 0) {
-            data.status = res[0].status;
-            data.userId = res[0].id;
-            this.strpArray.push(data);
-            this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
-            this.dashboardModelarr.splice(ind, 1);
-            this.openProffesionalForm();
-          }
-        })
-      })
-    }
-    else {
-      data.familyId = this.familyId;
-      test.push(data);
-      this.dashboardService.saveData(test).subscribe((res) => {
-        if (res[0].isDuplicate) {
-          this.duplicateUser = res[0];
-          this.duplicateUser.index = ind;
-          $(document).ready(function () {
-            $("#DuplicateNoModalCenter").modal('show');
-          });
-        }
-        else if (res.length > 0) {
-          data.status = res[0].status;
-          data.userId = res[0].id;
-          this.strpArray.push(data);
-          this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
-          this.dashboardModelarr.splice(ind, 1);
-          this.openProffesionalForm();
-        }
-      })
-    }
-
-  }
+ 
   AddExistUser() {
-    this.strpArray.push(this.duplicateUser);
-    this.dashboardModelarr.splice(this.duplicateUser.index, 1);
-    this.openProffesionalForm();
+    this.professionModel[this.duplicateUser.index]=this.duplicateUser;
   }
   selectedprofession(name, index, type?) {
     if (type == 'modal') {
@@ -688,8 +605,8 @@ export class DashboardComponent implements OnInit {
   }
 
   AddMoreMember() {
-
     for (let i = 0; i < this.tot_mem; i++) {
+      
       let data = {
         contactNo: 0,
         firstName: '',
@@ -721,13 +638,14 @@ export class DashboardComponent implements OnInit {
         mvip: false,
         politician: false,
       }
+      this.isOpenForm=true;
       this.professionModel.push(data);
 
     }
     // this.professionModel.length = this.tot_mem;
   }
   saveProffesionInfo(data, ind) {
-    debugger
+    
     let test = [];
     test.push(data);
     this.dashboardService.saveProffesionInfo(test).subscribe((res) => {
@@ -763,7 +681,7 @@ export class DashboardComponent implements OnInit {
   savePersonalInfo(data, ind) {
     let test = [];
     data.status = 1;
-    data.tag = 'Nan';
+    data.tag = 'General';
     data.prepareIelts = false;
 
     if (data.relationship == 'Father') {
@@ -845,27 +763,29 @@ export class DashboardComponent implements OnInit {
 
   }
   verifyNumber(data) {
+    debugger
     let val = { mob: this.professionModel[data].contactNo }
     this.dashboardService.verifyNumber(val).subscribe((res: any) => {
       this.duplicateUser = res[0];
+      this.duplicateUser.index = data;
+      $(document).ready(function () {
+        $("#DuplicateNoModalCenter1").modal('show');
+      });
     })
+  }
+  openOTPforAddUser(){
+    $(document).ready(function () {
+      $("#DuplicateNoModalCenter").modal('show');
+    });
   }
 
   openViewInfo(data) {
-    if (data.status == 2) {
-      this.dashboardService.getEditDataofSecondstage(data).subscribe((res: any) => {
-        this.professionViewModel = res[0];
-        this.professionViewModel.status = 2;
-        $(document).ready(function () {
-          $("#addCustomerModal").modal('show');
-        });
-      })
-    } else {
+  
       this.professionViewModel = data;
       $(document).ready(function () {
-        $("#addCustomerModal").modal('show');
+        $("#editCustomerModal").modal('show');
       });
-    }
+    
   }
   updateHaribhaktInfo(data) {
     if (this.professionViewModel.general == true) {
