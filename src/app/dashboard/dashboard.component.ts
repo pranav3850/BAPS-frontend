@@ -69,6 +69,8 @@ export class DashboardComponent implements OnInit {
   openRedtickFlag: boolean = false;
   openYellowtickFlag: boolean = false;
   openGreentickFlag: boolean = false;
+  bloodGroupDataList: any = [];
+  maratialData:any=[];
   constructor(
     private dashboardService: DashboardService,
     private apiService: ApiService,
@@ -93,7 +95,24 @@ export class DashboardComponent implements OnInit {
       { name: 'Student' },
       { name: 'Other' }
     ]
-
+    this.bloodGroupDataList = [
+      { name: 'A Positive' },
+      { name: 'A Negative' },
+      { name: 'B Positive' },
+      { name: 'B Negative' },
+      { name: 'AB Positive' },
+      { name: 'AB Negative' },
+      { name: 'O Positive' },
+      { name: 'O Negative' },
+      { name: 'Unknown' },
+    ]
+    this.maratialData = [
+      { name: 'Single' },
+      { name: 'Married' },
+      { name: 'Unmarried' },
+      { name: 'Divorced' },
+      { name: 'Widowed' }
+    ]
   }
 
   public ngOnInit() {
@@ -117,7 +136,7 @@ export class DashboardComponent implements OnInit {
         this.familyId = res[0].familyId;
         this.professionModel = res;
         debugger
-       
+
         this.oldUser = true;
       } else {
         this.newUser()
@@ -139,12 +158,12 @@ export class DashboardComponent implements OnInit {
     }
   }
   viewEditHaribhakatDetails(data) {
-      this.professionViewModel = data;
-      this.professionViewModel.general=false;
-      this.professionViewModel.medium=false;
-      this.professionViewModel.vip=false;
-      this.professionViewModel.mvip=false;
-      this.professionViewModel.politician=false;
+    this.professionViewModel = data;
+    this.professionViewModel.general = false;
+    this.professionViewModel.medium = false;
+    this.professionViewModel.vip = false;
+    this.professionViewModel.mvip = false;
+    this.professionViewModel.politician = false;
     $(document).ready(function () {
       $("#editCustomerModal").modal('show');
     });
@@ -167,13 +186,13 @@ export class DashboardComponent implements OnInit {
   }
   viewFamilyMembersDetails(id) {
     this.viewMembers = [];
-    this.totalHaribhakt.forEach((element,index) => {
+    this.totalHaribhakt.forEach((element, index) => {
       debugger
       if (element.familyId == id) {
         element.index = index;
         this.viewMembers.push(element);
       }
-    
+
     });
   }
   searchFamiliesList(val) {
@@ -358,13 +377,13 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-  isForigenOpen(data,ind) {
+  isForigenOpen(data, ind) {
     this.isCountry = true;
-    this.professionModel[ind].isForeignCountry=true;
+    this.professionModel[ind].isForeignCountry = true;
   }
-  isForigenClose(data,ind) {
+  isForigenClose(data, ind) {
     this.isCountry = false;
-    this.professionModel[ind].isForeignCountry=false;
+    this.professionModel[ind].isForeignCountry = false;
 
   }
   getrelation() {
@@ -446,14 +465,14 @@ export class DashboardComponent implements OnInit {
 
   }
 
- 
 
-  selectedMandalType(mandaltype,ind) {
-    
+
+  selectedMandalType(mandaltype, ind) {
+
     this.mandalTypeList.forEach(element => {
       if (element.mandaltype == mandaltype) {
         this.selectedName = element.mandaltype;
-        this.professionModel[ind].mandalType=element.mandaltype;
+        this.professionModel[ind].mandalType = element.mandaltype;
         this.getmandal(element.mandaltype);
       }
       // this.MandalModel.mandaltype = this.selectedName;
@@ -569,6 +588,7 @@ export class DashboardComponent implements OnInit {
     })
 
   }
+
   getSavedMembers() {
     this.dashboardService.getSavedMembersList().subscribe((data: any) => {
       this.addedMembers = data;
@@ -589,41 +609,41 @@ export class DashboardComponent implements OnInit {
   }
 
   AddMoreMember() {
-    
-    for(let i=0;i<this.tot_mem;i++){
-      let data={
-         contactNo:0 ,
-         firstName:'',
-         middleName:'',
-         lastName:'',
-         mandalName:'',
-         mandaltype:'',
-         relationship:'',
-         address:'',
-         city:'',
-         area:'',
-         education:'',
-         profession:'',
-         occupation:'',
-         businessType:'',
-         skill:'',
-         workInfo:'',
-         email:'',
-         bloodGrp:'',
-         dob:'',
-         gender:'',
-         maritalStatus:'',
-         foreignCountry:'',
-         foreignCity:'',
-         foreignContact:'',
-          general:false,
-          medium:false,
-          vip:false,
-          mvip:false,
-          politician:false,
+
+    for (let i = 0; i < this.tot_mem; i++) {
+      let data = {
+        contactNo: 0,
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        mandalName: '',
+        mandaltype: '',
+        relationship: '',
+        address: '',
+        city: '',
+        area: '',
+        education: '',
+        profession: '',
+        occupation: '',
+        businessType: '',
+        skill: '',
+        workInfo: '',
+        email: '',
+        bloodGrp: '',
+        dob: '',
+        gender: '',
+        maritalStatus: '',
+        foreignCountry: '',
+        foreignCity: '',
+        foreignContact: '',
+        general: false,
+        medium: false,
+        vip: false,
+        mvip: false,
+        politician: false,
       }
       this.professionModel.push(data);
-      
+
     }
     // this.professionModel.length = this.tot_mem;
   }
@@ -636,19 +656,19 @@ export class DashboardComponent implements OnInit {
       this.professionModel.splice(1, ind);
     })
   }
-  selectChangeHandlerForMarital(event: any,ind) {
-    
-    this.professionModel[ind].maritalStatus = event.target.value;
-  }
-  selectChangeHandlerForBloodgrp(event:any,ind){
-    this.professionModel[ind].bloodGrp = event.target.value;
+  selectChangeHandlerForMarital(name, index) {
+
+    this.professionModel[index].maritalStatus =name;
   }
 
-  savePersonalInfo(data,ind){
+  selectedBloodData(name, index) {
+    this.professionModel[index].bloodGrp = name;
+  }
+  savePersonalInfo(data, ind) {
     let test = [];
-    data.status=1;
-    data.tag='Nan';
-    data.prepareIelts=false;
+    data.status = 1;
+    data.tag = 'Nan';
+    data.prepareIelts = false;
 
     if (data.relationship == 'Father') {
       let obj = {
@@ -659,7 +679,7 @@ export class DashboardComponent implements OnInit {
         this.familyId = res.insertId;
         data.familyId = this.familyId;
         test.push(data);
-        this.dashboardService.savePersonalInfo(test).subscribe((res:any) => {
+        this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
           if (res[0].isDuplicate) {
             this.duplicateUser = res[0];
             this.duplicateUser.index = ind;
@@ -686,7 +706,7 @@ export class DashboardComponent implements OnInit {
         this.familyId = res.insertId;
         data.familyId = this.familyId;
         test.push(data);
-        this.dashboardService.savePersonalInfo(test).subscribe((res:any) => {
+        this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
           if (res[0].isDuplicate) {
             this.duplicateUser = res[0];
             this.duplicateUser.index = ind;
@@ -708,7 +728,7 @@ export class DashboardComponent implements OnInit {
     else {
       data.familyId = this.familyId;
       test.push(data);
-      this.dashboardService.savePersonalInfo(test).subscribe((res:any) => {
+      this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
         if (res[0].isDuplicate) {
           this.duplicateUser = res[0];
           this.duplicateUser.index = ind;
@@ -728,10 +748,10 @@ export class DashboardComponent implements OnInit {
     }
 
   }
-  verifyNumber(data){
-    let val={mob:this.professionModel[data].contactNo}
-    this.dashboardService.verifyNumber(val).subscribe((res:any)=>{
-      this.duplicateUser=res[0];
+  verifyNumber(data) {
+    let val = { mob: this.professionModel[data].contactNo }
+    this.dashboardService.verifyNumber(val).subscribe((res: any) => {
+      this.duplicateUser = res[0];
     })
   }
 
@@ -752,35 +772,35 @@ export class DashboardComponent implements OnInit {
     }
   }
   updateHaribhaktInfo(data) {
-    if(this.professionViewModel.general==true){
-      this.professionViewModel.medium=false;
-      this.professionViewModel.vip=false;
-      this.professionViewModel.mvip=false;
-      this.professionViewModel.politician=false;
+    if (this.professionViewModel.general == true) {
+      this.professionViewModel.medium = false;
+      this.professionViewModel.vip = false;
+      this.professionViewModel.mvip = false;
+      this.professionViewModel.politician = false;
     }
-    else if(this.professionViewModel.medium==true){
-      this.professionViewModel.general=false;
-      this.professionViewModel.vip=false;
-      this.professionViewModel.mvip=false;
-      this.professionViewModel.politician=false;
+    else if (this.professionViewModel.medium == true) {
+      this.professionViewModel.general = false;
+      this.professionViewModel.vip = false;
+      this.professionViewModel.mvip = false;
+      this.professionViewModel.politician = false;
     }
-    else if(this.professionViewModel.vip==true){
-      this.professionViewModel.general=false;
-      this.professionViewModel.medium=false;
-      this.professionViewModel.mvip=false;
-      this.professionViewModel.politician=false;
+    else if (this.professionViewModel.vip == true) {
+      this.professionViewModel.general = false;
+      this.professionViewModel.medium = false;
+      this.professionViewModel.mvip = false;
+      this.professionViewModel.politician = false;
     }
-    else if(this.professionViewModel.mvip==true){
-      this.professionViewModel.general=false;
-      this.professionViewModel.medium=false;
-      this.professionViewModel.vip=false;
-      this.professionViewModel.politician=false;
+    else if (this.professionViewModel.mvip == true) {
+      this.professionViewModel.general = false;
+      this.professionViewModel.medium = false;
+      this.professionViewModel.vip = false;
+      this.professionViewModel.politician = false;
     }
-    else if(this.professionViewModel.politician==true){
-      this.professionViewModel.general=false;
-      this.professionViewModel.medium=false;
-      this.professionViewModel.vip=false;
-      this.professionViewModel.mvip=false;
+    else if (this.professionViewModel.politician == true) {
+      this.professionViewModel.general = false;
+      this.professionViewModel.medium = false;
+      this.professionViewModel.vip = false;
+      this.professionViewModel.mvip = false;
     }
     debugger
     this.dashboardService.updateHaribhakt(data).subscribe((res: any) => {
