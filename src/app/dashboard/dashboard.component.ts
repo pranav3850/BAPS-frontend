@@ -70,6 +70,9 @@ export class DashboardComponent implements OnInit {
   openGreentickFlag: boolean = false;
   bloodGroupDataList: any = [];
   maratialData: any = [];
+  haribhaktTagsdata: any = [];
+  updateHariDetail: any = [];
+
   constructor(
     private dashboardService: DashboardService,
     private apiService: ApiService,
@@ -112,6 +115,13 @@ export class DashboardComponent implements OnInit {
       { name: 'Unmarried' },
       { name: 'Divorced' },
       { name: 'Widowed' }
+    ]
+    this.haribhaktTagsdata = [
+      { name: 'General' },
+      { name: 'Medium' },
+      { name: 'Vip' },
+      { name: 'Mvip' },
+      { name: 'Politician' }
     ]
   }
 
@@ -164,7 +174,7 @@ export class DashboardComponent implements OnInit {
     this.professionViewModel.vip = false;
     this.professionViewModel.mvip = false;
     this.professionViewModel.politician = false;
-   
+
     const str = this.professionViewModel.dob;
     const date = new Date(str);
     this.formdate = date;
@@ -172,6 +182,16 @@ export class DashboardComponent implements OnInit {
     $(document).ready(function () {
       $("#editCustomerModal").modal('show');
     });
+  }
+  updateHarbhakatDetailsById() {
+    let data=[];
+    data.push(this.professionViewModel);
+    this.dashboardService.updateProffesionInfo(data).subscribe((res) => {
+      // this.strpArray[ind].status = res[0].status;
+      // this.professionModel.splice(1, ind);
+    })
+    debugger
+
   }
   removeItem(i) {
     this.dashboardModelarr.splice(i, 1);
@@ -472,26 +492,48 @@ export class DashboardComponent implements OnInit {
 
 
 
-  selectedMandalType(mandaltype, ind) {
+  selectedMandalType(mandaltype, ind, type?) {
+    if (type == 'array') {
+      this.mandalTypeList.forEach(element => {
+        if (element.mandaltype == mandaltype) {
+          this.selectedName = element.mandaltype;
+          this.professionModel[ind].mandalType = element.mandaltype;
+          this.getmandal(element.mandaltype);
+        }
+        // this.MandalModel.mandaltype = this.selectedName;
+      })
+    }
+    else {
+      this.mandalTypeList.forEach(element => {
+        if (element.mandaltype == mandaltype) {
+          this.selectedName = element.mandaltype;
+          this.professionViewModel.mandalType = element.mandaltype;
+          this.getmandal(element.mandaltype);
+        }
+        // this.MandalModel.mandaltype = this.selectedName;
+      })
+    }
 
-    this.mandalTypeList.forEach(element => {
-      if (element.mandaltype == mandaltype) {
-        this.selectedName = element.mandaltype;
-        this.professionModel[ind].mandalType = element.mandaltype;
-        this.getmandal(element.mandaltype);
-      }
-      // this.MandalModel.mandaltype = this.selectedName;
-    })
 
   }
 
-  selectedrelation(id, ind) {
-    this.relationList.forEach(element => {
-      if (element.id == id) {
-        this.selectedRelation = element.name;
-        this.professionModel[ind].relationship = element.name;
-      }
-    })
+  selectedrelation(id, ind, type) {
+    if (type == 'modal') {
+      this.relationList.forEach(element => {
+        if (element.id == id) {
+          this.selectedRelation = element.name;
+          this.professionViewModel.relationship = element.name;
+        }
+      })
+    }
+    else {
+      this.relationList.forEach(element => {
+        if (element.id == id) {
+          this.selectedRelation = element.name;
+          this.professionModel[ind].relationship = element.name;
+        }
+      })
+    }
   }
 
   saveDraft(data, ind) {
@@ -580,8 +622,13 @@ export class DashboardComponent implements OnInit {
     this.dashboardModelarr.splice(this.duplicateUser.index, 1);
     this.openProffesionalForm();
   }
-  selectedprofession(name, index) {
-    this.professionModel[index].profession = name;
+  selectedprofession(name, index, type?) {
+    if (type == 'modal') {
+      this.professionViewModel.profession = name;
+    }
+    else {
+      this.professionModel[index].profession = name;
+    }
   }
   openProffesionalForm() {
     // this.professionModel = this.strpArray;
@@ -602,15 +649,28 @@ export class DashboardComponent implements OnInit {
 
 
 
-  selectedmandal(id, ind) {
-    this.mandalList.forEach(element => {
-      if (element.id == id) {
-        this.selectedMandal = element.name;
-        this.professionModel[ind].mandalName = element.name;
-        this.professionModel[ind].mandalId = element.id;
-        debugger
-      }
-    })
+  selectedmandal(id, ind, type?) {
+    if (type == 'modal') {
+      this.mandalList.forEach(element => {
+        if (element.id == id) {
+          this.selectedMandal = element.name;
+          this.professionViewModel.mandalName = element.name;
+          this.professionViewModel.mandalId = element.id;
+
+        }
+      })
+    }
+    else {
+      this.mandalList.forEach(element => {
+        if (element.id == id) {
+          this.selectedMandal = element.name;
+          this.professionModel[ind].mandalName = element.name;
+          this.professionModel[ind].mandalId = element.id;
+
+        }
+      })
+    }
+
   }
 
   AddMoreMember() {
@@ -661,13 +721,30 @@ export class DashboardComponent implements OnInit {
       this.professionModel.splice(1, ind);
     })
   }
-  selectChangeHandlerForMarital(name, index) {
-
-    this.professionModel[index].maritalStatus = name;
+  selectChangeHandlerForMarital(name, index, type?) {
+    if (type == 'modal') {
+      this.professionViewModel.maritalStatus = name;
+    }
+    else {
+      this.professionModel[index].maritalStatus = name;
+    }
   }
 
-  selectedBloodData(name, index) {
-    this.professionModel[index].bloodGrp = name;
+  selectedBloodData(name, index, type?) {
+    if (type == 'modal') {
+      this.professionViewModel.bloodGrp = name;
+    }
+    else {
+      this.professionModel[index].bloodGrp = name;
+    }
+  }
+  selectedHaribhaktTags(name, index, type?) {
+    if (type == 'modal') {
+      this.professionViewModel.tag = name;
+    }
+    else {
+      this.professionModel[index].tag = name;
+    }
   }
   savePersonalInfo(data, ind) {
     let test = [];
@@ -807,7 +884,6 @@ export class DashboardComponent implements OnInit {
       this.professionViewModel.vip = false;
       this.professionViewModel.mvip = false;
     }
-    debugger
     this.dashboardService.updateHaribhakt(data).subscribe((res: any) => {
 
     })
