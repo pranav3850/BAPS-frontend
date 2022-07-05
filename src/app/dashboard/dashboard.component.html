@@ -389,11 +389,12 @@
                                 <label>
                                     <h6>General</h6>
                                 </label>
-                                </div>
+                            </div>
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1">
                                 <label class="switch">
                                     <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
-                                        [switch-off-color]="'primary'" id="general" name="general" [(ngModel)]="professionViewModel.general">
+                                        [switch-off-color]="'primary'" id="general" name="general"
+                                        [(ngModel)]="professionViewModel.general">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -401,11 +402,12 @@
                                 <label>
                                     <h6>Medium</h6>
                                 </label>
-                                </div>
+                            </div>
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1">
                                 <label class="switch">
                                     <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
-                                        [switch-off-color]="'primary'" id="medium" name="medium" [(ngModel)]="professionViewModel.medium">
+                                        [switch-off-color]="'primary'" id="medium" name="medium"
+                                        [(ngModel)]="professionViewModel.medium">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -413,11 +415,12 @@
                                 <label>
                                     <h6>VIP</h6>
                                 </label>
-                                </div>
+                            </div>
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1">
                                 <label class="switch">
                                     <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
-                                        [switch-off-color]="'primary'" id="vip" name="vip" [(ngModel)]="professionViewModel.vip">
+                                        [switch-off-color]="'primary'" id="vip" name="vip"
+                                        [(ngModel)]="professionViewModel.vip">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -425,11 +428,12 @@
                                 <label>
                                     <h6>MVIP</h6>
                                 </label>
-                                </div>
+                            </div>
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1">
                                 <label class="switch">
                                     <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
-                                        [switch-off-color]="'primary'" id="mvip" name="mvip" [(ngModel)]="professionViewModel.mvip">
+                                        [switch-off-color]="'primary'" id="mvip" name="mvip"
+                                        [(ngModel)]="professionViewModel.mvip">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -437,15 +441,16 @@
                                 <label>
                                     <h6>Politician</h6>
                                 </label>
-                                </div>
+                            </div>
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1">
                                 <label class="switch">
                                     <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
-                                        [switch-off-color]="'primary'" id="politician" name="politician" [(ngModel)]="professionViewModel.politician">
+                                        [switch-off-color]="'primary'" id="politician" name="politician"
+                                        [(ngModel)]="professionViewModel.politician">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                            
+
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
@@ -817,7 +822,7 @@
         <app-mandal></app-mandal>
 
     </div>
- 
+
     <!-- DataTable for openMandal End -->
 
     <!-- DataTable for RedTick Start -->
@@ -1103,7 +1108,7 @@
 
         </div>
     </div>
-    
+
     <!--Member Information-->
     <div *ngIf="professionModel.length>0">
         <div *ngFor="let item of professionModel; let ind=index">
@@ -1135,7 +1140,8 @@
                                         [(ngModel)]="item.firstName" placeholder=" Enter First Name " required value=""
                                         pattern="[A-Za-z]{1,32}" (focus)="focus = true" #firstName="ngModel" />
                                 </div>
-                                <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                                <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)"
+                                    class="alert alert-danger">
                                     <div *ngIf="firstName.errors.required">
                                         First Name is required
                                     </div>
@@ -1195,7 +1201,8 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="contact" [(ngModel)]="item.contactNo"
                                         name="contact" placeholder="Enter Contact Number" required value=""
-                                        pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel" (keyup)="verifyNumber(ind)" />
+                                        pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel"
+                                        (keyup)="verifyNumber(ind)" />
                                 </div>
 
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
@@ -1224,7 +1231,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
                                 <div class="dropdown form-group">
@@ -1330,8 +1337,8 @@
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" id="contact" name="contact"
-                                        placeholder="Enter Email Id" required value="" pattern="^[0-9].{9,9}$">
+                                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="item.email"
+                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"   placeholder="Enter Email Id" required value="" >
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
@@ -1345,7 +1352,7 @@
                                 <div class="col-md-1">
                                     <div class="form-check-radio">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="title" id="Present"
+                                            <input class="form-check-input" type="radio" name="gender" id="male"
                                                 value="male" [(ngModel)]="item.gender"> MALE
                                             <span class="form-check-sign"></span>
                                         </label>
@@ -1354,7 +1361,7 @@
                                 <div class="col-md-1">
                                     <div class="form-check-radio">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="title" id="Abscent"
+                                            <input class="form-check-input" type="radio" name="gender" id="female"
                                                 value="female" [(ngModel)]="item.gender"> FEMALE
                                             <span class="form-check-sign"></span>
                                         </label>
@@ -1367,23 +1374,23 @@
                                     <h6 style="margin-left: 5px;">Blood Group</h6>
                                 </label>
                             </div>
-                                <div class="col-md-3">
-                                    <div class="btn-group bootstrap-select w-100">
-                                        <select class="selectpicker w-100" data-size="7"
-                                            data-style="btn btn-primary btn-round" title="Select...">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                    <div class="form-group">
+                                        <select (change)="selectChangeHandlerForBloodgrp($event,ind)" class="form-control">
                                             <option disabled selected>Select...</option>
-                                            <option value="2">A Positive</option>
-                                            <option value="3">A Negative</option>
-                                            <option value="4">B Positive</option>
-                                            <option value="5">B Negative</option>
-                                            <option value="6">AB Positive</option>
-                                            <option value="7">AB Negative</option>
-                                            <option value="8">O Positive</option>
-                                            <option value="9">O Negative</option>
-                                            <option value="10">Unknown</option>
-                                        </select>
+                                            <option value="A Positive">A Positive</option>
+                                            <option value="A Negative">A Negative</option>
+                                            <option value="B Positive">B Positive</option>
+                                            <option value="B Negative">B Negative</option>
+                                            <option value="AB Positive">AB Positive</option>
+                                            <option value="AB Negative">AB Negative</option>
+                                            <option value="O Positive">O Positive</option>
+                                            <option value="O Negative">O Negative</option>
+                                            <option value="Unknown">Unknown</option>
+                                    </select>
                                     </div>
-                                </div>
+                            </div>
+                            
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
@@ -1393,7 +1400,7 @@
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group">
-                                    <input type="date" id="dob" [(ngModel)]="item.dob" name="dob" value="{{ formdate }}"
+                                    <input type="date" id="dob" [(ngModel)]="item.dob" name="dob" value="{{ item.dob }}"
                                         class="form-control">
                                 </div>
                             </div>
@@ -1403,17 +1410,17 @@
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                <div class="btn-group bootstrap-select w-100">
-                                    <select class="selectpicker w-100" data-size="7"
-                                        data-style="btn btn-primary btn-round" title="Select...">
+
+                                <div class="form-group">
+                                    <select (change)="selectChangeHandlerForMarital($event,ind)" [(ngModel)]="item.maritalStatus" class="form-control">
                                         <option disabled selected>Select...</option>
-                                        <option value="2">Married</option>
-                                        <option value="3">Unmarried</option>
-                                        <option value="4">Divorced</option>
-                                        <option value="5">Widowed</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Unmarried">Unmarried</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
                                     </select>
                                 </div>
-                                
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
                                 <label>
@@ -1576,9 +1583,9 @@
                             <div class="col-md-1">
                                 <div class="form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="title" id="Present"
-                                            value="yes" [(ngModel)]="item.isForeignCountry"
-                                            (click)="isForigenOpen('Yes')"> YES
+                                        <input class="form-check-input" type="radio" name="isForeignCountry" id="yes"
+                                            value="true" [(ngModel)]="item.isForeignCountry"
+                                            (click)="isForigenOpen(true,ind)"> YES
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
@@ -1587,9 +1594,9 @@
 
                                 <div class="form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="title" id="Abscent"
-                                            value="no" [(ngModel)]="item.isForeignCountry"
-                                            (click)="isForigenClose('No')"> NO
+                                        <input class="form-check-input" type="radio" name="isForeignCountry" id="no"
+                                            value="false" [(ngModel)]="item.isForeignCountry"
+                                            (click)="isForigenClose(false,ind)"> NO
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
@@ -1664,7 +1671,7 @@
                         </div>
                         <div class="row">
                             <div class="ml-md-auto">
-                                <div class="btn btn-warning" (click)="saveProffesionInfo(item,ind)">Save Draft</div>
+                                <div class="btn btn-warning" (click)="savePersonalInfo(item,ind)">Save Draft</div>
                                 <!-- <div class="btn btn-success">Submit</div> -->
                                 &nbsp;&nbsp;&nbsp;
                             </div>
@@ -1686,8 +1693,8 @@
                 </h5>
                 <div class="modal-body">
                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                        <input type="number" class="form-control" id="family" [(ngModel)]="tot_mem" name="family" value=""
-                            pattern="[0-9]{0,10}" (focus)="focus = true" #noofmem="ngModel" />
+                        <input type="number" class="form-control" id="family" [(ngModel)]="tot_mem" name="family"
+                            value="" pattern="[0-9]{0,10}" (focus)="focus = true" #noofmem="ngModel" />
                     </div>
                     <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
                         <div [hidden]="!family.errors('pattern')">

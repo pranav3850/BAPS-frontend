@@ -115,14 +115,9 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
       if (res != 'no family') {
         this.familyId = res[0].familyId;
-        this.strpArray = res;
-        res.forEach(element => {
-          if (element.status == 1) {
-            element.city = '';
-            this.professionModel.push(element);
-
-          }
-        });
+        this.professionModel = res;
+        debugger
+       
         this.oldUser = true;
       } else {
         this.newUser()
@@ -353,11 +348,13 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-  isForigenOpen(data) {
+  isForigenOpen(data,ind) {
     this.isCountry = true;
+    this.professionModel[ind].isForeignCountry=true;
   }
-  isForigenClose(data) {
+  isForigenClose(data,ind) {
     this.isCountry = false;
+    this.professionModel[ind].isForeignCountry=false;
 
   }
   getrelation() {
@@ -442,7 +439,7 @@ export class DashboardComponent implements OnInit {
  
 
   selectedMandalType(mandaltype,ind) {
-    debugger
+    
     this.mandalTypeList.forEach(element => {
       if (element.mandaltype == mandaltype) {
         this.selectedName = element.mandaltype;
@@ -576,6 +573,7 @@ export class DashboardComponent implements OnInit {
         this.selectedMandal = element.name;
         this.professionModel[ind].mandalName = element.name;
         this.professionModel[ind].mandalId = element.id;
+        debugger
       }
     })
   }
@@ -623,11 +621,22 @@ export class DashboardComponent implements OnInit {
       this.professionModel.splice(1, ind);
     })
   }
+  selectChangeHandlerForMarital(event: any,ind) {
+    
+    this.professionModel[ind].maritalStatus = event.target.value;
+  }
+  selectChangeHandlerForBloodgrp(event:any,ind){
+    debugger
+    this.professionModel[ind].bloodGrp = event.target.value;
+    debugger
+  }
 
   savePersonalInfo(data,ind){
+    debugger
     let test = [];
     data.status=1;
     data.tag='Nan';
+    data.prepareIelts=false;
 
     if (data.relationship == 'Father') {
       let obj = {
