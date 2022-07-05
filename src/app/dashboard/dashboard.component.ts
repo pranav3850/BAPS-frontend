@@ -402,13 +402,27 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-  isForigenOpen(data, ind) {
-    this.isCountry = true;
+  isForigenOpen(data, ind,type?) {
+    if(type=='modal'){
+      this.isCountry = true;
+      this.professionViewModel.isForeignCountry = true;
+    }
+    else{
+      this.isCountry = true;
     this.professionModel[ind].isForeignCountry = true;
+    }
+    
   }
-  isForigenClose(data, ind) {
-    this.isCountry = false;
+  isForigenClose(data, ind,type?) {
+    if(type=='modal'){
+      this.isCountry = false;
+      this.professionViewModel.isForeignCountry = false;
+    }
+    else{
+      this.isCountry = false;
     this.professionModel[ind].isForeignCountry = false;
+    }
+    
 
   }
   getrelation() {
