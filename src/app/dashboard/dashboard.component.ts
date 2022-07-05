@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dashboard } from './dashboard.model';
 import { Mandal } from './mandal.model'
 import { Relation } from './relation.model'
-
 import { DashboardService } from './dashboard.service';
 import { ApiService } from 'app/api.service';
 import { Profession } from './profession.model';
@@ -70,7 +69,7 @@ export class DashboardComponent implements OnInit {
   openYellowtickFlag: boolean = false;
   openGreentickFlag: boolean = false;
   bloodGroupDataList: any = [];
-  maratialData:any=[];
+  maratialData: any = [];
   constructor(
     private dashboardService: DashboardService,
     private apiService: ApiService,
@@ -84,6 +83,7 @@ export class DashboardComponent implements OnInit {
       }
       this.getOldDetails(obj);
       this.formdate
+      debugger
 
 
     })
@@ -164,6 +164,11 @@ export class DashboardComponent implements OnInit {
     this.professionViewModel.vip = false;
     this.professionViewModel.mvip = false;
     this.professionViewModel.politician = false;
+   
+    const str = this.professionViewModel.dob;
+    const date = new Date(str);
+    this.formdate = date;
+    debugger
     $(document).ready(function () {
       $("#editCustomerModal").modal('show');
     });
@@ -225,7 +230,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  setGeneralTagbyAdmin(){
+  setGeneralTagbyAdmin() {
     this.professionViewModel.general;
     debugger
   }
@@ -658,7 +663,7 @@ export class DashboardComponent implements OnInit {
   }
   selectChangeHandlerForMarital(name, index) {
 
-    this.professionModel[index].maritalStatus =name;
+    this.professionModel[index].maritalStatus = name;
   }
 
   selectedBloodData(name, index) {
