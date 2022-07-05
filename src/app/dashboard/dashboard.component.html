@@ -1299,7 +1299,7 @@
     </div>
     <!-- DataTable for GreenTick End -->
 
-    <div *ngIf="strpArray.length>0">
+    <div *ngIf="professionModel.length>0">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
@@ -1328,7 +1328,7 @@
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let item of strpArray |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:strpArray.length };let ind=index">
+                            *ngFor="let item of professionModel |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:strpArray.length };let ind=index">
                             <td class="text-left">{{ind+1}}</td>
                             <td class="text-center">
                                 <i class="fa fa-circle text-danger" style="font-size: large;" aria-hidden="true"
