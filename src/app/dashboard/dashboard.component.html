@@ -382,13 +382,31 @@
                     <h5 class="modal-title" id="myModalLabel">View/Edit Information</h5>
                 </div>
                 <div class="modal-body">
-
                     <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm">
                         <div class="row">
-
+                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
+                                <label>
+                                    <h6>Select Tags</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ professionViewModel.tag }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Tags</div>
+                                        <div *ngFor="let i of haribhaktTagsdata">
+                                            <a class="dropdown-item"
+                                                (click)="selectedHaribhaktTags(i.name,ind,'modal')">{{i.name}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6>General</h6>
@@ -396,9 +414,9 @@
                             </div>
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1">
                                 <label class="switch">
-                                    <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'" (click)="setGeneralTagbyAdmin()"
-                                        [switch-off-color]="'primary'" id="general" name="general" 
-                                        [(ngModel)]="professionViewModel.general" >
+                                    <input type="checkbox" checked class="switch-input" [switch-on-color]="'primary'"
+                                        (click)="setGeneralTagbyAdmin()" [switch-off-color]="'primary'" id="general"
+                                        name="general" [(ngModel)]="professionViewModel.general">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -455,25 +473,26 @@
                                 </label>
                             </div>
 
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label class="labeltext">
                                     <h6>First Name</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" id="fname" name="fname"
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
                                         [(ngModel)]="professionViewModel.firstName" placeholder=" Enter First Name "
                                         required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
-                                        #fname="ngModel" />
+                                        #firstName="ngModel" />
                                 </div>
-                                <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
-                                    <div *ngIf="fname.errors.required">
+                                <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="firstName.errors.required">
                                         First Name is required
                                     </div>
-                                    <div [hidden]="!fname.errors('pattern')">
+                                    <div [hidden]="!firstName.errors('pattern')">
                                         Numbers and Special Characters not allowed
                                     </div>
                                 </div>
@@ -483,7 +502,7 @@
                                     <h6>Middle Name</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="mname" name="mname"
                                         [(ngModel)]="professionViewModel.middleName" placeholder=" Enter Middle Name "
@@ -504,7 +523,7 @@
                                     <h6>Last Name</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="lname" name="lname"
                                         [(ngModel)]="professionViewModel.lastName" placeholder=" Enter Last Name "
@@ -527,13 +546,14 @@
                                     <h6>Contact Number</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="contact"
                                         [(ngModel)]="professionViewModel.contactNo" name="contact"
                                         placeholder="Enter Contact Number" required value="" pattern="^[0-9].{9,9}$"
-                                        (focus)="focus = true" #contact="ngModel" />
+                                        (focus)="focus = true" #contact="ngModel" (keyup)="verifyNumber(ind)" />
                                 </div>
+
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
                                     class="alert alert-danger">
                                     <div *ngIf="contact.errors.required">
@@ -544,63 +564,74 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Mandal Type</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
                                         {{ professionViewModel.mandalType }}
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right"
-                                        aria-labelledby="dropdownMenuButton2">
-                                        <div class="dropdown-header">Select Mandal Type</div>
-                                        <div *ngFor="let i of mandalTypeList">
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Category</div>
+                                        <div *ngFor="let pos of mandalTypeList">
                                             <a class="dropdown-item"
-                                                (click)="selectedmandaltype(i.mandaltype)">{{i.mandaltype}}</a>
+                                                (click)="selectedMandalType(pos.mandaltype,ind,'edit')">{{pos.mandaltype}}</a>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Mandal Name</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
                                         {{ professionViewModel.mandalName }}
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right"
-                                        aria-labelledby="dropdownMenuButton2">
+                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton2">
                                         <div class="dropdown-header">Select Mandal </div>
-                                        <div *ngFor="let i of mandalList">
-                                            <a class="dropdown-item" (click)="selectedmandal(i.id)">{{i.name}}</a>
+                                        <div *ngFor="let j of mandalList">
+                                            <a class="dropdown-item" (click)="selectedmandal(j.id,ind,'modal')">{{j.name}}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Relationship</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
                                         {{ professionViewModel.relationship}}
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
                                         <div class="dropdown-header">Select Relation</div>
-                                        <div *ngFor="let i of relationList">
-                                            <a class="dropdown-item" (click)="selectedrelation(i.id)">{{i.name}}</a>
+                                        <div *ngFor="let j of relationList">
+                                            <a class="dropdown-item" (click)="selectedrelation(j.id,ind,'modal')">{{j.name}}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Address</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="address" name="address"
                                         [(ngModel)]="professionViewModel.address" placeholder="Enter Address" value=""
@@ -622,7 +653,7 @@
                                     <h6>City</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="city" city="city"
                                         [(ngModel)]="professionViewModel.city" placeholder=" Enter city " required
@@ -642,7 +673,7 @@
                                     <h6>pincode</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="pincode"
                                         [(ngModel)]="professionViewModel.pincode" name="pincode"
@@ -659,9 +690,120 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                                <label>
+                                    <h6>E-mail</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="email" name="email"
+                                        [(ngModel)]="professionViewModel.email"
+                                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                        placeholder="Enter Email Id" required value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                                <label>
+                                    <h6>
+                                        Gender
+                                    </h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                    value="male" [(ngModel)]="professionViewModel.gender"> MALE
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                    value="female" [(ngModel)]="professionViewModel.gender"> FEMALE
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                                <label>
+                                    <h6>Blood Group</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ professionViewModel.bloodGrp }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Blood Group</div>
+                                        <div *ngFor="let i of bloodGroupDataList">
+                                            <a class="dropdown-item"
+                                                (click)="selectedBloodData(i.name,ind,'modal')">{{i.name}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                                <label>
+                                    <h6>Birth Date</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group">
+                                    <input type="date" id="dob" [(ngModel)]="professionViewModel.dob" name="dob"
+                                         class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                                <label>
+                                    <h6>Martial Status</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ professionViewModel.maritalStatus }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Marital Status</div>
+                                        <div *ngFor="let i of maratialData">
+                                            <a class="dropdown-item"
+                                                (click)="selectChangeHandlerForMarital(i.name,ind,'modal')">{{i.name}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Native Place</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" placeholder=" Enter Native Place ">
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Select profession</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
@@ -672,7 +814,7 @@
                                         <div class="dropdown-header">Select profession</div>
                                         <div *ngFor="let i of professionList">
                                             <a class="dropdown-item"
-                                                (click)="selectedprofession(i.name,ind)">{{i.name}}</a>
+                                                (click)="selectedprofession(i.name,ind,'modal')">{{i.name}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -684,7 +826,7 @@
                                 </label>
                             </div>
                             <div *ngIf="professionViewModel.profession =='Job'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="occupation" name="occupation"
                                         [(ngModel)]="professionViewModel.occupation" placeholder=" Enter occupation"
@@ -708,7 +850,7 @@
                                 </label>
                             </div>
                             <div *ngIf="professionViewModel.profession =='Business'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="businessType" name="businessType"
                                         [(ngModel)]="professionViewModel.businessType" placeholder=" Enter businessType"
@@ -725,7 +867,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div *ngIf="professionViewModel.profession =='Student'"
                                 class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
@@ -733,7 +874,7 @@
                                 </label>
                             </div>
                             <div *ngIf="professionViewModel.profession =='Student'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="education" name="education"
                                         [(ngModel)]="professionViewModel.education" placeholder=" Enter education"
@@ -750,7 +891,39 @@
                                     </div>
                                 </div>
                             </div>
+                            <div *ngIf="professionViewModel.profession =='Student'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                                <label>
+                                    <h6>
+                                        Is Preparing For IELTS?
+                                    </h6>
+                                </label>
+                            </div>
+                            <div *ngIf="professionViewModel.profession =='Student'"
+                                class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="prepareIelts"
+                                                    id="yes" value="yes" [(ngModel)]="professionViewModel.prepareIelts">
+                                                YES
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="prepareIelts" id="no"
+                                                    value="no" [(ngModel)]="professionViewModel.prepareIelts"> NO
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
                             <div *ngIf="professionViewModel.profession =='Other'"
                                 class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
@@ -758,7 +931,7 @@
                                 </label>
                             </div>
                             <div *ngIf="professionViewModel.profession =='Other'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="workInfo" name="workInfo"
                                         [(ngModel)]="professionViewModel.workInfo" placeholder=" Enter workInfo"
@@ -775,35 +948,128 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
-                                    <h6>Skill</h6>
+                                    <h6>Skills</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" id="skill" name="skill"
-                                        [(ngModel)]="professionViewModel.skill" placeholder=" Enter skill " required
-                                        value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true" #skill="ngModel" />
+                                    <input type="text" class="form-control" id="skills" name="skills"
+                                        [(ngModel)]="professionViewModel.skill" placeholder=" Enter skills " required
+                                        value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true" #skills="ngModel" />
                                 </div>
-                                <div *ngIf="skill.errors && (skill.dirty || skill.touched)" class="alert alert-danger">
-                                    <div *ngIf="skill.errors.required">
-                                        skill is required
+                                <div *ngIf="skills.errors && (skills.dirty || skills.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="skills.errors.required">
+                                        skills is required
                                     </div>
-                                    <div [hidden]="!skill.errors('pattern')">
+                                    <div [hidden]="!skills.errors('pattern')">
                                         Numbers and Special Characters not allowed
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
+                                <label>
+                                    <h6>Currently living in Foreingh country?</h6>
+                                </label>
 
+                            </div>
+                            <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1">
+                                <div class="form-check-radio" style="margin-top:12px;"
+                                    (click)="isForigenOpen(true,ind)">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="isForeignCountry" id="yes"
+                                            value="true" [(ngModel)]="professionViewModel.isForeignCountry"> YES
+                                        <span class="form-check-sign"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1">
+
+                                <div class="form-check-radio" style="margin-top:12px;"
+                                    (click)="isForigenClose(false,ind)">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="isForeignCountry" id="no"
+                                            value="false" [(ngModel)]="professionViewModel.isForeignCountry"> NO
+                                        <span class="form-check-sign"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="isCountry">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label class="labeltext">
+                                    <h6>Enter Country</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="foreignCountry" name="foreignCountry"
+                                        [(ngModel)]="professionViewModel.foreignCountry"
+                                        placeholder=" Enter Country Name " required value="" pattern="[A-Za-z]{1,32}"
+                                        (focus)="focus = true" #foreignCountry="ngModel" />
+                                </div>
+                                <div *ngIf="foreignCountry.errors && (foreignCountry.dirty || foreignCountry.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="foreignCountry.errors.required">
+                                        First Name is required
+                                    </div>
+                                    <div [hidden]="!foreignCountry.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>City Name</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="foreignCity" name="foreignCity"
+                                        [(ngModel)]="professionViewModel.foreignCity" placeholder=" Enter City Name "
+                                        required value="" pattern="[A-Za-z]{1,32}" (focus)="focus = true"
+                                        #foreignCity="ngModel" />
+                                </div>
+                                <div *ngIf="foreignCity.errors && (foreignCity.dirty || foreignCity.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="foreignCity.errors.required">
+                                        Middle Name is required
+                                    </div>
+                                    <div [hidden]="!foreignCity.errors('pattern')">
+                                        Numbers and Special Characters not allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Foriegn Number</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
+                                <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                    <input type="text" class="form-control" id="foreignContact"
+                                        [(ngModel)]="professionViewModel.foreignContact" name="foreignContact"
+                                        placeholder="Enter Foreign  Number" required value="" pattern="^[0-9].{9,9}$"
+                                        (focus)="focus = true" #foreignContact="ngModel" />
+                                </div>
+                                <div *ngIf="foreignContact.errors && (foreignContact.dirty || foreignContact.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="foreignContact.errors.required">
+                                        foreignContact Address is required.
+                                    </div>
+                                    <div [hidden]="!foreignContact.errors('pattern')">
+                                        Enter Only Numbers.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="ml-md-auto">
-                                <div class="btn btn-success" (click)="updateHaribhaktInfo(professionViewModel)">Save
-                                    Edit</div>
+                                <div class="btn btn-warning" (click)="updateHarbhakatDetailsById()">Update</div>
                                 <!-- <div class="btn btn-success">Submit</div> -->
                                 &nbsp;&nbsp;&nbsp;
                             </div>
@@ -1119,8 +1385,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-11 col-sm-11 col-xl-11 col-lg-11">
                             <h5 class="text-center">Personal Information</h5>
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xl-1 col-lg-1">
+                            <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm">
+                                <i class="fa fa-close" (click)="openViewInfo(item)"></i>
+                            </button>
                         </div>
                     </div>
                     <h6 class="small text-muted text-center">For Member {{ind+1}}</h6>
@@ -1230,7 +1501,7 @@
                                         <div class="dropdown-header">Select Category</div>
                                         <div *ngFor="let pos of mandalTypeList">
                                             <a class="dropdown-item"
-                                                (click)="selectedMandalType(pos.mandaltype,ind)">{{pos.mandaltype}}</a>
+                                                (click)="selectedMandalType(pos.mandaltype,ind,'array')">{{pos.mandaltype}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1383,7 +1654,7 @@
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
-                                    <h6 style="margin-left: 5px;">Blood Group</h6>
+                                    <h6>Blood Group</h6>
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -1394,7 +1665,7 @@
                                         {{ item.bloodGrp }}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <div class="dropdown-header">Select profession</div>
+                                        <div class="dropdown-header">Select Blood Group</div>
                                         <div *ngFor="let i of bloodGroupDataList">
                                             <a class="dropdown-item"
                                                 (click)="selectedBloodData(i.name,ind)">{{i.name}}</a>
@@ -1419,7 +1690,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                
+
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
@@ -1430,7 +1701,7 @@
                                         <div class="dropdown-header">Select Marital Status</div>
                                         <div *ngFor="let i of maratialData">
                                             <a class="dropdown-item"
-                                                (click)="selectedBloodData(i.name,ind)">{{i.name}}</a>
+                                                (click)="selectChangeHandlerForMarital(i.name,ind)">{{i.name}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1467,7 +1738,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="item.profession =='Job'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Job'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Occupation</h6>
                                 </label>
@@ -1488,7 +1760,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="item.profession =='Business'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Business'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Type of Business</h6>
                                 </label>
@@ -1510,7 +1783,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="item.profession =='Student'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Student'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Education</h6>
                                 </label>
@@ -1531,7 +1805,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="item.profession =='Student'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                            <div *ngIf="item.profession =='Student'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6>
                                         Is Preparing For IELTS?
@@ -1543,8 +1818,8 @@
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                         <div class="form-check-radio">
                                             <label class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="prepareIelts" id="yes"
-                                                    value="yes" [(ngModel)]="item.prepareIelts"> YES
+                                                <input class="form-check-input" type="radio" name="prepareIelts"
+                                                    id="yes" value="yes" [(ngModel)]="item.prepareIelts"> YES
                                                 <span class="form-check-sign"></span>
                                             </label>
                                         </div>
@@ -1561,7 +1836,8 @@
                                 </div>
 
                             </div>
-                            <div *ngIf="item.profession =='Other'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Other'"
+                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Type of Work</h6>
                                 </label>
@@ -1612,22 +1888,22 @@
 
                             </div>
                             <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1">
-                                <div class="form-check-radio" style="margin-top:12px;" (click)="isForigenOpen(true,ind)">
+                                <div class="form-check-radio" style="margin-top:12px;"
+                                    (click)="isForigenOpen(true,ind)">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="isForeignCountry" id="yes"
-                                            value="true" [(ngModel)]="item.isForeignCountry"
-                                            > YES
+                                            value="true" [(ngModel)]="item.isForeignCountry"> YES
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1">
 
-                                <div class="form-check-radio" style="margin-top:12px;" (click)="isForigenClose(false,ind)">
+                                <div class="form-check-radio" style="margin-top:12px;"
+                                    (click)="isForigenClose(false,ind)">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="isForeignCountry" id="no"
-                                            value="false" [(ngModel)]="item.isForeignCountry"
-                                            > NO
+                                            value="false" [(ngModel)]="item.isForeignCountry"> NO
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
@@ -1788,11 +2064,6 @@
             </div>
         </div>
     </div>
- 
-
-
-
-
     <div class="card" *ngIf="1==2">
         <div class="card-body">
             <h6 class="text-center" id="satsang">Satsang Details</h6>

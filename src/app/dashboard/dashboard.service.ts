@@ -43,6 +43,9 @@ export class DashboardService {
     saveProffesionInfo(data) {
         return this.httpClient.post(ApiService.SaveProffesionInfoURL, data);
     }
+    updateProffesionInfo(data) {
+        return this.httpClient.post(ApiService.updateProffesionInfoURL, data);
+    }
     getRedtickCount() {
         return this.httpClient.get(ApiService.getRedtickCountURL);
     }
