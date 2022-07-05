@@ -385,6 +385,10 @@
 
                     <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm">
                         <div class="row">
+
+                        </div>
+
+                        <div class="row">
                             <div class="col-sm-2 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6>General</h6>
@@ -1388,19 +1392,19 @@
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                <div class="form-group">
-                                    <select (change)="selectChangeHandlerForBloodgrp($event,ind)" class="form-control">
-                                        <option disabled selected>Select...</option>
-                                        <option value="A Positive">A Positive</option>
-                                        <option value="A Negative">A Negative</option>
-                                        <option value="B Positive">B Positive</option>
-                                        <option value="B Negative">B Negative</option>
-                                        <option value="AB Positive">AB Positive</option>
-                                        <option value="AB Negative">AB Negative</option>
-                                        <option value="O Positive">O Positive</option>
-                                        <option value="O Negative">O Negative</option>
-                                        <option value="Unknown">Unknown</option>
-                                    </select>
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ item.bloodGrp }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select profession</div>
+                                        <div *ngFor="let i of bloodGroupDataList">
+                                            <a class="dropdown-item"
+                                                (click)="selectedBloodData(i.name,ind)">{{i.name}}</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
@@ -1420,17 +1424,20 @@
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-
-                                <div class="form-group">
-                                    <select (change)="selectChangeHandlerForMarital($event,ind)"
-                                        [(ngModel)]="item.maritalStatus" class="form-control">
-                                        <option disabled selected>Select...</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Single">Single</option>
-                                        <option value="Unmarried">Unmarried</option>
-                                        <option value="Divorced">Divorced</option>
-                                        <option value="Widowed">Widowed</option>
-                                    </select>
+                                
+                                <div class="dropdown form-group">
+                                    <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
+                                        name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ item.maritalStatus }}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-header">Select Marital Status</div>
+                                        <div *ngFor="let i of maratialData">
+                                            <a class="dropdown-item"
+                                                (click)="selectedBloodData(i.name,ind)">{{i.name}}</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
