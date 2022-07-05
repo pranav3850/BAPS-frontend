@@ -1197,7 +1197,7 @@
                                     <h6>Contact Number</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="contact" [(ngModel)]="item.contactNo"
                                         name="contact" placeholder="Enter Contact Number" required value=""
@@ -1215,8 +1215,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Select Mandal Type</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
@@ -1233,7 +1237,12 @@
                                 </div>
 
                             </div>
-                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Select Mandal</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton2" id="dropdownMenuButton2" data-toggle="dropdown"
@@ -1248,7 +1257,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Select Relationship</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
@@ -1263,14 +1277,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Address</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="address" name="address"
                                         [(ngModel)]="item.address" placeholder="Enter Address" value=""
@@ -1292,7 +1304,7 @@
                                     <h6>City</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="city" city="city"
                                         [(ngModel)]="item.city" placeholder=" Enter city " required value=""
@@ -1312,7 +1324,7 @@
                                     <h6>pincode</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="pincode" [(ngModel)]="item.pincode"
                                         name="pincode" placeholder="Enter pincode " required value=""
@@ -1328,20 +1340,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6>E-mail</h6>
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="item.email"
-                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"   placeholder="Enter Email Id" required value="" >
+                                    <input type="text" class="form-control" id="email" name="email"
+                                        [(ngModel)]="item.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                        placeholder="Enter Email Id" required value="">
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6>
                                         Gender
@@ -1349,51 +1360,50 @@
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                <div class="col-md-1">
-                                    <div class="form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="gender" id="male"
-                                                value="male" [(ngModel)]="item.gender"> MALE
-                                            <span class="form-check-sign"></span>
-                                        </label>
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                    value="male" [(ngModel)]="item.gender"> MALE
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                    value="female" [(ngModel)]="item.gender"> FEMALE
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
-                                    <div class="form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="gender" id="female"
-                                                value="female" [(ngModel)]="item.gender"> FEMALE
-                                            <span class="form-check-sign"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
+                            </div>
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6 style="margin-left: 5px;">Blood Group</h6>
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                                    <div class="form-group">
-                                        <select (change)="selectChangeHandlerForBloodgrp($event,ind)" class="form-control">
-                                            <option disabled selected>Select...</option>
-                                            <option value="A Positive">A Positive</option>
-                                            <option value="A Negative">A Negative</option>
-                                            <option value="B Positive">B Positive</option>
-                                            <option value="B Negative">B Negative</option>
-                                            <option value="AB Positive">AB Positive</option>
-                                            <option value="AB Negative">AB Negative</option>
-                                            <option value="O Positive">O Positive</option>
-                                            <option value="O Negative">O Negative</option>
-                                            <option value="Unknown">Unknown</option>
+                                <div class="form-group">
+                                    <select (change)="selectChangeHandlerForBloodgrp($event,ind)" class="form-control">
+                                        <option disabled selected>Select...</option>
+                                        <option value="A Positive">A Positive</option>
+                                        <option value="A Negative">A Negative</option>
+                                        <option value="B Positive">B Positive</option>
+                                        <option value="B Negative">B Negative</option>
+                                        <option value="AB Positive">AB Positive</option>
+                                        <option value="AB Negative">AB Negative</option>
+                                        <option value="O Positive">O Positive</option>
+                                        <option value="O Negative">O Negative</option>
+                                        <option value="Unknown">Unknown</option>
                                     </select>
-                                    </div>
+                                </div>
                             </div>
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6>Birth Date</h6>
                                 </label>
@@ -1404,7 +1414,7 @@
                                         class="form-control">
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
                                 <label>
                                     <h6>Martial Status</h6>
                                 </label>
@@ -1412,7 +1422,8 @@
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
 
                                 <div class="form-group">
-                                    <select (change)="selectChangeHandlerForMarital($event,ind)" [(ngModel)]="item.maritalStatus" class="form-control">
+                                    <select (change)="selectChangeHandlerForMarital($event,ind)"
+                                        [(ngModel)]="item.maritalStatus" class="form-control">
                                         <option disabled selected>Select...</option>
                                         <option value="Married">Married</option>
                                         <option value="Single">Single</option>
@@ -1422,7 +1433,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label text-center">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Native Place</h6>
                                 </label>
@@ -1433,9 +1444,12 @@
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                                <label>
+                                    <h6>Select profession</h6>
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="dropdown form-group">
                                     <button class="dropdown-toggle btn btn-info btn-round btn-block" type="button"
                                         name="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown"
@@ -1451,14 +1465,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="item.profession =='Job'"
-                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Job'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Occupation</h6>
                                 </label>
                             </div>
-                            <div *ngIf="item.profession =='Job'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div *ngIf="item.profession =='Job'" class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="occupation" name="occupation"
                                         [(ngModel)]="item.occupation" placeholder=" Enter occupation" required value=""
@@ -1474,14 +1486,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="item.profession =='Business'"
-                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Business'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Type of Business</h6>
                                 </label>
                             </div>
-                            <div *ngIf="item.profession =='Business'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div *ngIf="item.profession =='Business'" class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="businessType" name="businessType"
                                         [(ngModel)]="item.businessType" placeholder=" Enter businessType" required
@@ -1498,15 +1508,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div *ngIf="item.profession =='Student'"
-                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            <div *ngIf="item.profession =='Student'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Education</h6>
                                 </label>
                             </div>
-                            <div *ngIf="item.profession =='Student'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div *ngIf="item.profession =='Student'" class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="education" name="education"
                                         [(ngModel)]="item.education" placeholder=" Enter education" required value=""
@@ -1522,15 +1529,42 @@
                                     </div>
                                 </div>
                             </div>
+                            <div *ngIf="item.profession =='Student'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
+                                <label>
+                                    <h6>
+                                        Is Preparing For IELTS?
+                                    </h6>
+                                </label>
+                            </div>
+                            <div *ngIf="item.profession =='Student'" class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="prepareIelts" id="yes"
+                                                    value="yes" [(ngModel)]="item.prepareIelts"> YES
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name="prepareIelts" id="no"
+                                                    value="no" [(ngModel)]="item.prepareIelts"> NO
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div *ngIf="item.profession =='Other'"
-                                class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
+                            </div>
+                            <div *ngIf="item.profession =='Other'" class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Type of Work</h6>
                                 </label>
                             </div>
-                            <div *ngIf="item.profession =='Other'"
-                                class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div *ngIf="item.profession =='Other'" class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="workInfo" name="workInfo"
                                         [(ngModel)]="item.workInfo" placeholder=" Enter workInfo" required value=""
@@ -1546,15 +1580,12 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
                                     <h6>Skills</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="skills" name="skills"
                                         [(ngModel)]="item.skill" placeholder=" Enter skills " required value=""
@@ -1571,32 +1602,30 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                                 <label>
                                     <h6>Currently living in Foreingh country?</h6>
                                 </label>
 
                             </div>
-                            <div class="col-md-1">
-                                <div class="form-check-radio">
+                            <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1">
+                                <div class="form-check-radio" style="margin-top:12px;" (click)="isForigenOpen(true,ind)">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="isForeignCountry" id="yes"
                                             value="true" [(ngModel)]="item.isForeignCountry"
-                                            (click)="isForigenOpen(true,ind)"> YES
+                                            > YES
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1">
 
-                                <div class="form-check-radio">
+                                <div class="form-check-radio" style="margin-top:12px;" (click)="isForigenClose(false,ind)">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="radio" name="isForeignCountry" id="no"
                                             value="false" [(ngModel)]="item.isForeignCountry"
-                                            (click)="isForigenClose(false,ind)"> NO
+                                            > NO
                                         <span class="form-check-sign"></span>
                                     </label>
                                 </div>
@@ -1608,7 +1637,7 @@
                                     <h6>Enter Country</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="foreignCountry" name="foreignCountry"
                                         [(ngModel)]="item.foreignCountry" placeholder=" Enter Country Name " required
@@ -1630,7 +1659,7 @@
                                     <h6>City Name</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="foreignCity" name="foreignCity"
                                         [(ngModel)]="item.foreignCity" placeholder=" Enter City Name " required value=""
@@ -1651,7 +1680,7 @@
                                     <h6>Foriegn Number</h6>
                                 </label>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 ">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="foreignContact"
                                         [(ngModel)]="item.foreignContact" name="foreignContact"
