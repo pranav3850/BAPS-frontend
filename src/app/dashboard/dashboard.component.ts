@@ -139,7 +139,12 @@ export class DashboardComponent implements OnInit {
     }
   }
   viewEditHaribhakatDetails(data) {
-    this.professionViewModel = data;
+      this.professionViewModel = data;
+      this.professionViewModel.general=false;
+      this.professionViewModel.medium=false;
+      this.professionViewModel.vip=false;
+      this.professionViewModel.mvip=false;
+      this.professionViewModel.politician=false;
     $(document).ready(function () {
       $("#editCustomerModal").modal('show');
     });
@@ -149,6 +154,7 @@ export class DashboardComponent implements OnInit {
     this.tot_mem = this.dashboardModelarr.length;
   }
   getAllFamily() {
+    debugger
     this.dashboardService.getAllFamilyList().subscribe((res: any) => {
       this.totalFamily = res;
       debugger
@@ -161,13 +167,13 @@ export class DashboardComponent implements OnInit {
   }
   viewFamilyMembersDetails(id) {
     this.viewMembers = [];
-    this.totalHaribhakt.forEach(element => {
+    this.totalHaribhakt.forEach((element,index) => {
+      debugger
       if (element.familyId == id) {
+        element.index = index;
         this.viewMembers.push(element);
       }
-      for (let i = 0; i < this.viewMembers.length; i++) {
-        this.viewMembers[i].index = i + 1;
-      }
+    
     });
   }
   searchFamiliesList(val) {
@@ -199,6 +205,10 @@ export class DashboardComponent implements OnInit {
         this.totalHaribhakt[i].index = i + 1;
       }
     });
+  }
+  setGeneralTagbyAdmin(){
+    this.professionViewModel.general;
+    debugger
   }
   searchHaribhaktList(val) {
     if (this.search == '') {
@@ -606,6 +616,11 @@ export class DashboardComponent implements OnInit {
          foreignCountry:'',
          foreignCity:'',
          foreignContact:'',
+          general:false,
+          medium:false,
+          vip:false,
+          mvip:false,
+          politician:false,
       }
       this.professionModel.push(data);
       
@@ -626,13 +641,10 @@ export class DashboardComponent implements OnInit {
     this.professionModel[ind].maritalStatus = event.target.value;
   }
   selectChangeHandlerForBloodgrp(event:any,ind){
-    debugger
     this.professionModel[ind].bloodGrp = event.target.value;
-    debugger
   }
 
   savePersonalInfo(data,ind){
-    debugger
     let test = [];
     data.status=1;
     data.tag='Nan';
@@ -717,11 +729,9 @@ export class DashboardComponent implements OnInit {
 
   }
   verifyNumber(data){
-    debugger
     let val={mob:this.professionModel[data].contactNo}
     this.dashboardService.verifyNumber(val).subscribe((res:any)=>{
       this.duplicateUser=res[0];
-      debugger
     })
   }
 
@@ -729,7 +739,6 @@ export class DashboardComponent implements OnInit {
     if (data.status == 2) {
       this.dashboardService.getEditDataofSecondstage(data).subscribe((res: any) => {
         this.professionViewModel = res[0];
-        debugger
         this.professionViewModel.status = 2;
         $(document).ready(function () {
           $("#addCustomerModal").modal('show');

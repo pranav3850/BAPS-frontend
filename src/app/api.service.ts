@@ -30,7 +30,7 @@ export class ApiService {
   public static SaveProffesionInfoURL: string = ApiService.HOST_URL + '/admin/SaveProffesionInfo';
   public static createFamilyURL: string = ApiService.HOST_URL + '/admin/createFamily';
   public static getOldDetailsURL: string = ApiService.HOST_URL + '/admin/getOldDetails';
-  public static getAllFamilyListURL: string = ApiService.HOST_URL + '/admin/getAllFamilyList';
+  public static getAllFamilyListURL: string = ApiService.HOST_URL + '/admin/getAllFamilyForData';
   public static removeHaribhaktDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveHaribhaktDetails/';
   public static removeMandalDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveMandalDetails/';
   public static saveMandalListURL: string = ApiService.HOST_URL + '/admin/SaveMandalList';
