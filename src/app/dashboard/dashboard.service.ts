@@ -37,7 +37,7 @@ export class DashboardService {
         return this.httpClient.get<any>(ApiService.getAllSavedMembersListURL);
     }
     getAllHaribhakt() {
-        debugger
+        
         return this.httpClient.get(ApiService.getAllHaribhaktURL);
     }
     saveProffesionInfo(data) {
