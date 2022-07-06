@@ -289,7 +289,7 @@ export class DashboardComponent implements OnInit {
   removeHaribhaktList(id) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You want to delete! If you delete Registerd Member then member will be removed from family.",
+      text: "You want to delete! If you delete Registered Member then the member will be removed from family.",
       icon: 'warning',
       showCancelButton: true,
       customClass: {
@@ -302,7 +302,7 @@ export class DashboardComponent implements OnInit {
       if (result.value == true) {
         Swal.fire({
           title: 'Are you sure?',
-          text: "You want to delete! If you delete Registerd Member then member will be removed from family.",
+          text: "You want to delete! If you delete Registered Member then the member will be removed from family.",
           icon: 'warning',
           showCancelButton: true,
           customClass: {
