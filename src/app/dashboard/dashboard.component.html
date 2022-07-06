@@ -444,7 +444,8 @@
                                     <input type="text" class="form-control" id="mname" name="mname"
                                         [(ngModel)]="professionViewModel.middleName" placeholder=" Enter Middle Name "
                                         required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        [ngModelOptions]="{standalone: true}" #mname="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        [ngModelOptions]="{standalone: true}" #mname="ngModel"
+                                 />
                                 </div>
                                 <div *ngIf="mname.errors && (mname.dirty || mname.touched)" class="alert alert-danger">
                                     <div *ngIf="mname.errors.required">
@@ -465,7 +466,7 @@
                                     <input type="text" class="form-control" id="lname" name="lname"
                                         [(ngModel)]="professionViewModel.lastName" placeholder=" Enter Last Name "
                                         required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        #lname="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        #lname="ngModel" [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
                                     <div *ngIf="lname.errors.required">
@@ -488,7 +489,8 @@
                                     <input type="text" class="form-control" id="contact"
                                         [(ngModel)]="professionViewModel.contactNo" name="contact"
                                         placeholder="Enter Contact Number" required value="" pattern="^[0-9].{9,9}$"
-                                        (focus)="focus = true" #contact="ngModel" (keyup)="verifyNumber(ind)" [ngModelOptions]="{standalone: true}" />
+                                        (focus)="focus = true" #contact="ngModel" (keyup)="verifyNumber(ind)"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
 
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
@@ -578,7 +580,7 @@
                                     <input type="text" class="form-control" id="address" name="address"
                                         [(ngModel)]="professionViewModel.address" placeholder="Enter Address" value=""
                                         pattern="[#\d+ ([^,]+), ([A-Z]{2}) (\d{5})]" (focus)="focus = true"
-                                        #address="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        #address="ngModel" [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="address.errors && (address.dirty || address.touched)"
                                     class="alert alert-danger">
@@ -599,7 +601,8 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="city" city="city"
                                         [(ngModel)]="professionViewModel.city" placeholder=" Enter city " required
-                                        value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #city="ngModel" [ngModelOptions]="{standalone: true}" />
+                                        value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #city="ngModel"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="city.errors && (city.dirty || city.touched)" class="alert alert-danger">
                                     <div *ngIf="city.errors.required">
@@ -620,7 +623,8 @@
                                     <input type="text" class="form-control" id="pincode"
                                         [(ngModel)]="professionViewModel.pincode" name="pincode"
                                         placeholder="Enter pincode " required value="" pattern="^[0-9].{0,6}$"
-                                        (focus)="focus = true" #pincode="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        (focus)="focus = true" #pincode="ngModel"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="pincode.errors && (pincode.dirty || pincode.touched)"
                                     class="alert alert-danger">
@@ -642,7 +646,8 @@
                                     <input type="text" class="form-control" id="email" name="email"
                                         [(ngModel)]="professionViewModel.email"
                                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                                        placeholder="Enter Email Id" required value="" [ngModelOptions]="{standalone: true}">
+                                        placeholder="Enter Email Id" required value=""
+                                        [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label">
@@ -736,7 +741,8 @@
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" placeholder=" Enter Native Place " [ngModelOptions]="{standalone: true}">
+                                    <input type="text" class="form-control" placeholder=" Enter Native Place "
+                                        [ngModelOptions]="{standalone: true}">
                                 </div>
 
                             </div>
@@ -773,7 +779,7 @@
                                     <input type="text" class="form-control" id="occupation" name="occupation"
                                         [(ngModel)]="professionViewModel.occupation" placeholder=" Enter occupation"
                                         required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        #occupation="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        #occupation="ngModel" [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="occupation.errors && (occupation.dirty || occupation.touched)"
                                     class="alert alert-danger">
@@ -797,7 +803,7 @@
                                     <input type="text" class="form-control" id="businessType" name="businessType"
                                         [(ngModel)]="professionViewModel.businessType" placeholder=" Enter businessType"
                                         required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        #businessType="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        #businessType="ngModel" [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="businessType.errors && (businessType.dirty || businessType.touched)"
                                     class="alert alert-danger">
@@ -899,7 +905,8 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="skills" name="skills"
                                         [(ngModel)]="professionViewModel.skill" placeholder=" Enter skills " required
-                                        value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true" #skills="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true" #skills="ngModel"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="skills.errors && (skills.dirty || skills.touched)"
                                     class="alert alert-danger">
@@ -952,7 +959,8 @@
                                     <input type="text" class="form-control" id="foreignCountry" name="foreignCountry"
                                         [(ngModel)]="professionViewModel.foreignCountry"
                                         placeholder=" Enter Country Name " required value="" pattern="[A-Za-z ]{1,32}"
-                                        (focus)="focus = true" #foreignCountry="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        (focus)="focus = true" #foreignCountry="ngModel"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="foreignCountry.errors && (foreignCountry.dirty || foreignCountry.touched)"
                                     class="alert alert-danger">
@@ -974,7 +982,7 @@
                                     <input type="text" class="form-control" id="foreignCity" name="foreignCity"
                                         [(ngModel)]="professionViewModel.foreignCity" placeholder=" Enter City Name "
                                         required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        #foreignCity="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        #foreignCity="ngModel" [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="foreignCity.errors && (foreignCity.dirty || foreignCity.touched)"
                                     class="alert alert-danger">
@@ -996,7 +1004,8 @@
                                     <input type="text" class="form-control" id="foreignContact"
                                         [(ngModel)]="professionViewModel.foreignContact" name="foreignContact"
                                         placeholder="Enter Foreign  Number" required value="" pattern="^[0-9].{9,9}$"
-                                        (focus)="focus = true" #foreignContact="ngModel" [ngModelOptions]="{standalone: true}"/>
+                                        (focus)="focus = true" #foreignContact="ngModel"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="foreignContact.errors && (foreignContact.dirty || foreignContact.touched)"
                                     class="alert alert-danger">
@@ -1009,19 +1018,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="ml-md-auto">
-                                <div class="btn btn-warning" (click)="updateHarbhakatDetailsById()">Update</div>
-                                <!-- <div class="btn btn-success">Submit</div> -->
-                                &nbsp;&nbsp;&nbsp;
-                            </div>
-                        </div>
+
                     </form>
 
                 </div>
 
                 <div class="modal-footer justify-content-center">
-
+                    <div class="row">
+                        <button type="button" class="btn btn-info btn-round" data-dismiss="modal"
+                            (click)="updateHarbhakatDetailsById()">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
+                        </button>
+                        <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-times"
+                                aria-hidden="true"></i> Close</button>
+                        <!-- <div class="ml-md-auto">
+                            <div class="btn btn-warning" (click)="updateHarbhakatDetailsById()">Update</div>
+                            
+                        </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -1344,7 +1358,8 @@
                     <h6 class="small text-muted text-center">For Member {{ind+1}}</h6>
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm" [ngModelOptions]="{standalone: true}">
+                    <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm"
+                        [ngModelOptions]="{standalone: true}">
                         <div class="row">
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label class="labeltext">
@@ -1667,7 +1682,8 @@
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" placeholder=" Enter Native Place " [ngModelOptions]="{standalone: true}">
+                                    <input type="text" class="form-control" placeholder=" Enter Native Place "
+                                        [ngModelOptions]="{standalone: true}">
                                 </div>
 
                             </div>

@@ -191,6 +191,7 @@ export class DashboardComponent implements OnInit {
     let data=[];
     data.push(this.professionViewModel);
     this.dashboardService.updateProffesionInfo(data).subscribe((res) => {
+      this.apiService.showNotification('top', 'right', 'Haribhakt Details Successfully Updated.', 'success');
       // this.strpArray[ind].status = res[0].status;
       // this.professionModel.splice(1, ind);
     })
