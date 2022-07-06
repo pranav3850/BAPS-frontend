@@ -194,7 +194,7 @@ export class DashboardComponent implements OnInit {
       if(res != 'success'){
         this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
       }else{
-          this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'danger');
+        this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
       }
     });
     
@@ -236,10 +236,13 @@ export class DashboardComponent implements OnInit {
       if (element.mobNo.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalFamily.push(element);
       }
-      else if (element.fname.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+      else if (element.firstName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalFamily.push(element);
       }
-      else if (element.lname.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+      else if (element.middleName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalFamily.push(element);
+      }
+      else if (element.lastName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalFamily.push(element);
       }
     })
@@ -276,6 +279,9 @@ export class DashboardComponent implements OnInit {
         this.totalHaribhakt.push(element);
       }
       else if (element.lastName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalHaribhakt.push(element);
+      }
+      else if (element.relationship.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalHaribhakt.push(element);
       }
     })
@@ -601,13 +607,13 @@ export class DashboardComponent implements OnInit {
     });
   }
   else{
-    debugger
+     
     let data={
       familyId:this.familyId,
       oldFamilyId:this.duplicateUser.familyId,
     };
     this.dashboardService.addFamilytoNew(data).subscribe((res:any)=>{
-      debugger
+       
       if(res.length>0){
         this.familyId = res[0].familyId;
       }
