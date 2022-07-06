@@ -283,7 +283,7 @@ export class DashboardComponent implements OnInit {
   removeHaribhaktList(id) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You want to delete! If you delete Offer then all the offer data will be delete.",
+      text: "You want to delete! If you delete Registerd Member then member will be removed from family.",
       icon: 'warning',
       showCancelButton: true,
       customClass: {
@@ -294,28 +294,43 @@ export class DashboardComponent implements OnInit {
       buttonsStyling: false
     }).then((result) => {
       if (result.value == true) {
-        this.dashboardService.removeHaribhaktDetails(id).subscribe((req) => {
-          this.apiService.showNotification('top', 'right', 'Offer removed Successfully.', 'success');
-
-        })
-        Swal.fire(
-          {
-            title: 'Deleted!',
-            text: 'Your Offer has been deleted.',
-            icon: 'success',
-            customClass: {
-              confirmButton: "btn btn-success",
-            },
-            buttonsStyling: false
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You want to delete! If you delete Registerd Member then member will be removed from family.",
+          icon: 'warning',
+          showCancelButton: true,
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger',
+          },
+          confirmButtonText: 'Yes',
+          buttonsStyling: false
+        }).then((result) => {
+          if (result.value == true) {
+            this.dashboardService.removeHaribhaktDetails(id).subscribe((req) => {
+              this.apiService.showNotification('top', 'right', 'Offer removed Successfully.', 'success');
+          
+            })
+            Swal.fire(
+              {
+                title: 'Deleted!',
+                text: 'Your Offer has been deleted.',
+                icon: 'success',
+                customClass: {
+                  confirmButton: "btn btn-success",
+                },
+                buttonsStyling: false
+              }
+            )
+            this.getHaribhakt();
+          
           }
-        )
-        this.getHaribhakt();
+        })
       }
     })
 
   }
-
-
+ 
 
   getRedTickCount() {
     this.dashboardService.getRedtickCount().subscribe((res: any) => {
@@ -404,13 +419,27 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-  isForigenOpen(data, ind) {
-    this.isCountry = true;
+  isForigenOpen(data, ind,type?) {
+    if(type=='modal'){
+      this.isCountry = true;
+      this.professionViewModel.isForeignCountry = true;
+    }
+    else{
+      this.isCountry = true;
     this.professionModel[ind].isForeignCountry = true;
+    }
+    
   }
-  isForigenClose(data, ind) {
-    this.isCountry = false;
+  isForigenClose(data, ind,type?) {
+    if(type=='modal'){
+      this.isCountry = false;
+      this.professionViewModel.isForeignCountry = false;
+    }
+    else{
+      this.isCountry = false;
     this.professionModel[ind].isForeignCountry = false;
+    }
+    
 
   }
   getrelation() {
