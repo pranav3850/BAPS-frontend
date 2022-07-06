@@ -1278,7 +1278,7 @@
     </div>
     <!-- DataTable for GreenTick End -->
 
-    <div *ngIf="professionModel.length>0">
+    <div *ngIf="professionModelList.length>0">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
@@ -1307,7 +1307,7 @@
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let item of professionModel |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:strpArray.length };let ind=index">
+                            *ngFor="let item of professionModelList |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:strpArray.length };let ind=index">
                             <td class="text-left">{{ind+1}}</td>
                             <td class="text-center">
                                 <i class="fa fa-circle text-danger" style="font-size: large;" aria-hidden="true"
@@ -1347,7 +1347,9 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-11 col-sm-11 col-xl-11 col-lg-11">
-                            <h5 class="text-center">Personal Information</h5>
+                            <h5 class="text-center" *ngIf="ind==0">Add Details For Head of the Family first</h5>
+                            <h5 class="text-center" *ngIf="ind==1">Add Your details</h5>
+                            <h5 class="text-center" *ngIf="ind>1">Add details for Member {{ind+1}}</h5>
                         </div>
                         <div class="col-md-1 col-sm-1 col-xl-1 col-lg-1">
                             <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm">
@@ -1355,7 +1357,9 @@
                             </button>
                         </div>
                     </div>
-                    <h6 class="small text-muted text-center">For Member {{ind+1}}</h6>
+                    <!-- <h1 class="small text-muted text-center" ></h1>
+                    <h4 class="small text-muted text-center" ></h4>
+                    <h6 class="small text-muted text-center" ></h6> -->
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm"
@@ -2001,12 +2005,10 @@
             <div class="modal-content">
                 <br />
                 <h6 class="modal-title text-center">
-                    {{duplicateUser.firstName}} {{duplicateUser.middleName}} {{duplicateUser.lastName}} Already
-                    registered
-                    <br />
-
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="openOTPforAddUser()">Do
-                        you want to add them?</button><br />
+                   Family with this Contact number is registered Already
+                    <br/>
+                   
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="openOTPforAddUser()">Do you want to add them?</button><br/>
                     <h3>OR</h3>
                     <button type="button" class="btn btn-success" data-dismiss="modal">You want to create new?</button>
                 </h6>

@@ -20,7 +20,9 @@ export class DashboardComponent implements OnInit {
   public dashboardModelarr: Dashboard[] = [];
   public professionModel: Profession[] = [];
   public professionViewModel: Profession = new Profession;
+  public professionModelList:Profession[] = [];
   public duplicateUser:Profession = new Profession;
+  public duplicateFamily:Profession[]=[];
   public dashboardModel: Dashboard = new Dashboard;
   public mandalModel: Mandal[] = [];
   public relationModel: Relation[] = [];
@@ -89,7 +91,7 @@ export class DashboardComponent implements OnInit {
       }
       this.getOldDetails(obj);
       this.formdate
-      debugger
+       
 
 
     })
@@ -129,8 +131,6 @@ export class DashboardComponent implements OnInit {
   }
 
   public ngOnInit() {
-
-    this.tot_mem = 0;
     if (this.Role != undefined) {
       this.getHaribhakt();
       this.getRedTickCount();
@@ -145,12 +145,11 @@ export class DashboardComponent implements OnInit {
   }
   getOldDetails(data) {
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
-      if (res != 'no family') {
+      
+      if (res != 'no family' && res.length>0) {
         this.familyId = res[0].familyId;
-        this.professionModel = res;
+        this.professionModelList = res;
         this.isOpenForm=false;
-        debugger
-
         this.oldUser = true;
       } else {
         this.newUser()
@@ -182,7 +181,7 @@ export class DashboardComponent implements OnInit {
     const str = this.professionViewModel.dob;
     const date = new Date(str);
     this.formdate = date;
-    debugger
+     
     $(document).ready(function () {
       $("#editCustomerModal").modal('show');
     });
@@ -190,12 +189,15 @@ export class DashboardComponent implements OnInit {
   updateHarbhakatDetailsById() {
     let data=[];
     data.push(this.professionViewModel);
-    this.dashboardService.updateProffesionInfo(data).subscribe((res) => {
-      this.apiService.showNotification('top', 'right', 'Haribhakt Details Successfully Updated.', 'success');
-      // this.strpArray[ind].status = res[0].status;
-      // this.professionModel.splice(1, ind);
-    })
-    debugger
+    this.dashboardService.updatePersonalInfo(data).subscribe((res:any) => {
+       
+      if(res != 'success'){
+        this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
+      }else{
+          this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'danger');
+      }
+    });
+    
 
   }
   removeItem(i) {
@@ -520,6 +522,30 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  confirmationForHead() {
+    Swal.fire({
+      title: 'Are you a head of the family?',
+      // text: "You want to delete! If you delete Offer then all the offer data will be delete.",
+      icon: 'warning',
+      showCancelButton: true,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.value == true) {
+       this.professionModel[0].contactNo = this.mainMob;
+      }else{
+        this.professionModel[1].contactNo = this.mainMob;
+      }
+    })
+
+  }
+
+
 
   selectedMandalType(mandaltype, ind, type?) {
     if (type == 'array') {
@@ -567,7 +593,26 @@ export class DashboardComponent implements OnInit {
 
  
   AddExistUser() {
-    this.professionModel[this.duplicateUser.index]=this.duplicateUser;
+   this.professionModel.length=0;
+   this.professionModel = this.duplicateFamily;
+   if(this.familyId == this.duplicateUser.familyId){
+    $(document).ready(function () {
+      $("#DuplicateNoModalCenter").modal('show');
+    });
+  }
+  else{
+    debugger
+    let data={
+      familyId:this.familyId,
+      oldFamilyId:this.duplicateUser.familyId,
+    };
+    this.dashboardService.addFamilytoNew(data).subscribe((res:any)=>{
+      debugger
+      if(res.length>0){
+        this.familyId = res[0].familyId;
+      }
+    })
+  }
   }
   selectedprofession(name, index, type?) {
     if (type == 'modal') {
@@ -622,7 +667,6 @@ export class DashboardComponent implements OnInit {
 
   AddMoreMember() {
     for (let i = 0; i < this.tot_mem; i++) {
-      
       let data = {
         contactNo: 0,
         firstName: '',
@@ -630,7 +674,7 @@ export class DashboardComponent implements OnInit {
         lastName: '',
         mandalName: '',
         mandaltype: '',
-        relationship: '',
+        relationship: 'Self',
         address: '',
         city: '',
         area: '',
@@ -656,19 +700,16 @@ export class DashboardComponent implements OnInit {
       }
       this.isOpenForm=true;
       this.professionModel.push(data);
+      if(this.professionModelList.length==0){
+        this.confirmationForHead() ;
+      }
+     
+
 
     }
     // this.professionModel.length = this.tot_mem;
   }
-  saveProffesionInfo(data, ind) {
-    
-    let test = [];
-    test.push(data);
-    this.dashboardService.saveProffesionInfo(test).subscribe((res) => {
-      this.strpArray[ind].status = res[0].status;
-      this.professionModel.splice(1, ind);
-    })
-  }
+ 
   selectChangeHandlerForMarital(name, index, type?) {
     if (type == 'modal') {
       this.professionViewModel.maritalStatus = name;
@@ -706,24 +747,33 @@ export class DashboardComponent implements OnInit {
         mob: data.contactNo
       }
       this.dashboardService.createFamily(obj).subscribe((res: any) => {
-        this.familyId = res.insertId;
-        data.familyId = this.familyId;
+         
+        if(res.length ==undefined){
+          this.familyId = res.insertId;
+          data.familyId = this.familyId;
+        }else{
+          this.familyId = res[0].familyId;
+          data.familyId = this.familyId;
+        }
+      
         test.push(data);
         this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
-          if (res[0].isDuplicate) {
-            this.duplicateUser = res[0];
-            this.duplicateUser.index = ind;
-            $(document).ready(function () {
-              $("#DuplicateNoModalCenter").modal('show');
-            });
-          }
-          else if (res.length > 0) {
-            data.status = res[0].status;
-            data.userId = res[0].id;
-            this.strpArray.push(data);
+          if (res.insertId != undefined) {
+            data.userId = res.insertId;
+            this.professionModelList.push(data);
             this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
-            this.dashboardModelarr.splice(ind, 1);
-            this.openProffesionalForm();
+            this.professionModel.splice(ind, 1);
+            this.tot_mem=this.tot_mem-1;
+          }
+          else if(res[0].msg =='added'){
+            data.userId = res[0].userId;
+            this.professionModelList.push(data);
+            this.professionModel.splice(ind, 1);
+            this.tot_mem=this.tot_mem-1;
+            this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
+          }
+          else {
+            this.apiService.showNotification('top', 'right', 'Error in Adding Member.', 'danger');
           }
         })
       })
@@ -733,70 +783,122 @@ export class DashboardComponent implements OnInit {
         mob: data.contactNo
       }
       this.dashboardService.createFamily(obj).subscribe((res: any) => {
-        this.familyId = res.insertId;
-        data.familyId = this.familyId;
+        if(res.length ==undefined){
+          this.familyId = res.insertId;
+          data.familyId = this.familyId;
+        }else{
+          this.familyId = res[0].familyId;
+          data.familyId = this.familyId;
+        }
         test.push(data);
         this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
-          if (res[0].isDuplicate) {
-            this.duplicateUser = res[0];
-            this.duplicateUser.index = ind;
-            $(document).ready(function () {
-              $("#DuplicateNoModalCenter").modal('show');
-            });
-          }
-          else if (res.length > 0) {
-            data.status = res[0].status;
-            data.userId = res[0].id;
-            this.strpArray.push(data);
+          if (res.insertId != undefined) {
+            data.userId = res.insertId;
+            this.professionModelList.push(data);
+            this.tot_mem=this.tot_mem-1;
             this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
-            this.dashboardModelarr.splice(ind, 1);
-            this.openProffesionalForm();
+            this.professionModel.splice(ind, 1);
+          }
+          else if(res[0].msg =='added'){
+            data.userId = res[0].userId;
+            this.professionModelList.push(data);
+            this.professionModel.splice(ind, 1);
+            this.tot_mem=this.tot_mem-1;
+            this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
+          }
+          else {
+            this.apiService.showNotification('top', 'right', 'Error in Adding Member.', 'danger');
           }
         })
       })
     }
     else {
-      data.familyId = this.familyId;
-      test.push(data);
-      this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
-        if (res[0].isDuplicate) {
-          this.duplicateUser = res[0];
-          this.duplicateUser.index = ind;
-          $(document).ready(function () {
-            $("#DuplicateNoModalCenter").modal('show');
-          });
+      if(this.familyId == undefined){
+        let obj = {
+          nooffammem: this.tot_mem,
+          mob: data.contactNo
         }
-        else if (res.length > 0) {
-          data.status = res[0].status;
-          data.userId = res[0].id;
-          this.strpArray.push(data);
-          this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
-          this.dashboardModelarr.splice(ind, 1);
-          this.openProffesionalForm();
-        }
-      })
+        this.dashboardService.createFamily(obj).subscribe((res: any) => {
+          if(res.length ==undefined){
+            this.familyId = res.insertId;
+            data.familyId = this.familyId;
+          }else{
+            this.familyId = res[0].familyId;
+            data.familyId = this.familyId;
+          }
+          test.push(data);
+          this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
+            if (res.insertId != undefined) {
+              data.userId = res.insertId;
+              this.professionModelList.push(data);
+              this.tot_mem=this.tot_mem-1;
+              this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
+              this.professionModel.splice(ind, 1);
+            }
+            else if(res[0].msg =='added'){
+              data.userId = res[0].userId;
+              this.professionModelList.push(data);
+              this.professionModel.splice(ind, 1);
+              this.tot_mem=this.tot_mem-1;
+              this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
+            }
+            else {
+              this.apiService.showNotification('top', 'right', 'Error in Adding Member.', 'danger');
+            }
+          })
+        })
+      }else{
+        data.familyId = this.familyId;
+        test.push(data);
+        this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
+          if (res.insertId != undefined) {
+            data.userId = res.insertId;
+            this.professionModelList.push(data);
+            this.professionModel.splice(ind, 1);
+            this.tot_mem=this.tot_mem-1;
+            this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
+          }
+          else if(res[0].msg =='added'){
+            data.userId = res[0].userId;
+            this.professionModelList.push(data);
+            this.professionModel.splice(ind, 1);
+            this.tot_mem=this.tot_mem-1;
+            this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
+          }
+          else {
+            this.apiService.showNotification('top', 'right', 'Error in Adding Member.', 'danger');
+          }
+        })
+      }
+     
     }
 
   }
   verifyNumber(data) {
-    debugger
     let val = { mob: this.professionModel[data].contactNo }
     this.dashboardService.verifyNumber(val).subscribe((res: any) => {
-      this.duplicateUser = res[0];
-      this.duplicateUser.index = data;
-      $(document).ready(function () {
-        $("#DuplicateNoModalCenter1").modal('show');
-      });
+      if(res.length >0){
+        this.duplicateUser = res[0];
+        this.duplicateFamily =res;
+        this.duplicateUser.index = data;
+        $(document).ready(function () {
+          $("#DuplicateNoModalCenter1").modal('show');
+        });
+      }
+     
     })
   }
   openOTPforAddUser(){
     $(document).ready(function () {
       $("#DuplicateNoModalCenter").modal('show');
     });
+    
+    
+    
+   
   }
 
   openViewInfo(data) {
-  
       this.professionViewModel = data;
       $(document).ready(function () {
         $("#editCustomerModal").modal('show');
