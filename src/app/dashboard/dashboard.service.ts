@@ -46,6 +46,9 @@ export class DashboardService {
     updateProffesionInfo(data) {
         return this.httpClient.post(ApiService.updateProffesionInfoURL, data);
     }
+    updatePersonalInfo(data) {
+        return this.httpClient.post(ApiService.updatePersonalInfoURL, data);
+    }
     getRedtickCount() {
         return this.httpClient.get(ApiService.getRedtickCountURL);
     }
@@ -85,6 +88,9 @@ export class DashboardService {
     }
     verifyNumber(data){
         return this.httpClient.post(ApiService.verifyNumberURL,data);
+    }
+    addFamilytoNew(data){
+        return this.httpClient.post(ApiService.addFamilytoNewURL,data)
     }
     
 }

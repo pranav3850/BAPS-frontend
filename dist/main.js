@@ -850,9 +850,14 @@ var AppRoutes = [{
         children: [{
                 path: '',
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
-            }, {
+            },
+            {
                 path: '',
                 loadChildren: './password/password.module#PasswordModule'
+            },
+            {
+                path: '',
+                loadChildren: './mandal/mandal.module#MandalModule',
             },
         ]
     }, {
@@ -861,7 +866,8 @@ var AppRoutes = [{
         children: [{
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
-            }]
+            },
+        ]
     }
 ];
 
@@ -932,7 +938,12 @@ var FooterModule = /** @class */ (function () {
 var map = {
 	"./dashboard/dashboard.module": [
 		"TDBs",
+		"default~dashboard-dashboard-module~mandal-mandal-module",
 		"dashboard-dashboard-module"
+	],
+	"./mandal/mandal.module": [
+		"VJFv",
+		"default~dashboard-dashboard-module~mandal-mandal-module"
 	],
 	"./pages/pages.module": [
 		"dgmN",
@@ -953,7 +964,7 @@ function webpackAsyncContext(req) {
 	}
 
 	var ids = map[req], id = ids[0];
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(id);
 	});
 }
@@ -1379,15 +1390,22 @@ var ApiService = /** @class */ (function () {
     ApiService.saveMemberListURL = ApiService_1.HOST_URL + '/admin/SaveMemberList';
     ApiService.getAllSavedMembersListURL = ApiService_1.HOST_URL + '/admin/GetAllSavedMembersList';
     ApiService.SaveProffesionInfoURL = ApiService_1.HOST_URL + '/admin/SaveProffesionInfo';
+    ApiService.updateProffesionInfoURL = ApiService_1.HOST_URL + '/admin/updateProffesionInfoURL';
     ApiService.createFamilyURL = ApiService_1.HOST_URL + '/admin/createFamily';
     ApiService.getOldDetailsURL = ApiService_1.HOST_URL + '/admin/getOldDetails';
-    ApiService.getAllFamilyListURL = ApiService_1.HOST_URL + '/admin/getAllFamilyList';
+    ApiService.getAllFamilyListURL = ApiService_1.HOST_URL + '/admin/getAllFamilyForData';
     ApiService.removeHaribhaktDetailsURL = ApiService_1.HOST_URL + '/admin/RemoveHaribhaktDetails/';
     ApiService.removeMandalDetailsURL = ApiService_1.HOST_URL + '/admin/RemoveMandalDetails/';
-    ApiService.getHaribhaktInfoURL = ApiService_1.HOST_URL + '/admin/GetHaribhaktInfo';
+    ApiService.saveMandalListURL = ApiService_1.HOST_URL + '/admin/SaveMandalList';
+    ApiService.updateMandalListURL = ApiService_1.HOST_URL + '/admin/UpdateMandalList';
     ApiService.getRedtickCountURL = ApiService_1.HOST_URL + '/admin/getRedtickCount';
     ApiService.getYellowtickCountURL = ApiService_1.HOST_URL + '/admin/getYellowtickCount';
     ApiService.getGreentickCountURL = ApiService_1.HOST_URL + '/admin/getGreentickCount';
+    ApiService.getEditDataforSecondStageURL = ApiService_1.HOST_URL + '/admin/getEditDataforSecondStage';
+    ApiService.updateHaribhaktURL = ApiService_1.HOST_URL + '/admin/updateHaribhakt';
+    ApiService.savePersonalInfoURL = ApiService_1.HOST_URL + '/admin/savePersonalInfo';
+    ApiService.verifyNumberURL = ApiService_1.HOST_URL + '/admin/vetifyNumber';
+    ApiService.updatePersonalInfoURL = ApiService_1.HOST_URL + '/admin/updatePersonalInfo';
     ApiService.saveSanchalakListURL = ApiService_1.HOST_URL + '/admin/SaveSanchalakDetails';
     ApiService.getAllSanchalakURL = ApiService_1.HOST_URL + '/admin/GetAllSanchalakDetails';
     ApiService.removeSanchalakURL = ApiService_1.HOST_URL + '/admin/RemoveSanchalakDetails/';

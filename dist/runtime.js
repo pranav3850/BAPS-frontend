@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"dashboard-dashboard-module":"dashboard-dashboard-module","pages-pages-module":"pages-pages-module","password-password-module":"password-password-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"default~dashboard-dashboard-module~mandal-mandal-module":"default~dashboard-dashboard-module~mandal-mandal-module","dashboard-dashboard-module":"dashboard-dashboard-module","pages-pages-module":"pages-pages-module","password-password-module":"password-password-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

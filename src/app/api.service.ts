@@ -47,6 +47,8 @@ export class ApiService {
   public static verifyNumberURL: string = ApiService.HOST_URL + '/admin/vetifyNumber'
   public static updatePersonalInfoURL: string = ApiService.HOST_URL + '/admin/updatePersonalInfo'
   
+  public static addFamilytoNewURL: string = ApiService.HOST_URL + '/admin/addFamilytoNew'
+  
   
   
   
