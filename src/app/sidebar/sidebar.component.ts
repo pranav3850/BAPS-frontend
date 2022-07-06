@@ -31,6 +31,13 @@ export const ROUTES: RouteInfo[] = [
     icontype: 'nc-icon nc-bank',
     roles: "Admin",
 },
+{
+    path: '/mandal',
+    title: 'Manage mandal',
+    type: 'link',
+    icontype: 'fa fa-tasks',
+    roles: "Admin",
+},
 
 
 

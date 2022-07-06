@@ -82,7 +82,7 @@ export class ForgotPwdComponent implements OnInit {
             }else if(res ==2){
                 this.apiService.showNotification('top', 'right', 'Incorrect Password.', 'danger');
             }else{
-                this.apiService.showNotification('top', 'right', 'Login successfully', 'sucess');
+                this.apiService.showNotification('top', 'right', 'Login successfully', 'success');
                 localStorage.setItem('role', 'Admin');
                 this.router.navigate(['dashboard']);
             }

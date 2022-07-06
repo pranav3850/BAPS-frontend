@@ -195,7 +195,7 @@ export class DashboardComponent implements OnInit {
       if(res != 'success'){
         this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
       }else{
-          this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'danger');
+        this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
       }
     });
     
@@ -237,10 +237,13 @@ export class DashboardComponent implements OnInit {
       if (element.mobNo.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalFamily.push(element);
       }
-      else if (element.fname.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+      else if (element.firstName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalFamily.push(element);
       }
-      else if (element.lname.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+      else if (element.middleName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalFamily.push(element);
+      }
+      else if (element.lastName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalFamily.push(element);
       }
     })
@@ -279,12 +282,15 @@ export class DashboardComponent implements OnInit {
       else if (element.lastName.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
         this.totalHaribhakt.push(element);
       }
+      else if (element.relationship.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+        this.totalHaribhakt.push(element);
+      }
     })
   }
   removeHaribhaktList(id) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You want to delete! If you delete Registerd Member then member will be removed from family.",
+      text: "You want to delete! If you delete Registered Member then the member will be removed from family.",
       icon: 'warning',
       showCancelButton: true,
       customClass: {
@@ -297,7 +303,7 @@ export class DashboardComponent implements OnInit {
       if (result.value == true) {
         Swal.fire({
           title: 'Are you sure?',
-          text: "You want to delete! If you delete Registerd Member then member will be removed from family.",
+          text: "You want to delete! If you delete Registered Member then the member will be removed from family.",
           icon: 'warning',
           showCancelButton: true,
           customClass: {
@@ -605,13 +611,13 @@ export class DashboardComponent implements OnInit {
     });
   }
   else{
-    debugger
+     
     let data={
       familyId:this.familyId,
       oldFamilyId:this.duplicateUser.familyId,
     };
     this.dashboardService.addFamilytoNew(data).subscribe((res:any)=>{
-      debugger
+       
       if(res.length>0){
         this.familyId = res[0].familyId;
       }
