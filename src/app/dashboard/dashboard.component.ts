@@ -84,8 +84,9 @@ export class DashboardComponent implements OnInit {
     private avctivatedroute: ActivatedRoute
   ) {
     this.Role = localStorage.getItem('role');
-    this.avctivatedroute.queryParams.subscribe((res: any) => {
-      this.mainMob = res.mob;
+    this.mainMob = localStorage.getItem('mob');
+    // this.avctivatedroute.queryParams.subscribe((res: any) => {
+    //   this.mainMob = res.mob;
       let obj = {
         mob: this.mainMob
       }
@@ -94,7 +95,7 @@ export class DashboardComponent implements OnInit {
        
 
 
-    })
+    // })
     this.tot_mem = 0;
     this.professionList = [
       { name: 'Job' },
@@ -519,6 +520,9 @@ export class DashboardComponent implements OnInit {
       }
     })
 
+  }
+  closeModal(index){
+    this.professionModel.splice(index,1);
   }
 
 

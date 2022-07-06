@@ -1406,6 +1406,7 @@ var ApiService = /** @class */ (function () {
     ApiService.savePersonalInfoURL = ApiService_1.HOST_URL + '/admin/savePersonalInfo';
     ApiService.verifyNumberURL = ApiService_1.HOST_URL + '/admin/vetifyNumber';
     ApiService.updatePersonalInfoURL = ApiService_1.HOST_URL + '/admin/updatePersonalInfo';
+    ApiService.addFamilytoNewURL = ApiService_1.HOST_URL + '/admin/addFamilytoNew';
     ApiService.saveSanchalakListURL = ApiService_1.HOST_URL + '/admin/SaveSanchalakDetails';
     ApiService.getAllSanchalakURL = ApiService_1.HOST_URL + '/admin/GetAllSanchalakDetails';
     ApiService.removeSanchalakURL = ApiService_1.HOST_URL + '/admin/RemoveSanchalakDetails/';

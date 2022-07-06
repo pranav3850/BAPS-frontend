@@ -3559,6 +3559,9 @@ var DashboardService = /** @class */ (function () {
     DashboardService.prototype.verifyNumber = function (data) {
         return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].verifyNumberURL, data);
     };
+    DashboardService.prototype.addFamilytoNew = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].addFamilytoNewURL, data);
+    };
     DashboardService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"] }
     ]; };

@@ -14,6 +14,7 @@ export const AppRoutes: Routes = [{
     children: [{
         path: '',
         loadChildren: './dashboard/dashboard.module#DashboardModule',
+        canActivate: [AuthGuard]
     },
     {
         path: '',
@@ -23,6 +24,7 @@ export const AppRoutes: Routes = [{
     {
         path: '',
         loadChildren: './mandal/mandal.module#MandalModule',
+        canActivate: [AuthGuard]
     },
 
 

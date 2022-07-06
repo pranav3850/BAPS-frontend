@@ -1339,7 +1339,7 @@
                         </div>
                         <div class="col-md-1 col-sm-1 col-xl-1 col-lg-1">
                             <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm">
-                                <i class="fa fa-close" (click)="openViewInfo(item)"></i>
+                                <i class="fa fa-close" (click)="closeModal(ind)"></i>
                             </button>
                         </div>
                     </div>
@@ -1426,7 +1426,7 @@
                                     <input type="text" class="form-control" id="contact" [(ngModel)]="item.contactNo"
                                         name="contact" placeholder="Enter Contact Number" required value=""
                                         pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel"
-                                        (keyup)="verifyNumber(ind)" [ngModelOptions]="{standalone: true}" />
+                                        (keyup)="verifyNumber(ind)" [ngModelOptions]="{standalone: true}" [disabled]="item.contactNo !=0" />
                                 </div>
 
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"

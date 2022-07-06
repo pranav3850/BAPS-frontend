@@ -89,11 +89,8 @@ export class LoginComponent implements OnInit {
         this.OTPSent = true;
     }
     gotodashboard() {
-        this.router.navigate(['dashboard'],{
-            queryParams:{
-                mob:this.loginModel.pno
-            }
-        });
+        localStorage.setItem('mob',this.loginModel.pno);
+        this.router.navigate(['dashboard']);
     }
 
 

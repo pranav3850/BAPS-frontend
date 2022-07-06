@@ -20,7 +20,6 @@ export class ApiService {
   }
   public static getUserLoginURL: string = ApiService.HOST_URL + '/admin/GetUsersLogin';
   public static updateLogoutDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateLogoutDetails'
-
   public static getMandalListURL: string = ApiService.HOST_URL + '/admin/GetMandalList/'
   public static getAllMandalListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalList/'
   public static getAllMandalTypeListURL: string = ApiService.HOST_URL + '/admin/GetAllMandalTypeList'
@@ -36,37 +35,20 @@ export class ApiService {
   public static removeMandalDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveMandalDetails/';
   public static saveMandalListURL: string = ApiService.HOST_URL + '/admin/SaveMandalList';
   public static updateMandalListURL: string = ApiService.HOST_URL+'/admin/UpdateMandalList';
-
   public static getRedtickCountURL: string = ApiService.HOST_URL + '/admin/getRedtickCount'
   public static getYellowtickCountURL: string = ApiService.HOST_URL + '/admin/getYellowtickCount'
   public static getGreentickCountURL: string = ApiService.HOST_URL + '/admin/getGreentickCount'
-
   public static getEditDataforSecondStageURL: string = ApiService.HOST_URL + '/admin/getEditDataforSecondStage'
   public static updateHaribhaktURL: string = ApiService.HOST_URL + '/admin/updateHaribhakt'
   public static savePersonalInfoURL: string = ApiService.HOST_URL + '/admin/savePersonalInfo'
   public static verifyNumberURL: string = ApiService.HOST_URL + '/admin/vetifyNumber'
   public static updatePersonalInfoURL: string = ApiService.HOST_URL + '/admin/updatePersonalInfo'
-  
   public static addFamilytoNewURL: string = ApiService.HOST_URL + '/admin/addFamilytoNew'
-  
-  
-  
-  
-
-
-
-
   public static saveSanchalakListURL: string = ApiService.HOST_URL + '/admin/SaveSanchalakDetails'
   public static getAllSanchalakURL: string = ApiService.HOST_URL + '/admin/GetAllSanchalakDetails'
   public static removeSanchalakURL: string = ApiService.HOST_URL + '/admin/RemoveSanchalakDetails/'
   public static updateSanchalakListURL: string = ApiService.HOST_URL + '/admin/UpdateSanchalakDetails/'
-
-
   public static getAllHaribhaktURL: string = ApiService.HOST_URL + '/admin/getAllHaribhakt'
-
-
-
-
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({
