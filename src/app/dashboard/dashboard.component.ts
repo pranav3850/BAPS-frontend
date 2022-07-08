@@ -618,9 +618,10 @@ export class DashboardComponent implements OnInit {
 
  
   AddExistUser() {
-   this.professionModel.length=0;
-   this.professionModel = this.duplicateFamily;
+  //  this.professionModel.length=0;
+  //  this.professionModel = this.duplicateFamily;
    if(this.familyId == this.duplicateUser.familyId){
+    // this.getOldDetails(this.mainMob);
     $(document).ready(function () {
       $("#DuplicateNoModalCenter").modal('show');
     });
@@ -635,6 +636,7 @@ export class DashboardComponent implements OnInit {
        
       if(res.length>0){
         this.familyId = res[0].familyId;
+        this.getOldDetails(this.mainMob);
       }
     })
   }
@@ -920,10 +922,6 @@ export class DashboardComponent implements OnInit {
     $(document).ready(function () {
       $("#DuplicateNoModalCenter").modal('show');
     });
-    
-    
-    
-   
   }
 
   openViewInfo(data) {
