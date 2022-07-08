@@ -52,6 +52,13 @@ var ROUTES = [
         icontype: 'nc-icon nc-bank',
         roles: "Admin",
     },
+    {
+        path: '/mandal',
+        title: 'Manage mandal',
+        type: 'link',
+        icontype: 'fa fa-tasks',
+        roles: "Admin",
+    },
 ];
 var Employee = [
     {
@@ -836,8 +843,10 @@ var AppModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutes", function() { return AppRoutes; });
-/* harmony import */ var _layouts_admin_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/admin/admin-layout.component */ "YGuC");
-/* harmony import */ var _layouts_auth_auth_layout_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/auth/auth-layout.component */ "le+r");
+/* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth.guard */ "tIkO");
+/* harmony import */ var _layouts_admin_admin_layout_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/admin/admin-layout.component */ "YGuC");
+/* harmony import */ var _layouts_auth_auth_layout_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layouts/auth/auth-layout.component */ "le+r");
+
 
 
 var AppRoutes = [{
@@ -846,10 +855,11 @@ var AppRoutes = [{
         pathMatch: 'full',
     }, {
         path: '',
-        component: _layouts_admin_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__["AdminLayoutComponent"],
+        component: _layouts_admin_admin_layout_component__WEBPACK_IMPORTED_MODULE_1__["AdminLayoutComponent"],
         children: [{
                 path: '',
                 loadChildren: './dashboard/dashboard.module#DashboardModule',
+                canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuard"]]
             },
             {
                 path: '',
@@ -858,11 +868,12 @@ var AppRoutes = [{
             {
                 path: '',
                 loadChildren: './mandal/mandal.module#MandalModule',
+                canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuard"]]
             },
         ]
     }, {
         path: '',
-        component: _layouts_auth_auth_layout_component__WEBPACK_IMPORTED_MODULE_1__["AuthLayoutComponent"],
+        component: _layouts_auth_auth_layout_component__WEBPACK_IMPORTED_MODULE_2__["AuthLayoutComponent"],
         children: [{
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
@@ -1281,6 +1292,60 @@ var AuthLayoutComponent = /** @class */ (function () {
         })
     ], AuthLayoutComponent);
     return AuthLayoutComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "tIkO":
+/*!*******************************!*\
+  !*** ./src/app/auth.guard.ts ***!
+  \*******************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AuthGuard = /** @class */ (function () {
+    function AuthGuard(router) {
+        this.router = router;
+    }
+    AuthGuard.prototype.canActivate = function (next, state) {
+        //  
+        if (localStorage.length > 0) {
+            return true;
+        }
+        else {
+            this.router.navigate(['pages/login']);
+            return false;
+        }
+        // return true;
+    };
+    AuthGuard.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }
+    ]; };
+    AuthGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], AuthGuard);
+    return AuthGuard;
 }());
 
 

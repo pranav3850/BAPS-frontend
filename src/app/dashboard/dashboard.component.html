@@ -1489,7 +1489,7 @@
                                     <input type="text" class="form-control" id="contact" [(ngModel)]="item.contactNo"
                                         name="contact" placeholder="Enter Contact Number" required value=""
                                         pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel"
-                                        (keyup)="verifyNumber(ind)" [ngModelOptions]="{standalone: true}" [disabled]="item.contactNo !=0" />
+                                        (keyup)="verifyNumber(ind)" [ngModelOptions]="{standalone: true}"  />
                                 </div>
 
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
