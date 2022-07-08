@@ -89,8 +89,14 @@ export class DashboardComponent implements OnInit {
     this.mainMob = localStorage.getItem('mob');
     // this.avctivatedroute.queryParams.subscribe((res: any) => {
     //   this.mainMob = res.mob;
+      let obj = {
+        mob: this.mainMob
+      }
+      if(this.Role == undefined){
+        this.getOldDetails(obj);
+      }
 
-      
+     
       this.formdate
        
 
@@ -215,6 +221,7 @@ export class DashboardComponent implements OnInit {
   }
   getAllFamily() {
     this.dashboardService.getAllFamilyList().subscribe((res: any) => {
+      debugger
       this.totalFamily = res;
       this.tFamily = res;
       for (let i = 0; i < this.totalFamily.length; i++) {
@@ -227,7 +234,7 @@ export class DashboardComponent implements OnInit {
     this.viewMembers = [];
     this.totalHaribhakt.forEach((element, index) => {
       if (element.familyId == id) {
-        element.index = index;
+        element.index = index+1;
         this.viewMembers.push(element);
       }
     });
@@ -611,9 +618,10 @@ export class DashboardComponent implements OnInit {
 
  
   AddExistUser() {
-   this.professionModel.length=0;
-   this.professionModel = this.duplicateFamily;
+  //  this.professionModel.length=0;
+  //  this.professionModel = this.duplicateFamily;
    if(this.familyId == this.duplicateUser.familyId){
+    // this.getOldDetails(this.mainMob);
     $(document).ready(function () {
       $("#DuplicateNoModalCenter").modal('show');
     });
@@ -628,6 +636,7 @@ export class DashboardComponent implements OnInit {
        
       if(res.length>0){
         this.familyId = res[0].familyId;
+        this.getOldDetails(this.mainMob);
       }
     })
   }
@@ -913,10 +922,6 @@ export class DashboardComponent implements OnInit {
     $(document).ready(function () {
       $("#DuplicateNoModalCenter").modal('show');
     });
-    
-    
-    
-   
   }
 
   openViewInfo(data) {
