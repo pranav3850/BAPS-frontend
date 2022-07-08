@@ -54,6 +54,8 @@ export class DashboardComponent implements OnInit {
   search: string = '';
   haribhakt: any = [];
   mainMob: any;
+  focus;
+
   
   otp: any;
   professionList: any = [];
@@ -143,10 +145,18 @@ export class DashboardComponent implements OnInit {
       this.getGreenTickCount();
       this.getAllFamily();
       this.getAllmandal();
+      
     }
+    else{
+      let obj = {
+        mob: this.mainMob
+      }
+      this.getOldDetails(obj);
+    
+    }
+
     this.getrelation();
     this.getMandalType();
-
   }
   getOldDetails(data) {
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
@@ -712,6 +722,9 @@ export class DashboardComponent implements OnInit {
         vip: false,
         mvip: false,
         politician: false,
+        company:'',
+        native:'',
+        businesscity:''
       }
       this.isOpenForm=true;
       this.professionModel.push(data);

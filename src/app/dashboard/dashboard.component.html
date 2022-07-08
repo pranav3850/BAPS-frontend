@@ -444,8 +444,7 @@
                                     <input type="text" class="form-control" id="mname" name="mname"
                                         [(ngModel)]="professionViewModel.middleName" placeholder=" Enter Middle Name "
                                         required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        [ngModelOptions]="{standalone: true}" #mname="ngModel"
-                                 />
+                                        [ngModelOptions]="{standalone: true}" #mname="ngModel" />
                                 </div>
                                 <div *ngIf="mname.errors && (mname.dirty || mname.touched)" class="alert alert-danger">
                                     <div *ngIf="mname.errors.required">
@@ -594,7 +593,7 @@
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1  ">
                                 <label class="col-form-label" style="font-weight: 700;">
-                                     City/Village
+                                    City/Village
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -741,8 +740,11 @@
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" placeholder=" Enter Native Place "
-                                        [ngModelOptions]="{standalone: true}">
+                                    <!-- <input type="text" class="form-control" placeholder=" Enter Native Place "
+                                        [ngModelOptions]="{standalone: true}"> -->
+                                    <input type="text" class="form-control" id="native" name="native"
+                                        [(ngModel)]="professionViewModel.native" placeholder="Enter Native Place" required
+                                        value="" [ngModelOptions]="{standalone: true}" pattern="[A-Za-z ]{1,32}">
                                 </div>
 
                             </div>
@@ -801,9 +803,9 @@
                                 class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="company" name="company"
-                                        [(ngModel)]="professionViewModel.company" placeholder=" Enter company"
-                                        required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        #company="ngModel" [ngModelOptions]="{standalone: true}" />
+                                        [(ngModel)]="professionViewModel.company" placeholder=" Enter company" required
+                                        value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true" #company="ngModel"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="company.errors && (company.dirty || company.touched)"
                                     class="alert alert-danger">
@@ -849,9 +851,10 @@
                                 class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="businesscity" name="businesscity"
-                                        [(ngModel)]="professionViewModel.businesscity" placeholder=" Enter Business City"
-                                        required value="" pattern="[A-Za-z ]{1,32}" (focus)="focus = true"
-                                        #businesscity="ngModel" [ngModelOptions]="{standalone: true}" />
+                                        [(ngModel)]="professionViewModel.businesscity"
+                                        placeholder=" Enter Business City" required value="" pattern="[A-Za-z ]{1,32}"
+                                        (focus)="focus = true" #businesscity="ngModel"
+                                        [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="businesscity.errors && (businesscity.dirty || businesscity.touched)"
                                     class="alert alert-danger">
@@ -1058,7 +1061,7 @@
                                 <div *ngIf="foreignContact.errors && (foreignContact.dirty || foreignContact.touched)"
                                     class="alert alert-danger">
                                     <div *ngIf="foreignContact.errors.required">
-                                        foreignContact  is required.
+                                        foreignContact is required.
                                     </div>
                                     <div [hidden]="!foreignContact.errors('pattern')">
                                         Enter Only Numbers. Only 10 digit.
@@ -1077,8 +1080,8 @@
                             (click)="updateHarbhakatDetailsById()">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i> Update
                         </button>
-                        <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-times"
-                                aria-hidden="true"></i> Close</button>
+                        <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i
+                                class="fa fa-times" aria-hidden="true"></i> Close</button>
                         <!-- <div class="ml-md-auto">
                             <div class="btn btn-warning" (click)="updateHarbhakatDetailsById()">Update</div>
                             
@@ -1400,8 +1403,9 @@
                             <h5 class="text-center" *ngIf="ind>1">Add details for Member {{ind+1}}</h5>
                         </div>
                         <div class="col-md-1 col-sm-1 col-xl-1 col-lg-1">
-                            <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm">
-                                <i class="fa fa-close" (click)="closeModal(ind)"></i>
+                            <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm"
+                                (click)="closeModal(ind)">
+                                <i class="fa fa-close"></i>
                             </button>
                         </div>
                     </div>
@@ -1489,7 +1493,7 @@
                                     <input type="text" class="form-control" id="contact" [(ngModel)]="item.contactNo"
                                         name="contact" placeholder="Enter Contact Number" required value=""
                                         pattern="^[0-9].{9,9}$" (focus)="focus = true" #contact="ngModel"
-                                        (keyup)="verifyNumber(ind)" [ngModelOptions]="{standalone: true}"  />
+                                        (keyup)="verifyNumber(ind)" [ngModelOptions]="{standalone: true}" />
                                 </div>
 
                                 <div *ngIf="contact.errors && (contact.dirty || contact.touched)"
@@ -1588,7 +1592,7 @@
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
-                                     <h6>City/Village</h6>
+                                    <h6>City/Village</h6>
                                 </label>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -1734,8 +1738,11 @@
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                                    <input type="text" class="form-control" placeholder=" Enter Native Place "
-                                        [ngModelOptions]="{standalone: true}">
+                                    <!-- <input type="text" class="form-control" placeholder=" Enter Native Place "
+                                        [ngModelOptions]="{standalone: true}"> -->
+                                    <input type="text" class="form-control" id="native" name="native"
+                                        [(ngModel)]="professionViewModel.native" placeholder="Enter Native Place" required
+                                        value="" [ngModelOptions]="{standalone: true}" pattern="[A-Za-z ]{1,32}">
                                 </div>
 
                             </div>
@@ -1852,7 +1859,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div *ngIf="item.profession =='Student'"
                                 class="col-sm-12 col-md-1 col-lg-1 col-xl-1 col-form-label ">
                                 <label>
@@ -2077,7 +2084,7 @@
                     <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                         <input type="number" class="form-control" id="family" [(ngModel)]="tot_mem" name="family"
                             value="" pattern="[0-9]{0,10}" placeholder="Enter Total Numbers Of Members"
-                            (focus)="focus = true" #noofmem="ngModel" />
+                            (focus)="focus = true" #noofmem="ngModel" autofocus />
                     </div>
                     <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
                         <div [hidden]="!family.errors('pattern')">
@@ -2100,10 +2107,11 @@
             <div class="modal-content">
                 <br />
                 <h6 class="modal-title text-center">
-                   Family with this Contact number is registered Already
-                    <br/>
-                   
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="openOTPforAddUser()">Do you want to add them?</button><br/>
+                    Family with this Contact number is registered Already
+                    <br />
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="openOTPforAddUser()">Do
+                        you want to add them?</button><br />
                     <h3>OR</h3>
                     <button type="button" class="btn btn-success" data-dismiss="modal">You want to create new?</button>
                 </h6>

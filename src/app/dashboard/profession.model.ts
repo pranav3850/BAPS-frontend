@@ -42,6 +42,7 @@ export class Profession {
         public mvip?:boolean,
         public politician?:boolean,
         public company?:string,
+        public native?:string,
         public businesscity?:string
     
     ){}

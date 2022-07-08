@@ -40,7 +40,7 @@
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="mandaltype" name="mandaltype"
                                 [(ngModel)]="MandalModel.mandaltype" placeholder="Enter Mandal Type " required value=""
-                                pattern="^[a-zA-Z]+$" (focus)="focus = true" #mandaltype="ngModel" />
+                                pattern="^[a-zA-Z 0-9]+$" (focus)="focus = true" #mandaltype="ngModel" />
                         </div>
                         <div *ngIf="mandaltype.errors && (mandaltype.dirty || mandaltype.touched)"
                             class="alert alert-danger">
@@ -48,7 +48,7 @@
                                 First Name is required
                             </div>
                             <div [hidden]="!fname.errors('pattern')">
-                                Enter Only Characters.
+                                Special Charatcters not allowed.
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4">
                         <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                             <input type="text" class="form-control" id="name" name="name" [(ngModel)]="MandalModel.name"
-                                placeholder="Enter Mandal Name " required value="" pattern="^[a-zA-Z]+$"
+                                placeholder="Enter Mandal Name " required value="" pattern="^[a-zA-Z 0-9]+$"
                                 (focus)="focus = true" #name="ngModel" />
                         </div>
                         <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
@@ -64,7 +64,7 @@
                                 First Name is required
                             </div>
                             <div [hidden]="!fname.errors('pattern')">
-                                Enter Only Characters.
+                                Special Charatcters not allowed.
                             </div>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="mandaltype" name="mandaltype"
                                         [(ngModel)]="updateMandalModel.mandaltype" placeholder="Enter Mandal Type " required value=""
-                                        pattern="^[a-zA-Z]+$" (focus)="focus = true" #mandaltype="ngModel" />
+                                        pattern="^[a-zA-Z 0-9]+$" (focus)="focus = true" #mandaltype="ngModel" />
                                 </div>
                                 <div *ngIf="mandaltype.errors && (mandaltype.dirty || mandaltype.touched)"
                                     class="alert alert-danger">
@@ -197,7 +197,7 @@
                                         First Name is required
                                     </div>
                                     <div [hidden]="!fname.errors('pattern')">
-                                        Enter Only Characters.
+                                        Special Charatcters not allowed.
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@
                             <div class="col-sm-12 col-md-4 col-xl-4 col-lg-4">
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="name" name="name" [(ngModel)]="updateMandalModel.name"
-                                        placeholder="Enter Mandal Name " required value="" pattern="^[a-zA-Z]+$"
+                                        placeholder="Enter Mandal Name " required value="" pattern="^[a-zA-Z 0-9]+$"
                                         (focus)="focus = true" #name="ngModel" />
                                 </div>
                                 <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
@@ -213,7 +213,7 @@
                                         First Name is required
                                     </div>
                                     <div [hidden]="!fname.errors('pattern')">
-                                        Enter Only Characters.
+                                        Special Charatcters not allowed.
                                     </div>
                                 </div>
                             </div>
