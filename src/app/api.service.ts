@@ -49,8 +49,8 @@ export class ApiService {
   public static removeSanchalakURL: string = ApiService.HOST_URL + '/admin/RemoveSanchalakDetails/'
   public static updateSanchalakListURL: string = ApiService.HOST_URL + '/admin/UpdateSanchalakDetails/'
   public static getAllHaribhaktURL: string = ApiService.HOST_URL + '/admin/getAllHaribhakt';
-  public static SaveAndSendOTPURL: string = ApiService.HOST_URL + '/admin/sendUserOTP';
-
+  public static SaveAndSendOTPURL: string = ApiService.HOST_URL + '/admin/sendAndSaveUserOTP';
+  public static removeLastInsertedOTPURL:string =ApiService.HOST_URL+'/admin/removeLastInsertedOTP';
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({

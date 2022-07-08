@@ -109,9 +109,9 @@
                                 <button class="btn btn-danger btn-block btn-round" id="registration-submit"
                                     (click)="gotodashboard()" value="Sign in" [disabled]="!loginForm.form.valid"><i
                                         class="fa fa-sign-in"></i> Login</button>
-                                <div class="link d-flex justify-content-center" style="padding-top:10px ;">
-                                    <a href="">
-                                        <h5 (click)="resendOTP()"><strong>Resend OTP in: </strong>{{timeLeft}}</h5>
+                                <div class="link d-flex justify-content-center" style="padding-top:10px ;color:blue;">
+                                    <a (click)="resendOTP()">
+                                        <h5><strong >Resend OTP in: </strong>{{timeLeft}}</h5>
                                     </a>
                                 </div>
                             </div>
