@@ -43,6 +43,9 @@ export class DashboardService {
     saveProffesionInfo(data) {
         return this.httpClient.post(ApiService.SaveProffesionInfoURL, data);
     }
+    saveAndSendOtp(data) {
+        return this.httpClient.post(ApiService.SaveAndSendOTPURL, data);
+    }
     updateProffesionInfo(data) {
         return this.httpClient.post(ApiService.updateProffesionInfoURL, data);
     }
