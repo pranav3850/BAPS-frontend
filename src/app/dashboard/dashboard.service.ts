@@ -10,7 +10,7 @@ import { Relation } from './relation.model';
     providedIn: 'root'
 })
 export class DashboardService {
-    
+
 
     constructor(
         private httpClient: HttpClient
@@ -37,14 +37,16 @@ export class DashboardService {
         return this.httpClient.get<any>(ApiService.getAllSavedMembersListURL);
     }
     getAllHaribhakt() {
-        
+
         return this.httpClient.get(ApiService.getAllHaribhaktURL);
     }
     saveProffesionInfo(data) {
         return this.httpClient.post(ApiService.SaveProffesionInfoURL, data);
     }
+
     saveAndSendOtp(data) {
-        return this.httpClient.post(ApiService.SaveAndSendOTPURL, data);
+         
+        return this.httpClient.post<any>(ApiService.SaveAndSendOTPURL, data);
     }
     updateProffesionInfo(data) {
         return this.httpClient.post(ApiService.updateProffesionInfoURL, data);
@@ -67,18 +69,22 @@ export class DashboardService {
     getOldDetails(data) {
         return this.httpClient.post(ApiService.getOldDetailsURL, data);
     }
-   
+
     removeHaribhaktDetails(id) {
         return this.httpClient.get<any>(ApiService.removeHaribhaktDetailsURL + id);
     }
     removeMandalDetails(id) {
         return this.httpClient.get<any>(ApiService.removeMandalDetailsURL + id);
     }
-    getEditDataofSecondstage(data){
-        return this.httpClient.post(ApiService.getEditDataforSecondStageURL,data);
+    removeLastInsertedOTP(data) {
+         
+        return this.httpClient.post<any>(ApiService.removeLastInsertedOTPURL ,data);
     }
-    updateHaribhakt(data){
-        return this.httpClient.post(ApiService.updateHaribhaktURL,data);
+    getEditDataofSecondstage(data) {
+        return this.httpClient.post(ApiService.getEditDataforSecondStageURL, data);
+    }
+    updateHaribhakt(data) {
+        return this.httpClient.post(ApiService.updateHaribhaktURL, data);
     }
     saveMandalDetails(admin: Mandal): Observable<any> {
         return this.httpClient.post<any>(ApiService.saveMandalListURL, admin);
@@ -86,14 +92,17 @@ export class DashboardService {
     updateMandalList(admin: Mandal): Observable<any[]> {
         return this.httpClient.post<any>(ApiService.updateMandalListURL, admin);
     }
-    savePersonalInfo(data:any){
-        return this.httpClient.post(ApiService.savePersonalInfoURL,data);
+    savePersonalInfo(data: any) {
+        return this.httpClient.post(ApiService.savePersonalInfoURL, data);
     }
-    verifyNumber(data){
-        return this.httpClient.post(ApiService.verifyNumberURL,data);
+    verifyNumber(data) {
+        return this.httpClient.post(ApiService.verifyNumberURL, data);
     }
-    addFamilytoNew(data){
-        return this.httpClient.post(ApiService.addFamilytoNewURL,data)
+    addFamilytoNew(data) {
+        return this.httpClient.post(ApiService.addFamilytoNewURL, data);
     }
-    
+    verifyUserOTP(data){
+        return this.httpClient.post(ApiService.getUserOTPVerifyURL,data);
+    }
+
 }

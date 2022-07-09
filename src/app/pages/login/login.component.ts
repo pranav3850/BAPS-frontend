@@ -3,6 +3,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { ApiService } from 'app/api.service';
 import { DashboardService } from 'app/dashboard/dashboard.service';
 import { Loginuser } from './login.model';
 
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     public OTPSent: boolean = false;
     public submitButton: boolean = true;
     public timeLeft: number = 120;
-    interval:any;
+    interval: any;
     account_validation_messages = {
         'email': [
             { type: 'required', message: 'Email is required' },
@@ -35,11 +36,12 @@ export class LoginComponent implements OnInit {
     private toggleButton;
     private sidebarVisible: boolean;
     private nativeElement: Node;
-    private dashboardService:DashboardService
 
     constructor(
         private element: ElementRef,
         private router: Router,
+        private dashboardService: DashboardService,
+        private apiService: ApiService
     ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -89,39 +91,54 @@ export class LoginComponent implements OnInit {
     }
 
     verifybox() {
-        localStorage.setItem('temp', this.loginModel.pno);
         this.submitButton = false
-        this.OTPSent = true;
         this.startTimer();
-        debugger
-        let data={
-            familyId:localStorage.getItem('temp'),
-          };
-          this.dashboardService.saveAndSendOtp(data).subscribe((res:any)=>{
-             
-            if(res.length>0){
-            //   this.familyId = res[0].familyId;
-            }
-          })
-        // this.dashboardService.().subscribe((data: any) => {
-        //     // this.addedMembers = data;
-        //   })
+        this.OTPSent = true;
+
+        let data = {
+            contactno: this.loginModel.pno,
+        };
+        this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
+            this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
+        })
     }
     startTimer() {
         this.interval = setInterval(() => {
-          if (this.timeLeft == 0) {
-            clearInterval(this.interval);
-          } else {
-            this.timeLeft--;
-          }
+            if (this.timeLeft == 0) {
+                clearInterval(this.interval);
+            } else {
+                this.timeLeft--;
+            }
         }, 1000)
-      }
-    resendOTP(){
-        localStorage.getItem('temp')
+    }
+    resendOTP() {
+        let data = {
+            contactno: this.loginModel.pno,
+        };
+        this.dashboardService.removeLastInsertedOTP(data).subscribe((data: any) => {
+             this.verifybox();
+        })
     }
     gotodashboard() {
         localStorage.setItem('mob', this.loginModel.pno);
         this.router.navigate(['dashboard']);
+    }
+    verifyOTPFromUser(){
+        let data = {
+            contactno: this.loginModel.pno,
+            otp:this.loginModel.otp
+        };
+        this.dashboardService.verifyUserOTP(data).subscribe((data:any)=>{
+           
+            if(data.length==1){
+                this.apiService.showNotification('top', 'right', 'OTP Verified Successfully.', 'success');
+                this.gotodashboard();
+            }
+            else{
+                this.apiService.showNotification('top', 'right', 'OTP and Number is does not Match Please resend OTP.', 'danger');
+
+            }
+        })
     }
 
 
