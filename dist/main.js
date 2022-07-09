@@ -1477,6 +1477,9 @@ var ApiService = /** @class */ (function () {
     ApiService.removeSanchalakURL = ApiService_1.HOST_URL + '/admin/RemoveSanchalakDetails/';
     ApiService.updateSanchalakListURL = ApiService_1.HOST_URL + '/admin/UpdateSanchalakDetails/';
     ApiService.getAllHaribhaktURL = ApiService_1.HOST_URL + '/admin/getAllHaribhakt';
+    ApiService.SaveAndSendOTPURL = ApiService_1.HOST_URL + '/admin/sendAndSaveUserOTP';
+    ApiService.removeLastInsertedOTPURL = ApiService_1.HOST_URL + '/admin/removeLastInsertedOTP';
+    ApiService.getUserOTPVerifyURL = ApiService_1.HOST_URL + '/admin/getUserOTPVerify';
     ApiService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
     ]; };

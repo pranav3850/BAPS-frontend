@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     public otp: any;
     public OTPSent: boolean = false;
     public submitButton: boolean = true;
-    public timeLeft: number = 120;
+    public timeLeft: number = 300;
     interval: any;
     account_validation_messages = {
         'email': [
@@ -124,19 +124,22 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['dashboard']);
     }
     verifyOTPFromUser(){
+        debugger
         let data = {
             contactno: this.loginModel.pno,
             otp:this.loginModel.otp
         };
-        this.dashboardService.verifyUserOTP(data).subscribe((data:any)=>{
-           
-            if(data.length==1){
+        this.dashboardService.verifyUserOTP(data).subscribe((res:any)=>{
+           debugger
+            
+             if(res == 'wrong'){
+                this.apiService.showNotification('top', 'right', 'OTP does not Match Please try Again.', 'danger');
+
+            }else if(res =='err'){
+                this.apiService.showNotification('top', 'right', 'Something is wrong please try again.', 'danger');
+            }else{
                 this.apiService.showNotification('top', 'right', 'OTP Verified Successfully.', 'success');
                 this.gotodashboard();
-            }
-            else{
-                this.apiService.showNotification('top', 'right', 'OTP and Number is does not Match Please resend OTP.', 'danger');
-
             }
         })
     }
