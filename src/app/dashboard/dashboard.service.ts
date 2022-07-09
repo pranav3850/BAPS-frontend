@@ -99,7 +99,10 @@ export class DashboardService {
         return this.httpClient.post(ApiService.verifyNumberURL, data);
     }
     addFamilytoNew(data) {
-        return this.httpClient.post(ApiService.addFamilytoNewURL, data)
+        return this.httpClient.post(ApiService.addFamilytoNewURL, data);
+    }
+    verifyUserOTP(data){
+        return this.httpClient.post(ApiService.getUserOTPVerifyURL,data);
     }
 
 }

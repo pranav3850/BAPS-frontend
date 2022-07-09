@@ -50,7 +50,8 @@ export class ApiService {
   public static updateSanchalakListURL: string = ApiService.HOST_URL + '/admin/UpdateSanchalakDetails/'
   public static getAllHaribhaktURL: string = ApiService.HOST_URL + '/admin/getAllHaribhakt';
   public static SaveAndSendOTPURL: string = ApiService.HOST_URL + '/admin/sendAndSaveUserOTP';
-  public static removeLastInsertedOTPURL:string =ApiService.HOST_URL+'/admin/removeLastInsertedOTP';
+  public static removeLastInsertedOTPURL: string = ApiService.HOST_URL + '/admin/removeLastInsertedOTP';
+  public static getUserOTPVerifyURL: string = ApiService.HOST_URL + '/admin/getUserOTPVerify';
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({

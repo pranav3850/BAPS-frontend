@@ -93,11 +93,12 @@ export class LoginComponent implements OnInit {
     verifybox() {
         this.submitButton = false
         this.startTimer();
+        this.OTPSent = true;
+
         let data = {
             contactno: this.loginModel.pno,
         };
         this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
-            this.OTPSent = true;
             this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
         })
     }
@@ -121,6 +122,23 @@ export class LoginComponent implements OnInit {
     gotodashboard() {
         localStorage.setItem('mob', this.loginModel.pno);
         this.router.navigate(['dashboard']);
+    }
+    verifyOTPFromUser(){
+        let data = {
+            contactno: this.loginModel.pno,
+            otp:this.loginModel.otp
+        };
+        this.dashboardService.verifyUserOTP(data).subscribe((data:any)=>{
+           
+            if(data.length==1){
+                this.apiService.showNotification('top', 'right', 'OTP Verified Successfully.', 'success');
+                this.gotodashboard();
+            }
+            else{
+                this.apiService.showNotification('top', 'right', 'OTP and Number is does not Match Please resend OTP.', 'danger');
+
+            }
+        })
     }
 
 
