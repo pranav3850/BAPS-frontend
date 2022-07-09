@@ -623,30 +623,17 @@ export class DashboardComponent implements OnInit {
       contactno: this.contactNoFormArray.mob,
       otp: this.otp,
     };
-    debugger
-    //  this.professionModel.length=0;
-    //  this.professionModel = this.duplicateFamily;
-    if (this.familyId == this.duplicateUser.familyId) {
-      // this.getOldDetails(this.mainMob);
-      $(document).ready(function () {
-        $("#DuplicateNoModalCenter").modal('show');
-      });
-    }
-    else {
-
-      let data = {
-        familyId: this.familyId,
-        oldFamilyId: this.duplicateUser.familyId,
-      };
-      this.dashboardService.addFamilytoNew(data).subscribe((res: any) => {
-
-        if (res.length > 0) {
-          this.familyId = res[0].familyId;
-          this.getOldDetails(this.mainMob);
-        }
-      })
-    }
+    this.dashboardService.addFamilytoNew(data).subscribe((res:any)=>{
+       
+      debugger
+      if(res.length>0){
+        this.familyId = res[0].familyId;
+        let data={mob:this.mainMob};
+        this.getOldDetails(data);
+      }
+    })
   }
+  
   selectedprofession(name, index, type?) {
     if (type == 'modal') {
       this.professionViewModel.profession = name;
@@ -913,9 +900,8 @@ export class DashboardComponent implements OnInit {
   verifyNumber(data) {
     this.contactNoFormArray = '';
     let val = { mob: this.professionModel[data].contactNo }
-    this.contactNoFormArray = { mob: this.professionModel[data].contactNo };
     this.dashboardService.verifyNumber(val).subscribe((res: any) => {
-      if (res.length > 0) {
+      if(res.length >0){
         this.duplicateUser = res[0];
         this.duplicateFamily = res;
         this.duplicateUser.index = data;
