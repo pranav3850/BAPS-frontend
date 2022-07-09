@@ -634,9 +634,11 @@ export class DashboardComponent implements OnInit {
     };
     this.dashboardService.addFamilytoNew(data).subscribe((res:any)=>{
        
+      debugger
       if(res.length>0){
         this.familyId = res[0].familyId;
-        this.getOldDetails(this.mainMob);
+        let data={mob:this.mainMob};
+        this.getOldDetails(data);
       }
     })
   }
@@ -906,7 +908,9 @@ export class DashboardComponent implements OnInit {
   }
   verifyNumber(data) {
     let val = { mob: this.professionModel[data].contactNo }
+    debugger
     this.dashboardService.verifyNumber(val).subscribe((res: any) => {
+      debugger
       if(res.length >0){
         this.duplicateUser = res[0];
         this.duplicateFamily =res;
