@@ -20,9 +20,9 @@ export class DashboardComponent implements OnInit {
   public dashboardModelarr: Dashboard[] = [];
   public professionModel: Profession[] = [];
   public professionViewModel: Profession = new Profession;
-  public professionModelList:Profession[] = [];
-  public duplicateUser:Profession = new Profession;
-  public duplicateFamily:Profession[]=[];
+  public professionModelList: Profession[] = [];
+  public duplicateUser: Profession = new Profession;
+  public duplicateFamily: Profession[] = [];
   public dashboardModel: Dashboard = new Dashboard;
   public mandalModel: Mandal[] = [];
   public relationModel: Relation[] = [];
@@ -55,8 +55,9 @@ export class DashboardComponent implements OnInit {
   haribhakt: any = [];
   mainMob: any;
   focus;
+  contactNoFormArray: any;
 
-  
+
   otp: any;
   professionList: any = [];
   allMandalList: any = [];
@@ -74,8 +75,8 @@ export class DashboardComponent implements OnInit {
   openYellowtickFlag: boolean = false;
   openGreentickFlag: boolean = false;
   bloodGroupDataList: any = [];
-  maratialData:any=[];
-  isOpenForm:boolean=false;
+  maratialData: any = [];
+  isOpenForm: boolean = false;
 
   haribhaktTagsdata: any = [];
   updateHariDetail: any = [];
@@ -89,16 +90,16 @@ export class DashboardComponent implements OnInit {
     this.mainMob = localStorage.getItem('mob');
     // this.avctivatedroute.queryParams.subscribe((res: any) => {
     //   this.mainMob = res.mob;
-      let obj = {
-        mob: this.mainMob
-      }
-      if(this.Role == undefined){
-        this.getOldDetails(obj);
-      }
+    let obj = {
+      mob: this.mainMob
+    }
+    if (this.Role == undefined) {
+      this.getOldDetails(obj);
+    }
 
-     
-      this.formdate
-       
+
+    this.formdate
+
 
 
     // })
@@ -145,14 +146,14 @@ export class DashboardComponent implements OnInit {
       this.getGreenTickCount();
       this.getAllFamily();
       this.getAllmandal();
-      
+
     }
-    else{
+    else {
       let obj = {
         mob: this.mainMob
       }
       this.getOldDetails(obj);
-    
+
     }
 
     this.getrelation();
@@ -160,11 +161,11 @@ export class DashboardComponent implements OnInit {
   }
   getOldDetails(data) {
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
-      
-      if (res != 'no family' && res.length>0) {
+
+      if (res != 'no family' && res.length > 0) {
         this.familyId = res[0].familyId;
         this.professionModelList = res;
-        this.isOpenForm=false;
+        this.isOpenForm = false;
         this.oldUser = true;
       } else {
         this.newUser()
@@ -196,23 +197,23 @@ export class DashboardComponent implements OnInit {
     const str = this.professionViewModel.dob;
     const date = new Date(str);
     this.formdate = date;
-     
+
     $(document).ready(function () {
       $("#editCustomerModal").modal('show');
     });
   }
   updateHarbhakatDetailsById() {
-    let data=[];
+    let data = [];
     data.push(this.professionViewModel);
-    this.dashboardService.updatePersonalInfo(data).subscribe((res:any) => {
-       
-      if(res != 'success'){
+    this.dashboardService.updatePersonalInfo(data).subscribe((res: any) => {
+
+      if (res != 'success') {
         this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
-      }else{
+      } else {
         this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
       }
     });
-    
+
 
   }
   removeItem(i) {
@@ -234,7 +235,7 @@ export class DashboardComponent implements OnInit {
     this.viewMembers = [];
     this.totalHaribhakt.forEach((element, index) => {
       if (element.familyId == id) {
-        element.index = index+1;
+        element.index = index + 1;
         this.viewMembers.push(element);
       }
     });
@@ -331,7 +332,7 @@ export class DashboardComponent implements OnInit {
           if (result.value == true) {
             this.dashboardService.removeHaribhaktDetails(id).subscribe((req) => {
               this.apiService.showNotification('top', 'right', 'Offer removed Successfully.', 'success');
-          
+
             })
             Swal.fire(
               {
@@ -345,14 +346,14 @@ export class DashboardComponent implements OnInit {
               }
             )
             this.getHaribhakt();
-          
+
           }
         })
       }
     })
 
   }
- 
+
 
   getRedTickCount() {
     this.dashboardService.getRedtickCount().subscribe((res: any) => {
@@ -441,27 +442,27 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-  isForigenOpen(data, ind,type?) {
-    if(type=='modal'){
+  isForigenOpen(data, ind, type?) {
+    if (type == 'modal') {
       this.isCountry = true;
       this.professionViewModel.isForeignCountry = true;
     }
-    else{
+    else {
       this.isCountry = true;
-    this.professionModel[ind].isForeignCountry = true;
+      this.professionModel[ind].isForeignCountry = true;
     }
-    
+
   }
-  isForigenClose(data, ind,type?) {
-    if(type=='modal'){
+  isForigenClose(data, ind, type?) {
+    if (type == 'modal') {
       this.isCountry = false;
       this.professionViewModel.isForeignCountry = false;
     }
-    else{
+    else {
       this.isCountry = false;
-    this.professionModel[ind].isForeignCountry = false;
+      this.professionModel[ind].isForeignCountry = false;
     }
-    
+
 
   }
   getrelation() {
@@ -542,8 +543,8 @@ export class DashboardComponent implements OnInit {
     })
 
   }
-  closeModal(index){
-    this.professionModel.splice(index,1);
+  closeModal(index) {
+    this.professionModel.splice(index, 1);
   }
 
 
@@ -562,8 +563,8 @@ export class DashboardComponent implements OnInit {
       buttonsStyling: false
     }).then((result) => {
       if (result.value == true) {
-       this.professionModel[0].contactNo = this.mainMob;
-      }else{
+        this.professionModel[0].contactNo = this.mainMob;
+      } else {
         this.professionModel[1].contactNo = this.mainMob;
       }
     })
@@ -616,30 +617,35 @@ export class DashboardComponent implements OnInit {
     }
   }
 
- 
+
   AddExistUser() {
-  //  this.professionModel.length=0;
-  //  this.professionModel = this.duplicateFamily;
-   if(this.familyId == this.duplicateUser.familyId){
-    // this.getOldDetails(this.mainMob);
-    $(document).ready(function () {
-      $("#DuplicateNoModalCenter").modal('show');
-    });
-  }
-  else{
-     
-    let data={
-      familyId:this.familyId,
-      oldFamilyId:this.duplicateUser.familyId,
+    let data = {
+      contactno: this.contactNoFormArray.mob,
+      otp: this.otp,
     };
-    this.dashboardService.addFamilytoNew(data).subscribe((res:any)=>{
-       
-      if(res.length>0){
-        this.familyId = res[0].familyId;
-        this.getOldDetails(this.mainMob);
-      }
-    })
-  }
+    debugger
+    //  this.professionModel.length=0;
+    //  this.professionModel = this.duplicateFamily;
+    if (this.familyId == this.duplicateUser.familyId) {
+      // this.getOldDetails(this.mainMob);
+      $(document).ready(function () {
+        $("#DuplicateNoModalCenter").modal('show');
+      });
+    }
+    else {
+
+      let data = {
+        familyId: this.familyId,
+        oldFamilyId: this.duplicateUser.familyId,
+      };
+      this.dashboardService.addFamilytoNew(data).subscribe((res: any) => {
+
+        if (res.length > 0) {
+          this.familyId = res[0].familyId;
+          this.getOldDetails(this.mainMob);
+        }
+      })
+    }
   }
   selectedprofession(name, index, type?) {
     if (type == 'modal') {
@@ -724,22 +730,22 @@ export class DashboardComponent implements OnInit {
         vip: false,
         mvip: false,
         politician: false,
-        company:'',
-        native:'',
-        businesscity:''
+        company: '',
+        native: '',
+        businesscity: ''
       }
-      this.isOpenForm=true;
+      this.isOpenForm = true;
       this.professionModel.push(data);
-      if(this.professionModelList.length==0){
-        this.confirmationForHead() ;
+      if (this.professionModelList.length == 0) {
+        this.confirmationForHead();
       }
-     
+
 
 
     }
     // this.professionModel.length = this.tot_mem;
   }
- 
+
   selectChangeHandlerForMarital(name, index, type?) {
     if (type == 'modal') {
       this.professionViewModel.maritalStatus = name;
@@ -777,15 +783,15 @@ export class DashboardComponent implements OnInit {
         mob: data.contactNo
       }
       this.dashboardService.createFamily(obj).subscribe((res: any) => {
-         
-        if(res.length ==undefined){
+
+        if (res.length == undefined) {
           this.familyId = res.insertId;
           data.familyId = this.familyId;
-        }else{
+        } else {
           this.familyId = res[0].familyId;
           data.familyId = this.familyId;
         }
-      
+
         test.push(data);
         this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
           if (res.insertId != undefined) {
@@ -793,13 +799,13 @@ export class DashboardComponent implements OnInit {
             this.professionModelList.push(data);
             this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
             this.professionModel.splice(ind, 1);
-            this.tot_mem=this.tot_mem-1;
+            this.tot_mem = this.tot_mem - 1;
           }
-          else if(res[0].msg =='added'){
+          else if (res[0].msg == 'added') {
             data.userId = res[0].userId;
             this.professionModelList.push(data);
             this.professionModel.splice(ind, 1);
-            this.tot_mem=this.tot_mem-1;
+            this.tot_mem = this.tot_mem - 1;
             this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
           }
           else {
@@ -813,10 +819,10 @@ export class DashboardComponent implements OnInit {
         mob: data.contactNo
       }
       this.dashboardService.createFamily(obj).subscribe((res: any) => {
-        if(res.length ==undefined){
+        if (res.length == undefined) {
           this.familyId = res.insertId;
           data.familyId = this.familyId;
-        }else{
+        } else {
           this.familyId = res[0].familyId;
           data.familyId = this.familyId;
         }
@@ -825,15 +831,15 @@ export class DashboardComponent implements OnInit {
           if (res.insertId != undefined) {
             data.userId = res.insertId;
             this.professionModelList.push(data);
-            this.tot_mem=this.tot_mem-1;
+            this.tot_mem = this.tot_mem - 1;
             this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
             this.professionModel.splice(ind, 1);
           }
-          else if(res[0].msg =='added'){
+          else if (res[0].msg == 'added') {
             data.userId = res[0].userId;
             this.professionModelList.push(data);
             this.professionModel.splice(ind, 1);
-            this.tot_mem=this.tot_mem-1;
+            this.tot_mem = this.tot_mem - 1;
             this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
           }
           else {
@@ -843,16 +849,16 @@ export class DashboardComponent implements OnInit {
       })
     }
     else {
-      if(this.familyId == undefined){
+      if (this.familyId == undefined) {
         let obj = {
           nooffammem: this.tot_mem,
           mob: data.contactNo
         }
         this.dashboardService.createFamily(obj).subscribe((res: any) => {
-          if(res.length ==undefined){
+          if (res.length == undefined) {
             this.familyId = res.insertId;
             data.familyId = this.familyId;
-          }else{
+          } else {
             this.familyId = res[0].familyId;
             data.familyId = this.familyId;
           }
@@ -861,15 +867,15 @@ export class DashboardComponent implements OnInit {
             if (res.insertId != undefined) {
               data.userId = res.insertId;
               this.professionModelList.push(data);
-              this.tot_mem=this.tot_mem-1;
+              this.tot_mem = this.tot_mem - 1;
               this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
               this.professionModel.splice(ind, 1);
             }
-            else if(res[0].msg =='added'){
+            else if (res[0].msg == 'added') {
               data.userId = res[0].userId;
               this.professionModelList.push(data);
               this.professionModel.splice(ind, 1);
-              this.tot_mem=this.tot_mem-1;
+              this.tot_mem = this.tot_mem - 1;
               this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
             }
             else {
@@ -877,7 +883,7 @@ export class DashboardComponent implements OnInit {
             }
           })
         })
-      }else{
+      } else {
         data.familyId = this.familyId;
         test.push(data);
         this.dashboardService.savePersonalInfo(test).subscribe((res: any) => {
@@ -885,14 +891,14 @@ export class DashboardComponent implements OnInit {
             data.userId = res.insertId;
             this.professionModelList.push(data);
             this.professionModel.splice(ind, 1);
-            this.tot_mem=this.tot_mem-1;
+            this.tot_mem = this.tot_mem - 1;
             this.apiService.showNotification('top', 'right', 'Member Added Successfully.', 'success');
           }
-          else if(res[0].msg =='added'){
+          else if (res[0].msg == 'added') {
             data.userId = res[0].userId;
             this.professionModelList.push(data);
             this.professionModel.splice(ind, 1);
-            this.tot_mem=this.tot_mem-1;
+            this.tot_mem = this.tot_mem - 1;
             this.apiService.showNotification('top', 'right', 'Member already Added.', 'success');
           }
           else {
@@ -900,36 +906,46 @@ export class DashboardComponent implements OnInit {
           }
         })
       }
-     
+
     }
 
   }
   verifyNumber(data) {
+    this.contactNoFormArray = '';
     let val = { mob: this.professionModel[data].contactNo }
+    this.contactNoFormArray = { mob: this.professionModel[data].contactNo };
     this.dashboardService.verifyNumber(val).subscribe((res: any) => {
-      if(res.length >0){
+      if (res.length > 0) {
         this.duplicateUser = res[0];
-        this.duplicateFamily =res;
+        this.duplicateFamily = res;
         this.duplicateUser.index = data;
         $(document).ready(function () {
           $("#DuplicateNoModalCenter1").modal('show');
         });
       }
-     
+
     })
   }
-  openOTPforAddUser(){
-    $(document).ready(function () {
-      $("#DuplicateNoModalCenter").modal('show');
-    });
+
+  openOTPforAddUser() {
+    let data = {
+      contactno: this.contactNoFormArray.mob
+    };
+    this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
+      this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
+      $(document).ready(function () {
+        $("#DuplicateNoModalCenter").modal('show');
+      });
+    })
+
   }
 
   openViewInfo(data) {
-      this.professionViewModel = data;
-      $(document).ready(function () {
-        $("#editCustomerModal").modal('show');
-      });
-    
+    this.professionViewModel = data;
+    $(document).ready(function () {
+      $("#editCustomerModal").modal('show');
+    });
+
   }
   updateHaribhaktInfo(data) {
     if (this.professionViewModel.general == true) {
