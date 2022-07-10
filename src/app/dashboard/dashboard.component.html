@@ -2147,6 +2147,33 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="DuplicateNoModalCenterforUpdate" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <br />
+                <h5 class="modal-title text-center">
+                    <small class="text-muted">Enter otp to Update Information</small>
+                </h5>
+                <div class="modal-body">
+                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                        <input type="text" class="form-control" [(ngModel)]="updateotp" name="otp" />
+                    </div>
+                    <!-- <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
+                    <div [hidden]="!family.errors('pattern')">
+                        Enter Valid Numbers
+                    </div>
+                </div> -->
+                </div>
+                <div class="ml-md-auto">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal"
+                        (click)="verifyandupdate()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card" *ngIf="1==2">
         <div class="card-body">
             <h6 class="text-center" id="satsang">Satsang Details</h6>
