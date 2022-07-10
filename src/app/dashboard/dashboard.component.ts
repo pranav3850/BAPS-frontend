@@ -673,8 +673,8 @@ export class DashboardComponent implements OnInit {
         this.apiService.showNotification('top', 'right', 'Something is wrong please try again.', 'danger');
       } else {
         let test = {
-          familyId: this.familyId,
-          oldFamilyId: this.duplicateUser.familyId
+          familyId: this.duplicateUser.familyId,
+          oldFamilyId: this.familyId
         }
         this.dashboardService.addFamilytoNew(test).subscribe((res: any) => {
           if (res.length > 0) {
