@@ -169,7 +169,7 @@ var LoginComponent = /** @class */ (function () {
         this.loginModel = new _login_model__WEBPACK_IMPORTED_MODULE_5__["Loginuser"];
         this.OTPSent = false;
         this.submitButton = true;
-        this.timeLeft = 120;
+        this.timeLeft = 300;
         this.account_validation_messages = {
             'email': [
                 { type: 'required', message: 'Email is required' },
@@ -259,17 +259,23 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.verifyOTPFromUser = function () {
         var _this = this;
+        debugger;
         var data = {
             contactno: this.loginModel.pno,
             otp: this.loginModel.otp
         };
-        this.dashboardService.verifyUserOTP(data).subscribe(function (data) {
-            if (data.length == 1) {
-                _this.apiService.showNotification('top', 'right', 'OTP Verified Successfully.', 'success');
-                _this.gotodashboard();
+        this.dashboardService.verifyUserOTP(data).subscribe(function (res) {
+            debugger;
+            if (res == 'wrong') {
+                _this.apiService.showNotification('top', 'right', 'OTP does not Match Please try Again.', 'danger');
+            }
+            else if (res == 'err') {
+                _this.apiService.showNotification('top', 'right', 'Something is wrong please try again.', 'danger');
             }
             else {
-                _this.apiService.showNotification('top', 'right', 'OTP and Number is does not Match Please resend OTP.', 'danger');
+                _this.apiService.showNotification('top', 'right', 'OTP Verified Successfully.', 'success');
+                _this.dashboardService.removeLastInsertedOTP(data).subscribe();
+                _this.gotodashboard();
             }
         });
     };

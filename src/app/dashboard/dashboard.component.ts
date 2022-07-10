@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
   bloodGroupDataList: any = [];
   maratialData: any = [];
   isOpenForm: boolean = false;
-
+  updateotp:any;
   haribhaktTagsdata: any = [];
   updateHariDetail: any = [];
 
@@ -202,19 +202,58 @@ export class DashboardComponent implements OnInit {
       $("#editCustomerModal").modal('show');
     });
   }
-  updateHarbhakatDetailsById() {
-    let data = [];
-    data.push(this.professionViewModel);
-    this.dashboardService.updatePersonalInfo(data).subscribe((res: any) => {
+  verifyandupdate() {
+    let data = {
+      contactno: this.professionViewModel.contactNo,
+      otp: this.updateotp,
+    };
+    this.dashboardService.verifyUserOTP(data).subscribe((res: any) => {
+      if (res == 'wrong') {
+        this.apiService.showNotification('top', 'right', 'OTP does not Match Please try Again.', 'danger');
+        $(document).ready(function () {
+          $("#DuplicateNoModalCenterforUpdate").modal('show');
+        });
 
-      if (res != 'success') {
-        this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
+      } else if (res == 'err') {
+        this.apiService.showNotification('top', 'right', 'Something is wrong please try again.', 'danger');
       } else {
-        this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
+        this.dashboardService.updatePersonalInfo(this.professionViewModel).subscribe((res: any) => {
+          if (res != 'success') {
+            this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
+          } else {
+            this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
+          }
+          this.dashboardService.removeLastInsertedOTP(data).subscribe();
+        });
+
       }
-    });
+    })
 
-
+  }
+  updateHarbhakatDetailsById() {
+    if(this.Role == undefined){
+      let data = {
+        contactno: this.professionViewModel.contactNo
+      };
+      this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
+        if (data == 'sent') {
+          this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
+          $(document).ready(function () {
+            $("#DuplicateNoModalCenterforUpdate").modal('show');
+          });
+        }
+      })
+    }else{
+      this.dashboardService.updatePersonalInfo(this.professionViewModel).subscribe((res: any) => {
+        if (res != 'success') {
+          this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
+        } else {
+          this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
+        }
+       
+      });
+    }
+   
   }
   removeItem(i) {
     this.dashboardModelarr.splice(i, 1);
@@ -620,20 +659,40 @@ export class DashboardComponent implements OnInit {
 
   AddExistUser() {
     let data = {
-      contactno: this.contactNoFormArray.mob,
+      contactno: this.duplicateUser.contactNo,
       otp: this.otp,
     };
-    this.dashboardService.addFamilytoNew(data).subscribe((res:any)=>{
-       
-      debugger
-      if(res.length>0){
-        this.familyId = res[0].familyId;
-        let data={mob:this.mainMob};
-        this.getOldDetails(data);
+    this.dashboardService.verifyUserOTP(data).subscribe((res: any) => {
+      if (res == 'wrong') {
+        this.apiService.showNotification('top', 'right', 'OTP does not Match Please try Again.', 'danger');
+        $(document).ready(function () {
+          $("#DuplicateNoModalCenter").modal('show');
+        });
+
+      } else if (res == 'err') {
+        this.apiService.showNotification('top', 'right', 'Something is wrong please try again.', 'danger');
+      } else {
+        let test = {
+          familyId: this.duplicateUser.familyId,
+          oldFamilyId: this.familyId
+        }
+        this.dashboardService.addFamilytoNew(test).subscribe((res: any) => {
+          if (res.length > 0) {
+            this.familyId = res[0].familyId;
+            let data = { mob: this.mainMob };
+            this.apiService.showNotification('top', 'right', 'Family added successfully.', 'success');
+            this.getOldDetails(data);
+            this.dashboardService.removeLastInsertedOTP(data).subscribe();
+          }
+        })
+
+
       }
     })
+
+
   }
-  
+
   selectedprofession(name, index, type?) {
     if (type == 'modal') {
       this.professionViewModel.profession = name;
@@ -901,7 +960,8 @@ export class DashboardComponent implements OnInit {
     this.contactNoFormArray = '';
     let val = { mob: this.professionModel[data].contactNo }
     this.dashboardService.verifyNumber(val).subscribe((res: any) => {
-      if(res.length >0){
+
+      if (res.length > 0) {
         this.duplicateUser = res[0];
         this.duplicateFamily = res;
         this.duplicateUser.index = data;
@@ -914,14 +974,19 @@ export class DashboardComponent implements OnInit {
   }
 
   openOTPforAddUser() {
+    debugger
     let data = {
-      contactno: this.contactNoFormArray.mob
+      contactno: this.duplicateUser.contactNo
     };
     this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
-      this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
-      $(document).ready(function () {
-        $("#DuplicateNoModalCenter").modal('show');
-      });
+      debugger
+      if (data == 'sent') {
+        this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
+        $(document).ready(function () {
+          $("#DuplicateNoModalCenter").modal('show');
+        });
+      }
+
     })
 
   }

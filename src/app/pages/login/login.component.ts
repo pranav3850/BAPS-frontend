@@ -149,6 +149,7 @@ export class LoginComponent implements OnInit {
                 this.apiService.showNotification('top', 'right', 'Something is wrong please try again.', 'danger');
             } else {
                 this.apiService.showNotification('top', 'right', 'OTP Verified Successfully.', 'success');
+                this.dashboardService.removeLastInsertedOTP(data).subscribe();
                 this.gotodashboard();
             }
         })
