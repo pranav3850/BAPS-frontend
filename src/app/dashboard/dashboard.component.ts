@@ -77,9 +77,12 @@ export class DashboardComponent implements OnInit {
   bloodGroupDataList: any = [];
   maratialData: any = [];
   isOpenForm: boolean = false;
-  updateotp:any;
+  updateotp: any;
   haribhaktTagsdata: any = [];
   updateHariDetail: any = [];
+  public timeLeft: number = 120;
+  interval: any;
+
 
   constructor(
     private dashboardService: DashboardService,
@@ -182,6 +185,8 @@ export class DashboardComponent implements OnInit {
   }
   viewEditHaribhakatDetails(data) {
     this.professionViewModel = data;
+    debugger
+    
     this.professionViewModel.general = false;
     this.professionViewModel.medium = false;
     this.professionViewModel.vip = false;
@@ -224,11 +229,24 @@ export class DashboardComponent implements OnInit {
     })
 
   }
+  resendUpdateOTP() {
+    let data = {
+      contactno: this.professionViewModel.contactNo
+    };
+    this.dashboardService.removeLastInsertedOTP(data).subscribe((data: any) => {
+      this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
+      this.timeLeft = 120;
+      this.startTimer();
+
+    })
+  }
   updateHarbhakatDetailsById() {
-    if(this.Role == undefined){
+    if (this.Role == undefined) {
       let data = {
         contactno: this.professionViewModel.contactNo
       };
+      this.startTimer();
+
       this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
         if (data == 'sent') {
           this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
@@ -237,17 +255,17 @@ export class DashboardComponent implements OnInit {
           });
         }
       })
-    }else{
+    } else {
       this.dashboardService.updatePersonalInfo(this.professionViewModel).subscribe((res: any) => {
         if (res != 'success') {
           this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
         } else {
           this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
         }
-       
+
       });
     }
-   
+
   }
   removeItem(i) {
     this.dashboardModelarr.splice(i, 1);
@@ -649,7 +667,26 @@ export class DashboardComponent implements OnInit {
       })
     }
   }
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft == 0) {
+        clearInterval(this.interval);
+      } else {
+        this.timeLeft--;
+      }
+    }, 1000)
+  }
+  resendOTP() {
+    let data = {
+      contactno: this.duplicateUser.contactNo,
+    };
+    this.dashboardService.removeLastInsertedOTP(data).subscribe((data: any) => {
+      this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
+      this.timeLeft = 120;
+      this.startTimer();
 
+    })
+  }
 
   AddExistUser() {
     let data = {
@@ -972,6 +1009,7 @@ export class DashboardComponent implements OnInit {
     let data = {
       contactno: this.duplicateUser.contactNo
     };
+    this.startTimer();
     this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
       debugger
       if (data == 'sent') {
@@ -987,6 +1025,14 @@ export class DashboardComponent implements OnInit {
 
   openViewInfo(data) {
     this.professionViewModel = data;
+    debugger
+    // if(this.professionViewModel.isForeignCountry==true){
+    //   this.isForigenOpen(true);
+    // }
+    // else{
+    //   this.isForigenClose(false);
+
+    // }
     $(document).ready(function () {
       $("#editCustomerModal").modal('show');
     });

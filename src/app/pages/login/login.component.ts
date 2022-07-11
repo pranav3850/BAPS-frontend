@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
     public otp: any;
     public OTPSent: boolean = false;
     public submitButton: boolean = true;
-    public timeLeft: number = 300;
-    public retimeLeft: number = 300;
+    public timeLeft: number = 120;
     interval: any;
     account_validation_messages = {
         'email': [
@@ -112,22 +111,14 @@ export class LoginComponent implements OnInit {
             }
         }, 1000)
     }
-    restartTimer() {
-        this.interval = setInterval(() => {
-            if (this.retimeLeft == 0) {
-                clearInterval(this.interval);
-            } else {
-                this.retimeLeft--;
-            }
-        }, 1000)
-    }
     resendOTP() {
         let data = {
             contactno: this.loginModel.pno,
         };
         this.dashboardService.removeLastInsertedOTP(data).subscribe((data: any) => {
             this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
-            this.restartTimer();
+            this.timeLeft=120;
+            this.startTimer();
             this.verifybox();
 
         })
