@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     public OTPSent: boolean = false;
     public submitButton: boolean = true;
     public timeLeft: number = 300;
+    public retimeLeft: number = 300;
     interval: any;
     account_validation_messages = {
         'email': [
@@ -111,33 +112,42 @@ export class LoginComponent implements OnInit {
             }
         }, 1000)
     }
+    restartTimer() {
+        this.interval = setInterval(() => {
+            if (this.retimeLeft == 0) {
+                clearInterval(this.interval);
+            } else {
+                this.retimeLeft--;
+            }
+        }, 1000)
+    }
     resendOTP() {
         let data = {
             contactno: this.loginModel.pno,
         };
         this.dashboardService.removeLastInsertedOTP(data).subscribe((data: any) => {
-             this.verifybox();
+            this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
+            this.restartTimer();
+            this.verifybox();
+
         })
     }
     gotodashboard() {
         localStorage.setItem('mob', this.loginModel.pno);
         this.router.navigate(['dashboard']);
     }
-    verifyOTPFromUser(){
-        debugger
+    verifyOTPFromUser() {
         let data = {
             contactno: this.loginModel.pno,
-            otp:this.loginModel.otp
+            otp: this.loginModel.otp
         };
-        this.dashboardService.verifyUserOTP(data).subscribe((res:any)=>{
-           debugger
-            
-             if(res == 'wrong'){
+        this.dashboardService.verifyUserOTP(data).subscribe((res: any) => {
+             if (res == 'wrong') {
                 this.apiService.showNotification('top', 'right', 'OTP does not Match Please try Again.', 'danger');
 
-            }else if(res =='err'){
+            } else if (res == 'err') {
                 this.apiService.showNotification('top', 'right', 'Something is wrong please try again.', 'danger');
-            }else{
+            } else {
                 this.apiService.showNotification('top', 'right', 'OTP Verified Successfully.', 'success');
                 this.dashboardService.removeLastInsertedOTP(data).subscribe();
                 this.gotodashboard();
