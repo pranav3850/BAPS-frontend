@@ -5,8 +5,8 @@ declare var $: any;
   providedIn: 'root'
 })
 export class ApiService {
-  public static HOST_URL: string = "http://localhost:8090";
-  // public static HOST_URL: string = "http://31.220.111.153:8090";
+  // public static HOST_URL: string = "http://localhost:8090";
+  public static HOST_URL: string = "http://31.220.111.153:8090";
 
 
   constructor(

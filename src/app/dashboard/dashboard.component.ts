@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   public mandalModel: Mandal[] = [];
   public relationModel: Relation[] = [];
   public memberlist;
-  tot_mem: number = 1;
+  tot_mem: number = 0;
 
   Role: any;
   relationList;
@@ -88,8 +88,7 @@ export class DashboardComponent implements OnInit {
   ) {
     this.Role = localStorage.getItem('role');
     this.mainMob = localStorage.getItem('mob');
-    // this.avctivatedroute.queryParams.subscribe((res: any) => {
-    //   this.mainMob = res.mob;
+    this.tot_mem = 0;
     let obj = {
       mob: this.mainMob
     }
@@ -99,11 +98,6 @@ export class DashboardComponent implements OnInit {
 
 
     this.formdate
-
-
-
-    // })
-    this.tot_mem = 0;
     this.professionList = [
       { name: 'Job' },
       { name: 'Business' },
