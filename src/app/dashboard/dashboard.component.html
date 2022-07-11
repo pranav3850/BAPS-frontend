@@ -600,7 +600,7 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="city" city="city"
                                         [(ngModel)]="professionViewModel.city" placeholder=" Enter city " required
-                                        value="" pattern="^[a-zA-Z]+$" (focus)="focus = true" #city="ngModel"
+                                        value="" pattern="^[a-zA-Z ]+$" (focus)="focus = true" #city="ngModel"
                                         [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="city.errors && (city.dirty || city.touched)" class="alert alert-danger">
@@ -743,8 +743,9 @@
                                     <!-- <input type="text" class="form-control" placeholder=" Enter Native Place "
                                         [ngModelOptions]="{standalone: true}"> -->
                                     <input type="text" class="form-control" id="native" name="native"
-                                        [(ngModel)]="professionViewModel.native" placeholder="Enter Native Place" required
-                                        value="" [ngModelOptions]="{standalone: true}" pattern="[A-Za-z ]{1,32}">
+                                        [(ngModel)]="professionViewModel.native" placeholder="Enter Native Place"
+                                        required value="" [ngModelOptions]="{standalone: true}"
+                                        pattern="[A-Za-z ]{1,32}">
                                 </div>
 
                             </div>
@@ -1054,9 +1055,8 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="foreignContact"
                                         [(ngModel)]="professionViewModel.foreignContact" name="foreignContact"
-                                        placeholder="Enter Foreign  Number" required value="" pattern="^[0-9].{9,9}$"
-                                        (focus)="focus = true" #foreignContact="ngModel"
-                                        [ngModelOptions]="{standalone: true}" />
+                                        placeholder="Enter Foreign  Number" required value="" (focus)="focus = true"
+                                        #foreignContact="ngModel" [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="foreignContact.errors && (foreignContact.dirty || foreignContact.touched)"
                                     class="alert alert-danger">
@@ -1336,7 +1336,7 @@
                     <h4 class="card-title" style="margin-top: 10px !important;">Registered Members List</h4>
                 </div>
 
-                <div class="col-md-3 ml-md-auto">
+                <div class=" ml-md-auto">
                     <button type="submit" class="btn btn-info btn-round" (click)="newUser()">
                         <i class="fa fa-plus" aria-hidden="true"></i> Add New Members
                     </button>
@@ -1348,18 +1348,18 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead class="text-primary">
-                        <th class="text-left">#</th>
+                        <th class="text-center">#</th>
                         <th class="text-center">progress</th>
-                        <th class="text-left">Name</th>
-                        <th class="text-left">Contact No</th>
-                        <th class="text-left">Mandal</th>
-                        <th class="text-left">Relation</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Contact No</th>
+                        <th class="text-center">Mandal</th>
+                        <th class="text-center">Relation</th>
+                        <th class="text-right">Actions</th>
                     </thead>
                     <tbody>
                         <tr
                             *ngFor="let item of professionModelList |  paginate: { id:'listing_pagination',itemsPerPage: 5, currentPage: page,totalItems:strpArray.length };let ind=index">
-                            <td class="text-left">{{ind+1}}</td>
+                            <td class="text-center">{{ind+1}}</td>
                             <td class="text-center">
                                 <i class="fa fa-circle text-danger" style="font-size: large;" aria-hidden="true"
                                     *ngIf="item.status==1"></i>
@@ -1368,11 +1368,11 @@
                                 <i class="fa fa-circle text-sucess" style="font-size: large;" aria-hidden="true"
                                     *ngIf="item.status==3"></i>
                             </td>
-                            <td class="text-left">{{item.firstName}} {{item.middleName}} {{item.lastName}}</td>
-                            <td class="text-left">{{item.contactNo}}</td>
-                            <td class="text-left">{{ item.mandalType }}-{{item.mandalName}}</td>
-                            <td class="text-left">{{item.relationship}}</td>
-                            <td class="text-center">
+                            <td class="text-center">{{item.firstName}} {{item.middleName}} {{item.lastName}}</td>
+                            <td class="text-center">{{item.contactNo}}</td>
+                            <td class="text-center">{{ item.mandalType }}-{{item.mandalName}}</td>
+                            <td class="text-center">{{item.relationship}}</td>
+                            <td class="text-right">
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                     <i class="fa fa-eye" (click)="openViewInfo(item)"></i>
                                 </button> &nbsp;&nbsp;
@@ -1741,8 +1741,9 @@
                                     <!-- <input type="text" class="form-control" placeholder=" Enter Native Place "
                                         [ngModelOptions]="{standalone: true}"> -->
                                     <input type="text" class="form-control" id="native" name="native"
-                                        [(ngModel)]="professionViewModel.native" placeholder="Enter Native Place" required
-                                        value="" [ngModelOptions]="{standalone: true}" pattern="[A-Za-z ]{1,32}">
+                                        [(ngModel)]="professionViewModel.native" placeholder="Enter Native Place"
+                                        required value="" [ngModelOptions]="{standalone: true}"
+                                        pattern="[A-Za-z ]{1,32}">
                                 </div>
 
                             </div>
@@ -2043,9 +2044,8 @@
                                 <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
                                     <input type="text" class="form-control" id="foreignContact"
                                         [(ngModel)]="item.foreignContact" name="foreignContact"
-                                        placeholder="Enter Foreign  Number" required value="" pattern="^[0-9].{9,9}$"
-                                        (focus)="focus = true" #foreignContact="ngModel"
-                                        [ngModelOptions]="{standalone: true}" />
+                                        placeholder="Enter Foreign  Number" required value="" (focus)="focus = true"
+                                        #foreignContact="ngModel" [ngModelOptions]="{standalone: true}" />
                                 </div>
                                 <div *ngIf="foreignContact.errors && (foreignContact.dirty || foreignContact.touched)"
                                     class="alert alert-danger">
@@ -2074,28 +2074,43 @@
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <br />
-                <h5 class="modal-title text-center">
-                    Add Number of Family Members
-                    <br>
-                    <small class="text-muted">(Including You)</small>
-                </h5>
+                <div class="modal-header">
+                    <h5 class="modal-title text-center">
+                        Add Number of Family Members
+                        <br>
+                        <small class="text-muted" style="font-weight: 600;">(Including You)</small>
+                    </h5>
+                </div>
                 <div class="modal-body">
-                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                        <input type="number" class="form-control" id="noofmem" [(ngModel)]="tot_mem" name="noofmem"
-                            value="" pattern="[0-9]{0,10}" placeholder="Enter Total Numbers Of Members"
-                            (focus)="focus = true" #noofmem="ngModel" autofocus />
-                    </div>
-                    <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
-                        <div [hidden]="!family.errors('pattern')">
-                            Enter Valid Numbers
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="col-form-label" style="font-weight: 600;">
+                                Enter Numbers Of Member
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                <input type="number" class="form-control" id="noofmem" [(ngModel)]="tot_mem"
+                                    name="noofmem" value="" pattern="[0-9]{0,2}"
+                                    placeholder="Enter Total Numbers Of Members" (focus)="focus = true"
+                                    #noofmem="ngModel" autofocus />
+                            </div>
+                            <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
+                                <div [hidden]="!family.errors('pattern')">
+                                    At a Time Only max 10 family member add.
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-                <div class="ml-md-auto">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="AddMoreMember()">Save
-                        changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!tot_mem"
+                            (click)="AddMoreMember()">Save
+                            changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger"
+                            data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;
+
                 </div>
             </div>
         </div>
@@ -2105,18 +2120,31 @@
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <br />
-                <h6 class="modal-title text-center">
-                    Family with this Contact number is registered Already
-                    <br />
+                <div class="modal-header">
+                    <h6 class="modal-title ">
+                        Family with this Contact number is registered Already !
+                    </h6>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                (click)="openOTPforAddUser()">Do
+                                you want to add them?</button>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                            <h3>OR</h3>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">You want to create
+                                new?</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
 
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="openOTPforAddUser()">Do
-                        you want to add them?</button><br />
-                    <h3>OR</h3>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">You want to create new?</button>
-                </h6>
-
-
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -2125,24 +2153,41 @@
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <br />
-                <h5 class="modal-title text-center">
-                    <small class="text-muted">Enter otp to add in family</small>
-                </h5>
-                <div class="modal-body">
-                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                        <input type="text" class="form-control" [(ngModel)]="otp" name="otp" />
-                    </div>
-                    <!-- <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
-                    <div [hidden]="!family.errors('pattern')">
-                        Enter Valid Numbers
-                    </div>
-                </div> -->
+                <div class="modal-header">
+                    <h5 class="modal-title text-center">
+                        <small class="text-muted">Enter OTP to add into family.</small>
+                    </h5>
                 </div>
-                <div class="ml-md-auto">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal"
-                        (click)="AddExistUser()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                <input type="text" class="form-control" placeholder="Enter OTP" [(ngModel)]="otp"
+                                    name="otp" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="link d-flex justify-content-center" style="padding-top:10px ;color:blue;">
+                                <a>
+                                    <h5><strong>Resend OTP in: </strong>{{timeLeft}}</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <button class="btn btn-warning" *ngIf="timeLeft==0" (click)="resendOTP()">Resend</button>
+                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!otp"
+                                (click)="AddExistUser()">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2152,24 +2197,49 @@
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <br />
-                <h5 class="modal-title text-center">
-                    <small class="text-muted">Enter otp to Update Information</small>
-                </h5>
-                <div class="modal-body">
-                    <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
-                        <input type="text" class="form-control" [(ngModel)]="updateotp" name="otp" />
-                    </div>
-                    <!-- <div *ngIf="noofmem.errors && noofmem.dirty " class="alert alert-danger">
-                    <div [hidden]="!family.errors('pattern')">
-                        Enter Valid Numbers
-                    </div>
-                </div> -->
+                <div class="modal-header">
+                    <h5 class="modal-title text-center">
+                        <small class="text-muted">Enter OTP to Update Information</small>
+                    </h5>
                 </div>
-                <div class="ml-md-auto">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal"
-                        (click)="verifyandupdate()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="col-form-label" style="font-weight: 600;">
+                                Enter OTP for Update Info
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                            <div class="form-group" [ngClass]="{ 'form-group-focus': focus === true }">
+                                <input type="text" placeholder="Enter OTP" class="form-control" [(ngModel)]="updateotp"
+                                    name="otp" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="link d-flex justify-content-center" style="padding-top:10px ;color:blue;">
+                                <a>
+                                    <h5><strong>Resend OTP in: </strong>{{timeLeft}}</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <button class="btn btn-warning" *ngIf="timeLeft==0"
+                                (click)="resendUpdateOTP()">Resend</button>
+                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!updateotp"
+                                (click)="verifyandupdate()">Submit</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
