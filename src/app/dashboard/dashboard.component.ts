@@ -154,6 +154,7 @@ export class DashboardComponent implements OnInit {
     this.getMandalType();
   }
   getOldDetails(data) {
+    debugger
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
 
       if (res != 'no family' && res.length > 0) {
@@ -363,8 +364,14 @@ export class DashboardComponent implements OnInit {
           buttonsStyling: false
         }).then((result) => {
           if (result.value == true) {
-            this.dashboardService.removeHaribhaktDetails(id).subscribe((req) => {
-              this.apiService.showNotification('top', 'right', 'Offer removed Successfully.', 'success');
+            this.dashboardService.removeHaribhaktDetails(id).subscribe((res:any) => {
+              if(res =='success'){
+                let data={mob:this.mainMob}
+                this.getOldDetails(data);
+                this.apiService.showNotification('top', 'right', 'Offer removed Successfully.', 'success');
+              }
+           
+            
 
             })
             Swal.fire(
@@ -674,8 +681,12 @@ export class DashboardComponent implements OnInit {
           if (res.length > 0) {
             this.familyId = res[0].familyId;
             let data = { mob: this.mainMob };
+            this.professionModel = this.duplicateFamily;
+            this.professionModel.forEach((element:any)=>{
+              element.title ='update relation';
+            })
             this.apiService.showNotification('top', 'right', 'Family added successfully.', 'success');
-            this.getOldDetails(data);
+            // this.getOldDetails(data);
             this.dashboardService.removeLastInsertedOTP(data).subscribe();
           }
         })
@@ -817,7 +828,7 @@ export class DashboardComponent implements OnInit {
     data.tag = 'General';
     data.prepareIelts = false;
 
-    if (data.relationship == 'Father') {
+    if (data.relationship == 'Father' && this.familyId ==undefined) {
       let obj = {
         nooffammem: this.tot_mem,
         mob: data.contactNo
