@@ -5,8 +5,8 @@ declare var $: any;
   providedIn: 'root'
 })
 export class ApiService {
-  public static HOST_URL: string = "http://localhost:8090";
-  // public static HOST_URL: string = "http://31.220.111.153:8090";
+  // public static HOST_URL: string = "http://localhost:8090";
+  public static HOST_URL: string = "http://31.220.111.153:8090";
 
 
   constructor(
@@ -52,6 +52,7 @@ export class ApiService {
   public static SaveAndSendOTPURL: string = ApiService.HOST_URL + '/admin/sendAndSaveUserOTP';
   public static removeLastInsertedOTPURL: string = ApiService.HOST_URL + '/admin/removeLastInsertedOTP';
   public static getUserOTPVerifyURL: string = ApiService.HOST_URL + '/admin/getUserOTPVerify';
+  public static updateFamilyCountURL: string = ApiService.HOST_URL+'/admin/updateFamilyCount';
   showNotification(from, align, msg, color) {
     var color = color;
     $.notify({

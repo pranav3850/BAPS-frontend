@@ -1398,9 +1398,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-11 col-sm-11 col-xl-11 col-lg-11">
-                            <h5 class="text-center" *ngIf="ind==0">Add Details For Head of the Family first</h5>
-                            <h5 class="text-center" *ngIf="ind==1">Add Your details</h5>
-                            <h5 class="text-center" *ngIf="ind>1">Add details for Member {{ind+1}}</h5>
+                            <h5 class="text-center" *ngIf="item.index==0 && item.title==undefined">Add Details For Head of the Family first</h5>
+                            <h5 class="text-center" *ngIf="item.index==1 && item.title==undefined">Add Your details</h5>
+                            <h5 class="text-center" *ngIf="item.index>1 && item.title==undefined">Add details for Member {{ind+1}}</h5>
+                            <h6 class="text-danger text-center" *ngIf="item.title=='update relation'">Please Update your relation </h6>
                         </div>
                         <div class="col-md-1 col-sm-1 col-xl-1 col-lg-1">
                             <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm"

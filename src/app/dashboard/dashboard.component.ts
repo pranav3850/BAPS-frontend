@@ -80,14 +80,13 @@ export class DashboardComponent implements OnInit {
   updateotp: any;
   haribhaktTagsdata: any = [];
   updateHariDetail: any = [];
-  public timeLeft: number = 120;
+   timeLeft: number = 120;
   interval: any;
 
 
   constructor(
     private dashboardService: DashboardService,
     private apiService: ApiService,
-    private avctivatedroute: ActivatedRoute
   ) {
     this.Role = localStorage.getItem('role');
     this.mainMob = localStorage.getItem('mob');
@@ -159,12 +158,17 @@ export class DashboardComponent implements OnInit {
   getOldDetails(data) {
     debugger
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
-
+      debugger
+      this.tot_mem = res[0].nooffamily - res.length;
       if (res != 'no family' && res.length > 0) {
         this.familyId = res[0].familyId;
         this.professionModelList = res;
         this.isOpenForm = false;
         this.oldUser = true;
+        // this.professionModel.length = this.tot_mem;
+        if(this.tot_mem>0){
+          this.AddMoreMember();
+        }
       } else {
         this.newUser()
       }
@@ -203,8 +207,9 @@ export class DashboardComponent implements OnInit {
     });
   }
   verifyandupdate() {
+    this.timeLeft=120;
     let data = {
-      contactno: this.professionViewModel.contactNo,
+      contactno: this.professionViewModel.oldno,
       otp: this.updateotp,
     };
     this.dashboardService.verifyUserOTP(data).subscribe((res: any) => {
@@ -243,11 +248,11 @@ export class DashboardComponent implements OnInit {
   }
   updateHarbhakatDetailsById() {
     if (this.Role == undefined) {
+      this.timeLeft=120;
       let data = {
-        contactno: this.professionViewModel.contactNo
+        contactno: this.professionViewModel.oldno
       };
       this.startTimer();
-
       this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
         if (data == 'sent') {
           this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
@@ -787,6 +792,7 @@ export class DashboardComponent implements OnInit {
   }
 
   AddMoreMember() {
+    
     for (let i = 0; i < this.tot_mem; i++) {
       let data = {
         contactNo: 0,
@@ -827,10 +833,11 @@ export class DashboardComponent implements OnInit {
       if (this.professionModelList.length == 0) {
         this.confirmationForHead();
       }
-
-
-
     }
+    this.professionModel.forEach((ele,ind)=>{
+      debugger
+      ele.index = ind;
+    })
     // this.professionModel.length = this.tot_mem;
   }
 
@@ -1004,7 +1011,11 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.verifyNumber(val).subscribe((res: any) => {
 
       if (res.length > 0) {
-        this.duplicateUser = res[0];
+        res.forEach((element:any)=>{
+          if(element.contactNo == this.professionModel[data].contactNo){
+            this.duplicateUser = element;
+          }
+        })
         this.duplicateFamily = res;
         this.duplicateUser.index = data;
         $(document).ready(function () {
@@ -1036,6 +1047,7 @@ export class DashboardComponent implements OnInit {
 
   openViewInfo(data) {
     this.professionViewModel = data;
+    this.professionViewModel.oldno = this.professionViewModel.contactNo;
     debugger
     // if(this.professionViewModel.isForeignCountry==true){
     //   this.isForigenOpen(true);

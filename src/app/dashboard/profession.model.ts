@@ -43,7 +43,8 @@ export class Profession {
         public politician?:boolean,
         public company?:string,
         public native?:string,
-        public businesscity?:string
+        public businesscity?:string,
+        public oldno?:number
     
     ){}
 }

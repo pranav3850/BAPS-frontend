@@ -28,7 +28,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var app_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/api.service */ "yTNM");
-/* harmony import */ var app_pages_login_login_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! app/pages/login/login.service */ "fxZ6");
+/* harmony import */ var app_dashboard_dashboard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! app/dashboard/dashboard.service */ "QAUA");
+/* harmony import */ var app_pages_login_login_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! app/pages/login/login.service */ "fxZ6");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,6 +39,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -74,10 +76,11 @@ var Employee = [
 
 */
 var SidebarComponent = /** @class */ (function () {
-    function SidebarComponent(router, loginService, apiService) {
+    function SidebarComponent(router, loginService, apiService, dashboardService) {
         this.router = router;
         this.loginService = loginService;
         this.apiService = apiService;
+        this.dashboardService = dashboardService;
         this.Rolees = localStorage.getItem("role");
         this.userName = localStorage.getItem("UserName");
     }
@@ -103,6 +106,15 @@ var SidebarComponent = /** @class */ (function () {
     SidebarComponent.prototype.ngAfterViewInit = function () {
     };
     SidebarComponent.prototype.logout = function () {
+        if (localStorage.getItem('role') == undefined) {
+            debugger;
+            var mob = localStorage.getItem('mob');
+            var data = {
+                mob: mob
+            };
+            debugger;
+            this.dashboardService.updateFamilyCount(data).subscribe(function (res) { });
+        }
         localStorage.clear();
         this.router.navigate(['pages/login']);
         // this.loginTimeCalculation();
@@ -138,8 +150,9 @@ var SidebarComponent = /** @class */ (function () {
     };
     SidebarComponent.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-        { type: app_pages_login_login_service__WEBPACK_IMPORTED_MODULE_4__["LoginService"] },
-        { type: app_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] }
+        { type: app_pages_login_login_service__WEBPACK_IMPORTED_MODULE_5__["LoginService"] },
+        { type: app_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+        { type: app_dashboard_dashboard_service__WEBPACK_IMPORTED_MODULE_4__["DashboardService"] }
     ]; };
     SidebarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -147,8 +160,9 @@ var SidebarComponent = /** @class */ (function () {
             template: _raw_loader_sidebar_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            app_pages_login_login_service__WEBPACK_IMPORTED_MODULE_4__["LoginService"],
-            app_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]])
+            app_pages_login_login_service__WEBPACK_IMPORTED_MODULE_5__["LoginService"],
+            app_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"],
+            app_dashboard_dashboard_service__WEBPACK_IMPORTED_MODULE_4__["DashboardService"]])
     ], SidebarComponent);
     return SidebarComponent;
 }());
@@ -557,6 +571,138 @@ var FixedPluginComponent = /** @class */ (function () {
         })
     ], FixedPluginComponent);
     return FixedPluginComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "QAUA":
+/*!************************************************!*\
+  !*** ./src/app/dashboard/dashboard.service.ts ***!
+  \************************************************/
+/*! exports provided: DashboardService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardService", function() { return DashboardService; });
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var app_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/api.service */ "yTNM");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DashboardService = /** @class */ (function () {
+    function DashboardService(httpClient) {
+        this.httpClient = httpClient;
+    }
+    DashboardService.prototype.getMandalList = function (type) {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getMandalListURL + type);
+    };
+    DashboardService.prototype.getAllMandalList = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllMandalListURL);
+    };
+    DashboardService.prototype.getAllFamilyList = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllFamilyListURL);
+    };
+    DashboardService.prototype.getAllMandaltypeList = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllMandalTypeListURL);
+    };
+    DashboardService.prototype.getAllRelationList = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllRelationListURL);
+    };
+    DashboardService.prototype.saveData = function (admin) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].saveMemberListURL, admin);
+    };
+    DashboardService.prototype.getSavedMembersList = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllSavedMembersListURL);
+    };
+    DashboardService.prototype.getAllHaribhakt = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllHaribhaktURL);
+    };
+    DashboardService.prototype.saveProffesionInfo = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].SaveProffesionInfoURL, data);
+    };
+    DashboardService.prototype.saveAndSendOtp = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].SaveAndSendOTPURL, data);
+    };
+    DashboardService.prototype.updateProffesionInfo = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updateProffesionInfoURL, data);
+    };
+    DashboardService.prototype.updatePersonalInfo = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updatePersonalInfoURL, data);
+    };
+    DashboardService.prototype.getRedtickCount = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getRedtickCountURL);
+    };
+    DashboardService.prototype.getYellowtickCount = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getYellowtickCountURL);
+    };
+    DashboardService.prototype.getGreentickCount = function () {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getGreentickCountURL);
+    };
+    DashboardService.prototype.createFamily = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].createFamilyURL, data);
+    };
+    DashboardService.prototype.getOldDetails = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getOldDetailsURL, data);
+    };
+    DashboardService.prototype.removeHaribhaktDetails = function (id) {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].removeHaribhaktDetailsURL + id);
+    };
+    DashboardService.prototype.removeMandalDetails = function (id) {
+        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].removeMandalDetailsURL + id);
+    };
+    DashboardService.prototype.removeLastInsertedOTP = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].removeLastInsertedOTPURL, data);
+    };
+    DashboardService.prototype.getEditDataofSecondstage = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getEditDataforSecondStageURL, data);
+    };
+    DashboardService.prototype.updateHaribhakt = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updateHaribhaktURL, data);
+    };
+    DashboardService.prototype.saveMandalDetails = function (admin) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].saveMandalListURL, admin);
+    };
+    DashboardService.prototype.updateMandalList = function (admin) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updateMandalListURL, admin);
+    };
+    DashboardService.prototype.savePersonalInfo = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].savePersonalInfoURL, data);
+    };
+    DashboardService.prototype.verifyNumber = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].verifyNumberURL, data);
+    };
+    DashboardService.prototype.addFamilytoNew = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].addFamilytoNewURL, data);
+    };
+    DashboardService.prototype.verifyUserOTP = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getUserOTPVerifyURL, data);
+    };
+    DashboardService.prototype.updateFamilyCount = function (data) {
+        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updateFamilyCountURL, data);
+    };
+    DashboardService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"] }
+    ]; };
+    DashboardService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]])
+    ], DashboardService);
+    return DashboardService;
 }());
 
 
@@ -1480,6 +1626,7 @@ var ApiService = /** @class */ (function () {
     ApiService.SaveAndSendOTPURL = ApiService_1.HOST_URL + '/admin/sendAndSaveUserOTP';
     ApiService.removeLastInsertedOTPURL = ApiService_1.HOST_URL + '/admin/removeLastInsertedOTP';
     ApiService.getUserOTPVerifyURL = ApiService_1.HOST_URL + '/admin/getUserOTPVerify';
+    ApiService.updateFamilyCountURL = ApiService_1.HOST_URL + '/admin/updateFamilyCount';
     ApiService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
     ]; };

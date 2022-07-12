@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'app/api.service';
+import { DashboardService } from 'app/dashboard/dashboard.service';
 import { LoginService } from 'app/pages/login/login.service';
 
 //Metadata
@@ -94,6 +95,7 @@ export class SidebarComponent {
         private router: Router,
         private loginService:LoginService,
         private apiService: ApiService,
+        private dashboardService: DashboardService
         
     ) {
 
@@ -115,6 +117,16 @@ export class SidebarComponent {
     ngAfterViewInit() {
     }
     logout() {
+        if(localStorage.getItem('role') ==undefined){
+            debugger
+            let mob = localStorage.getItem('mob');
+            let data={
+                mob:mob
+            }
+            debugger
+            this.dashboardService.updateFamilyCount(data).subscribe((res)=>{})
+        }
+       
        localStorage.clear();
        this.router.navigate(['pages/login']);
         // this.loginTimeCalculation();

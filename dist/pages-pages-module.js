@@ -169,7 +169,7 @@ var LoginComponent = /** @class */ (function () {
         this.loginModel = new _login_model__WEBPACK_IMPORTED_MODULE_5__["Loginuser"];
         this.OTPSent = false;
         this.submitButton = true;
-        this.timeLeft = 300;
+        this.timeLeft = 120;
         this.account_validation_messages = {
             'email': [
                 { type: 'required', message: 'Email is required' },
@@ -250,6 +250,9 @@ var LoginComponent = /** @class */ (function () {
             contactno: this.loginModel.pno,
         };
         this.dashboardService.removeLastInsertedOTP(data).subscribe(function (data) {
+            _this.apiService.showNotification('top', 'right', 'OTP Resent Successfully.', 'success');
+            _this.timeLeft = 120;
+            _this.startTimer();
             _this.verifybox();
         });
     };
@@ -259,13 +262,11 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.verifyOTPFromUser = function () {
         var _this = this;
-        debugger;
         var data = {
             contactno: this.loginModel.pno,
             otp: this.loginModel.otp
         };
         this.dashboardService.verifyUserOTP(data).subscribe(function (res) {
-            debugger;
             if (res == 'wrong') {
                 _this.apiService.showNotification('top', 'right', 'OTP does not Match Please try Again.', 'danger');
             }
@@ -296,135 +297,6 @@ var LoginComponent = /** @class */ (function () {
             app_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]])
     ], LoginComponent);
     return LoginComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "QAUA":
-/*!************************************************!*\
-  !*** ./src/app/dashboard/dashboard.service.ts ***!
-  \************************************************/
-/*! exports provided: DashboardService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardService", function() { return DashboardService; });
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var app_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/api.service */ "yTNM");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var DashboardService = /** @class */ (function () {
-    function DashboardService(httpClient) {
-        this.httpClient = httpClient;
-    }
-    DashboardService.prototype.getMandalList = function (type) {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getMandalListURL + type);
-    };
-    DashboardService.prototype.getAllMandalList = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllMandalListURL);
-    };
-    DashboardService.prototype.getAllFamilyList = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllFamilyListURL);
-    };
-    DashboardService.prototype.getAllMandaltypeList = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllMandalTypeListURL);
-    };
-    DashboardService.prototype.getAllRelationList = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllRelationListURL);
-    };
-    DashboardService.prototype.saveData = function (admin) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].saveMemberListURL, admin);
-    };
-    DashboardService.prototype.getSavedMembersList = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllSavedMembersListURL);
-    };
-    DashboardService.prototype.getAllHaribhakt = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getAllHaribhaktURL);
-    };
-    DashboardService.prototype.saveProffesionInfo = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].SaveProffesionInfoURL, data);
-    };
-    DashboardService.prototype.saveAndSendOtp = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].SaveAndSendOTPURL, data);
-    };
-    DashboardService.prototype.updateProffesionInfo = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updateProffesionInfoURL, data);
-    };
-    DashboardService.prototype.updatePersonalInfo = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updatePersonalInfoURL, data);
-    };
-    DashboardService.prototype.getRedtickCount = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getRedtickCountURL);
-    };
-    DashboardService.prototype.getYellowtickCount = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getYellowtickCountURL);
-    };
-    DashboardService.prototype.getGreentickCount = function () {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getGreentickCountURL);
-    };
-    DashboardService.prototype.createFamily = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].createFamilyURL, data);
-    };
-    DashboardService.prototype.getOldDetails = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getOldDetailsURL, data);
-    };
-    DashboardService.prototype.removeHaribhaktDetails = function (id) {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].removeHaribhaktDetailsURL + id);
-    };
-    DashboardService.prototype.removeMandalDetails = function (id) {
-        return this.httpClient.get(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].removeMandalDetailsURL + id);
-    };
-    DashboardService.prototype.removeLastInsertedOTP = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].removeLastInsertedOTPURL, data);
-    };
-    DashboardService.prototype.getEditDataofSecondstage = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getEditDataforSecondStageURL, data);
-    };
-    DashboardService.prototype.updateHaribhakt = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updateHaribhaktURL, data);
-    };
-    DashboardService.prototype.saveMandalDetails = function (admin) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].saveMandalListURL, admin);
-    };
-    DashboardService.prototype.updateMandalList = function (admin) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].updateMandalListURL, admin);
-    };
-    DashboardService.prototype.savePersonalInfo = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].savePersonalInfoURL, data);
-    };
-    DashboardService.prototype.verifyNumber = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].verifyNumberURL, data);
-    };
-    DashboardService.prototype.addFamilytoNew = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].addFamilytoNewURL, data);
-    };
-    DashboardService.prototype.verifyUserOTP = function (data) {
-        return this.httpClient.post(app_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"].getUserOTPVerifyURL, data);
-    };
-    DashboardService.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"] }
-    ]; };
-    DashboardService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpClient"]])
-    ], DashboardService);
-    return DashboardService;
 }());
 
 
@@ -576,7 +448,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent\">\r\n    <div class=\"container\">\r\n        <div class=\"navbar-wrapper\">\r\n            <div class=\"navbar-toggle\" (click)=\"sidebarToggle()\">\r\n                <button type=\"button\" class=\"navbar-toggler\">\r\n                    <span class=\"navbar-toggler-bar bar1\"></span>\r\n                    <span class=\"navbar-toggler-bar bar2\"></span>\r\n                    <span class=\"navbar-toggler-bar bar3\"></span>\r\n                </button>\r\n            </div>\r\n            <a class=\"navbar-brand\" routerLinkActive=\"active\" href=\"http://127.0.0.1:5500/index.html\">\r\n                <img style=\"max-height: 100px;\" src=\"../../../assets/img/logo.jpeg\">\r\n                <!-- <img style=\"max-height: 40px;\" src=\"../../../assets/img/logo1.png\"> -->\r\n            </a>\r\n        </div>\r\n        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navigation\"\r\n            aria-controls=\"navigation-index\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n            <span class=\"navbar-toggler-bar navbar-kebab\"></span>\r\n            <span class=\"navbar-toggler-bar navbar-kebab\"></span>\r\n            <span class=\"navbar-toggler-bar navbar-kebab\"></span>\r\n        </button>\r\n        <!-- <div class=\"collapse navbar-collapse justify-content-end\" id=\"navigation\">\r\n            <ul class=\"navbar-nav\">\r\n                <li class=\"nav-item\">\r\n                    <a routerLinkActive=\"active\" href=\"https://angrezthesalon.com/\" target=\"_blank\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-layout-11\"></i> Home\r\n                    </a>\r\n                </li>\r\n                 <li class=\"nav-item\">\r\n                    <a routerLinkActive=\"active\" href=\"https://angrezthesalon.com/\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-book-bookmark\"></i> About\r\n                    </a>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a routerLinkActive=\"active\" onmouseover=\"this.style.color ='#000000';\" href=\"https://angrezthesalon.com/\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-tap-01\"></i> Appointement\r\n                    </a>\r\n                </li>\r\n                <li class=\"nav-item \">\r\n                    <a routerLinkActive=\"active\" href=\"https://angrezthesalon.com/\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-satisfied\"></i> Blog\r\n                    </a>\r\n                </li> \r\n            </ul>\r\n        </div> -->\r\n    </div>\r\n</nav>\r\n<div class=\"wrapper wrapper-full-page \">\r\n    <div class=\"full-page section-image\" filter-color=\"red\" data-image=\"./assets/img/bg/banner.jpeg\">\r\n        <!--   you can change the color of the filter page using: data-color=\"blue | purple | green | orange | red | rose \" -->\r\n        <div class=\"content\">\r\n            <div class=\"container\">\r\n                <div class=\"col-lg-4 col-md-6 ml-auto mr-auto\">\r\n                    <form class=\"register-form\" name=\"loginForm\" #loginForm=\"ngForm\">\r\n                        <div class=\"card card-login\">\r\n                            <div class=\"card-header \">\r\n                                <div class=\"card-header \">\r\n                                    <h3 class=\"header text-center\" *ngIf=\"submitButton\">Login/Register</h3>\r\n                                    <h3 class=\"header text-center\" *ngIf=\"OTPSent\">Enter OTP</h3>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"card-body\" *ngIf=\"submitButton\">\r\n                                <div class=\"input-group\" [ngClass]=\"{'input-group-focus':focus===true}\">\r\n                                    <input type=\"text\" id=\"pno\" name=\"pno\" placeholder=\"Phone Number\" minlength=\"10\"\r\n                                        class=\"form-control\" [(ngModel)]=\"loginModel.pno\" required=\"true\" #pno=\"ngModel\"\r\n                                        type=\"text\" required >\r\n                                    <div class=\"input-group-append\">\r\n                                        <span class=\"input-group-text\" id=\"basic-addon1\"><i class=\"fa fa-phone\"\r\n                                                aria-hidden=\"true\"></i></span>\r\n                                    </div>\r\n                                </div>\r\n                                <div [hidden]=\"(pno.valid || pno.pristine || pno.untouched )\"\r\n                                    class=\"alert alert-danger\">\r\n                                    <div [hidden]=\"!pno.hasError('minlength')\">Phone Number should be atleast should be\r\n                                        10 digit</div>\r\n                                    <div [hidden]=\"!pno.hasError('required')\">Phone Number is required</div>\r\n                                </div>\r\n                                <br />\r\n                            </div>\r\n                            <div class=\"card-body\" *ngIf=\"OTPSent\">\r\n                                <div class=\"input-group\" [ngClass]=\"{'input-group-focus':focus===true}\">\r\n                                    <input type=\"text\" id=\"otp\" name=\"otp\" placeholder=\"Enter OTP\" minlength=\"6\"\r\n                                        class=\"form-control\" [(ngModel)]=\"loginModel.otp\" required=\"true\" value=\"\"\r\n                                        #otp=\"ngModel\" type=\"text\" required aria-describedby=\"basic-addon1\" autofocus\r\n                                        (focus)=\"focus=true\" (blur)=\"focus=false\">\r\n                                    <div class=\"input-group-append\">\r\n                                        <span class=\"input-group-text\" id=\"basic-addon1\"><i class=\"fa fa-key\"\r\n                                                aria-hidden=\"true\"></i></span>\r\n                                    </div>\r\n                                </div>\r\n                                <div [hidden]=\"(otp.valid || otp.pristine || otp.untouched )\"\r\n                                    class=\"alert alert-danger\">\r\n                                    <div [hidden]=\"!otp.hasError('minlength')\">OTP Number should be should be 6 digit\r\n                                    </div>\r\n                                    <div [hidden]=\"!otp.hasError('required')\">OTP Number is required</div>\r\n                                </div>\r\n                                <br />\r\n                            </div>\r\n\r\n                            <div class=\"card-footer \" *ngIf=\"submitButton\">\r\n                                <!-- <a href=\"javascript:void(0)\"  (click)=\"Login()\" class=\"btn btn-warning btn-round btn-block mb-3\">Get Started</a> -->\r\n                                <button class=\"btn btn-danger btn-block btn-round\" id=\"registration-submit\"\r\n                                    (click)=\"verifybox()\" value=\"Sign in\" [disabled]=\"!loginForm.form.valid \"><i\r\n                                        class=\"fa fa-sign-in\"></i> Get OTP</button>\r\n\r\n                            </div>\r\n                            <div class=\"card-footer \" *ngIf=\"OTPSent\">\r\n                                <!-- <a href=\"javascript:void(0)\"  (click)=\"Login()\" class=\"btn btn-warning btn-round btn-block mb-3\">Get Started</a> -->\r\n                                <button class=\"btn btn-danger btn-block btn-round\" id=\"registration-submit\"\r\n                                    (click)=\"verifyOTPFromUser()\" value=\"Sign in\" [disabled]=\"!loginForm.form.valid\"><i\r\n                                        class=\"fa fa-sign-in\"></i> Login</button>\r\n                                <div class=\"link d-flex justify-content-center\" style=\"padding-top:10px ;color:blue;\">\r\n                                    <a (click)=\"resendOTP()\">\r\n                                        <h5><strong >Resend OTP in: </strong>{{timeLeft}}</h5>\r\n                                    </a>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <footer class=\"footer footer-black  footer-white \">\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <!-- <nav class=\"footer-nav\">\r\n                        <ul>\r\n\r\n                            <li>\r\n                                <a href=\"https://www.keryar.com\">\r\n                  Keryar\r\n                </a>\r\n                            </li>\r\n                            <li>\r\n                                <a href=\"https://keryar.com/why\">\r\n                  Blog\r\n                </a>\r\n                            </li>\r\n                            <li>\r\n                                <a>\r\n                  Licenses\r\n                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </nav> -->\r\n                    <div class=\"credits ml-auto\">\r\n                        <span class=\"copyright\">\r\n                            &copy; {{test | date: 'yyyy'}}, Managed by <a href=\"https://www.keryar.com\">Keryar</a>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </footer>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent\">\r\n    <div class=\"container\">\r\n        <div class=\"navbar-wrapper\">\r\n            <div class=\"navbar-toggle\" (click)=\"sidebarToggle()\">\r\n                <button type=\"button\" class=\"navbar-toggler\">\r\n                    <span class=\"navbar-toggler-bar bar1\"></span>\r\n                    <span class=\"navbar-toggler-bar bar2\"></span>\r\n                    <span class=\"navbar-toggler-bar bar3\"></span>\r\n                </button>\r\n            </div>\r\n            <a class=\"navbar-brand\" routerLinkActive=\"active\" href=\"http://127.0.0.1:5500/index.html\">\r\n                <img style=\"max-height: 100px;\" src=\"../../../assets/img/logo.jpeg\">\r\n                <!-- <img style=\"max-height: 40px;\" src=\"../../../assets/img/logo1.png\"> -->\r\n            </a>\r\n        </div>\r\n        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navigation\"\r\n            aria-controls=\"navigation-index\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n            <span class=\"navbar-toggler-bar navbar-kebab\"></span>\r\n            <span class=\"navbar-toggler-bar navbar-kebab\"></span>\r\n            <span class=\"navbar-toggler-bar navbar-kebab\"></span>\r\n        </button>\r\n        <!-- <div class=\"collapse navbar-collapse justify-content-end\" id=\"navigation\">\r\n            <ul class=\"navbar-nav\">\r\n                <li class=\"nav-item\">\r\n                    <a routerLinkActive=\"active\" href=\"https://angrezthesalon.com/\" target=\"_blank\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-layout-11\"></i> Home\r\n                    </a>\r\n                </li>\r\n                 <li class=\"nav-item\">\r\n                    <a routerLinkActive=\"active\" href=\"https://angrezthesalon.com/\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-book-bookmark\"></i> About\r\n                    </a>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a routerLinkActive=\"active\" onmouseover=\"this.style.color ='#000000';\" href=\"https://angrezthesalon.com/\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-tap-01\"></i> Appointement\r\n                    </a>\r\n                </li>\r\n                <li class=\"nav-item \">\r\n                    <a routerLinkActive=\"active\" href=\"https://angrezthesalon.com/\" class=\"nav-link\">\r\n                        <i class=\"nc-icon nc-satisfied\"></i> Blog\r\n                    </a>\r\n                </li> \r\n            </ul>\r\n        </div> -->\r\n    </div>\r\n</nav>\r\n<div class=\"wrapper wrapper-full-page \">\r\n    <div class=\"full-page section-image\" filter-color=\"red\" data-image=\"./assets/img/bg/banner.jpeg\">\r\n        <!--   you can change the color of the filter page using: data-color=\"blue | purple | green | orange | red | rose \" -->\r\n        <div class=\"content\">\r\n            <div class=\"container\">\r\n                <div class=\"col-lg-4 col-md-6 ml-auto mr-auto\">\r\n                    <form class=\"register-form\" name=\"loginForm\" #loginForm=\"ngForm\">\r\n                        <div class=\"card card-login\">\r\n                            <div class=\"card-header \">\r\n                                <div class=\"card-header \">\r\n                                    <h3 class=\"header text-center\" *ngIf=\"submitButton\">Login/Register</h3>\r\n                                    <h3 class=\"header text-center\" *ngIf=\"OTPSent\">Enter OTP</h3>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"card-body\" *ngIf=\"submitButton\">\r\n                                <div class=\"input-group\" [ngClass]=\"{'input-group-focus':focus===true}\">\r\n                                    <input type=\"text\" id=\"pno\" name=\"pno\" placeholder=\"Phone Number\" minlength=\"10\"\r\n                                        class=\"form-control\" [(ngModel)]=\"loginModel.pno\" required=\"true\" #pno=\"ngModel\"\r\n                                        type=\"text\" required >\r\n                                    <div class=\"input-group-append\">\r\n                                        <span class=\"input-group-text\" id=\"basic-addon1\"><i class=\"fa fa-phone\"\r\n                                                aria-hidden=\"true\"></i></span>\r\n                                    </div>\r\n                                </div>\r\n                                <div [hidden]=\"(pno.valid || pno.pristine || pno.untouched )\"\r\n                                    class=\"alert alert-danger\">\r\n                                    <div [hidden]=\"!pno.hasError('minlength')\">Phone Number should be atleast should be\r\n                                        10 digit</div>\r\n                                    <div [hidden]=\"!pno.hasError('required')\">Phone Number is required</div>\r\n                                </div>\r\n                                <br />\r\n                            </div>\r\n                            <div class=\"card-body\" *ngIf=\"OTPSent\">\r\n                                <div class=\"input-group\" [ngClass]=\"{'input-group-focus':focus===true}\">\r\n                                    <input type=\"text\" id=\"otp\" name=\"otp\" placeholder=\"Enter OTP\" minlength=\"6\"\r\n                                        class=\"form-control\" [(ngModel)]=\"loginModel.otp\" required=\"true\" value=\"\"\r\n                                        #otp=\"ngModel\" type=\"text\" required aria-describedby=\"basic-addon1\" autofocus\r\n                                        (focus)=\"focus=true\" (blur)=\"focus=false\">\r\n                                    <div class=\"input-group-append\">\r\n                                        <span class=\"input-group-text\" id=\"basic-addon1\"><i class=\"fa fa-key\"\r\n                                                aria-hidden=\"true\"></i></span>\r\n                                    </div>\r\n                                </div>\r\n                                <div [hidden]=\"(otp.valid || otp.pristine || otp.untouched )\"\r\n                                    class=\"alert alert-danger\">\r\n                                    <div [hidden]=\"!otp.hasError('minlength')\">OTP Number should be should be 6 digit\r\n                                    </div>\r\n                                    <div [hidden]=\"!otp.hasError('required')\">OTP Number is required</div>\r\n                                </div>\r\n                                <br />\r\n                            </div>\r\n\r\n                            <div class=\"card-footer \" *ngIf=\"submitButton\">\r\n                                <!-- <a href=\"javascript:void(0)\"  (click)=\"Login()\" class=\"btn btn-warning btn-round btn-block mb-3\">Get Started</a> -->\r\n                                <button class=\"btn btn-danger btn-block btn-round\" id=\"registration-submit\"\r\n                                    (click)=\"verifybox()\" value=\"Sign in\" [disabled]=\"!loginForm.form.valid \"><i\r\n                                        class=\"fa fa-sign-in\"></i> Get OTP</button>\r\n\r\n                            </div>\r\n                            <div class=\"card-footer \" *ngIf=\"OTPSent\">\r\n                                <!-- <a href=\"javascript:void(0)\"  (click)=\"Login()\" class=\"btn btn-warning btn-round btn-block mb-3\">Get Started</a> -->\r\n                                <button class=\"btn btn-danger btn-block btn-round\" id=\"registration-submit\"\r\n                                    (click)=\"verifyOTPFromUser()\" value=\"Sign in\" [disabled]=\"!loginForm.form.valid\"><i\r\n                                        class=\"fa fa-sign-in\"></i> Login</button>\r\n                                <div class=\"link d-flex justify-content-center\" style=\"padding-top:10px ;color:blue;\" >\r\n                                    <a >\r\n                                        <h5><strong>Resend OTP in: </strong>{{timeLeft}}</h5>\r\n                                    </a>\r\n                                </div>\r\n                                <button class=\"btn btn-danger btn-block btn-round\" id=\"registration-submit\" *ngIf=\"timeLeft==0\"\r\n                                    (click)=\"resendOTP()\" value=\"Sign in\" ><i\r\n                                        class=\"fa fa-sign-in\"></i> Resend OTP</button>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <footer class=\"footer footer-black  footer-white \">\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <!-- <nav class=\"footer-nav\">\r\n                        <ul>\r\n\r\n                            <li>\r\n                                <a href=\"https://www.keryar.com\">\r\n                  Keryar\r\n                </a>\r\n                            </li>\r\n                            <li>\r\n                                <a href=\"https://keryar.com/why\">\r\n                  Blog\r\n                </a>\r\n                            </li>\r\n                            <li>\r\n                                <a>\r\n                  Licenses\r\n                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </nav> -->\r\n                    <div class=\"credits ml-auto\">\r\n                        <span class=\"copyright\">\r\n                            &copy; {{test | date: 'yyyy'}}, Managed by <a href=\"https://www.keryar.com\">Keryar</a>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </footer>\r\n    </div>\r\n</div>");
 
 /***/ })
 

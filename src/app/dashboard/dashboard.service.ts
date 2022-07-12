@@ -104,5 +104,8 @@ export class DashboardService {
     verifyUserOTP(data){
         return this.httpClient.post(ApiService.getUserOTPVerifyURL,data);
     }
+    updateFamilyCount(data){
+       return this.httpClient.post(ApiService.updateFamilyCountURL,data)
+    }
 
 }
