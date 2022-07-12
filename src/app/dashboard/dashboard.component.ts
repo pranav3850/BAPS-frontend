@@ -1020,6 +1020,7 @@ export class DashboardComponent implements OnInit {
     let data = {
       contactno: this.duplicateUser.contactNo
     };
+    this.timeLeft=120;
     this.startTimer();
     this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
       debugger
