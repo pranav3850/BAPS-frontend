@@ -1398,10 +1398,13 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-11 col-sm-11 col-xl-11 col-lg-11">
-                            <h5 class="text-center" *ngIf="item.index==0 && item.title==undefined">Add Details For Head of the Family first</h5>
+                            <h5 class="text-center" *ngIf="item.index==0 && item.title==undefined">Add Details For Head
+                                of the Family first</h5>
                             <h5 class="text-center" *ngIf="item.index==1 && item.title==undefined">Add Your details</h5>
-                            <h5 class="text-center" *ngIf="item.index>1 && item.title==undefined">Add details for Member {{ind+1}}</h5>
-                            <h6 class="text-danger text-center" *ngIf="item.title=='update relation'">Please Update your relation </h6>
+                            <h5 class="text-center" *ngIf="item.index>1 && item.title==undefined">Add details for Member
+                                {{ind+1}}</h5>
+                            <h6 class="text-danger text-center" *ngIf="item.title=='update relation'">Please Update your
+                                relation </h6>
                         </div>
                         <div class="col-md-1 col-sm-1 col-xl-1 col-lg-1">
                             <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm"
@@ -2079,6 +2082,8 @@
                     <h5 class="modal-title text-center">
                         Add Number of Family Members
                         <br>
+                        (તમારા પરિવાર ની સંખ્યાં લખો.)
+                        <br>
                         <small class="text-muted" style="font-weight: 600;">(Including You)</small>
                     </h5>
                 </div>
@@ -2106,11 +2111,11 @@
 
                 </div>
                 <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!tot_mem"
-                            (click)="AddMoreMember()">Save
-                            changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="button" class="btn btn-danger"
-                            data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!tot_mem"
+                        (click)="AddMoreMember()">Save
+                        changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger"
+                        data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;
 
                 </div>
             </div>
