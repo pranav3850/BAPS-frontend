@@ -10,7 +10,7 @@ export const PagesRoutes: Routes = [{
         component: LoginComponent
     },
     {
-        path: 'adminlogin',
+        path: 'keryaradminloginr',
         component: ForgotPwdComponent
     },
     ]
