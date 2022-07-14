@@ -5,7 +5,7 @@ import { Relation } from './relation.model'
 import { DashboardService } from './dashboard.service';
 import { ApiService } from 'app/api.service';
 import { Profession } from './profession.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 declare const $: any;
@@ -87,6 +87,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     private apiService: ApiService,
+    private router:Router
   ) {
     this.Role = localStorage.getItem('role');
     this.mainMob = localStorage.getItem('mob');
@@ -138,7 +139,6 @@ export class DashboardComponent implements OnInit {
     if (this.Role != undefined) {
       this.getHaribhakt();
       this.getRedTickCount();
-      this.getYellowTickCount();
       this.getGreenTickCount();
       this.getAllFamily();
       this.getAllmandal();
@@ -226,7 +226,15 @@ export class DashboardComponent implements OnInit {
           if (res != 'success') {
             this.apiService.showNotification('top', 'right', ' Error in Information Updation.', 'danger');
           } else {
-            this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
+            if(res =='success1'){
+              this.apiService.showNotification('top', 'right', 'Please Login with updated number.', 'success');
+            localStorage.clear();
+            this.router.navigate(['pages/login']);
+            }else{
+              this.apiService.showNotification('top', 'right', 'Information Updated Successfully.', 'success');
+            }
+            
+            
           }
           this.dashboardService.removeLastInsertedOTP(data).subscribe();
         });
@@ -432,15 +440,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  getYellowTickCount() {
-    this.dashboardService.getYellowtickCount().subscribe((res: any) => {
-      this.totalYelloTick = res;
-      this.tYellow = res;
-      for (let i = 0; i < this.totalYelloTick.length; i++) {
-        this.totalYelloTick[i].index = i + 1;
-      }
-    })
-  }
+ 
   searchYellowList(val) {
     if (this.search == '') {
       this.totalYelloTick = this.tYellow;
@@ -759,11 +759,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getSavedMembers() {
-    this.dashboardService.getSavedMembersList().subscribe((data: any) => {
-      this.addedMembers = data;
-    })
-  }
+  
 
 
 
@@ -874,7 +870,7 @@ export class DashboardComponent implements OnInit {
 
     if (data.relationship == 'Father' && this.familyId ==undefined) {
       let obj = {
-        nooffammem: this.tot_mem,
+        nooffammem: 0,
         mob: data.contactNo
       }
       this.dashboardService.createFamily(obj).subscribe((res: any) => {

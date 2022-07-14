@@ -40,25 +40,16 @@ export class DashboardService {
 
         return this.httpClient.get(ApiService.getAllHaribhaktURL);
     }
-    saveProffesionInfo(data) {
-        return this.httpClient.post(ApiService.SaveProffesionInfoURL, data);
-    }
-
+   
     saveAndSendOtp(data) {
          
         return this.httpClient.post<any>(ApiService.SaveAndSendOTPURL, data);
-    }
-    updateProffesionInfo(data) {
-        return this.httpClient.post(ApiService.updateProffesionInfoURL, data);
     }
     updatePersonalInfo(data) {
         return this.httpClient.post(ApiService.updatePersonalInfoURL, data);
     }
     getRedtickCount() {
         return this.httpClient.get(ApiService.getRedtickCountURL);
-    }
-    getYellowtickCount() {
-        return this.httpClient.get(ApiService.getYellowtickCountURL);
     }
     getGreentickCount() {
         return this.httpClient.get(ApiService.getGreentickCountURL);

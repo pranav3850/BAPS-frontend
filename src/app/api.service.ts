@@ -26,8 +26,6 @@ export class ApiService {
   public static getAllRelationListURL: string = ApiService.HOST_URL + '/admin/GetAllRelationList'
   public static saveMemberListURL: string = ApiService.HOST_URL + '/admin/SaveMemberList'
   public static getAllSavedMembersListURL: string = ApiService.HOST_URL + '/admin/GetAllSavedMembersList';
-  public static SaveProffesionInfoURL: string = ApiService.HOST_URL + '/admin/SaveProffesionInfo';
-  public static updateProffesionInfoURL: string = ApiService.HOST_URL + '/admin/updateProffesionInfoURL';
   public static createFamilyURL: string = ApiService.HOST_URL + '/admin/createFamily';
   public static getOldDetailsURL: string = ApiService.HOST_URL + '/admin/getOldDetails';
   public static getAllFamilyListURL: string = ApiService.HOST_URL + '/admin/getAllFamilyForData';
