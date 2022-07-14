@@ -141,14 +141,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8 col-lg-8 col-xl-8 col-sm-7 col-xs-6">
                             <h4 class="card-title">Families List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
                                 By</label>
                         </div>
-                        <div class="col-md-3 ml-md-auto">
+                        <div class="col-md-3 col-xl-3 col-lg-3 col-sm-4 col-xs-5 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
                                 <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
                                     [(ngModel)]="search" (keyup)="searchFamiliesList($event.target.value)"
@@ -182,11 +182,9 @@
                                             <i class="fa fa-eye" data-toggle="modal" data-target="#familyModal"
                                                 (click)="viewFamilyMembersDetails(item.familyId)"></i>
                                         </button>
-                                        &nbsp;
                                         <!-- <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                             <i class="fa fa-edit" ></i>
                                         </button> -->
-                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                                             (click)="removeOfferList(item.id)">
                                             <i class="fa fa-times"></i>
@@ -278,14 +276,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8 col-lg-8 col-xl-8 col-sm-7 col-xs-6">
                             <h4 class="card-title">Haribhakt List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
                                 By</label>
                         </div>
-                        <div class="col-md-3 ml-md-auto">
+                        <div class="col-md-3 col-xl-3 col-lg-3 col-sm-4 col-xs-5 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
                                 <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
                                     [(ngModel)]="search" (keyup)="searchHaribhaktList($event.target.value)"
@@ -318,7 +316,7 @@
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                             <i class="fa fa-eye" (click)="viewEditHaribhakatDetails(item)"></i>
                                         </button>
-                                        &nbsp;
+
                                         <!-- <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
                                                 (click)="viewOfferDetails(item)"></i>
@@ -360,6 +358,7 @@
                         <i class="nc-icon nc-simple-remove"></i>
                     </button>
                     <h5 class="modal-title" id="myModalLabel">View/Edit Information</h5>
+                    <h6 class=" text-muted" style="font-weight: 600;">( માહિતી જોવો અને ફેરફાર કરો )</h6>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" name="InfoForm" #InfoForm="ngForm">
@@ -567,7 +566,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1  ">
-                                <label class="col-form-label" style="font-weight: 700;">
+                                <label class="col-form-label" style="font-weight: 700; ">
                                     City/Village
                                 </label>
                             </div>
@@ -1083,14 +1082,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8 col-lg-8 col-xl-8 col-sm-7 col-xs-6">
                             <h4 class="card-title">Redtick Haribhakt List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
                                 By</label>
                         </div>
-                        <div class="col-md-3 ml-md-auto">
+                        <div class="col-md-3 col-xl-3 col-lg-3 col-sm-4 col-xs-5 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
                                 <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
                                     [(ngModel)]="search" (keyup)="searchManadalList($event.target.value)"
@@ -1123,12 +1122,10 @@
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                             <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
                                         </button>
-                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
                                                 (click)="viewOfferDetails(item)"></i>
                                         </button>
-                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                                             (click)="removeHaribhaktList(item.userId)">
                                             <i class="fa fa-times"></i>
@@ -1159,14 +1156,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8 col-lg-8 col-xl-8 col-sm-7 col-xs-6">
                             <h4 class="card-title">Yellowtick Haribhakt List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
                                 By</label>
                         </div>
-                        <div class="col-md-3 ml-md-auto">
+                        <div class="col-md-3 col-xl-3 col-lg-3 col-sm-4 col-xs-5 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
                                 <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
                                     [(ngModel)]="search" (keyup)="searchYellowList($event.target.value)"
@@ -1199,12 +1196,10 @@
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                             <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
                                         </button>
-                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
                                                 (click)="viewOfferDetails(item)"></i>
                                         </button>
-                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                                             (click)="removeHaribhaktList(item.userId)">
                                             <i class="fa fa-times"></i>
@@ -1234,14 +1229,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8 col-lg-8 col-xl-8 col-sm-7 col-xs-6">
                             <h4 class="card-title">GreenTick Haribhakt List</h4>
                         </div>
                         <div class="ml-md-auto">
                             <label class="col-form-label" style="margin-top: 5px;font-size: 18px;color: black;">Search
                                 By</label>
                         </div>
-                        <div class="col-md-3 ml-md-auto">
+                        <div class="col-md-3 col-xl-3 col-lg-3 col-sm-4 col-xs-5 ml-md-auto">
                             <div class="form-group" style="margin-top: 8px !important;">
                                 <input type="search" id="form1" class="form-control" placeholder="Conatct Number"
                                     [(ngModel)]="search" (keyup)="searchGreenList($event.target.value)"
@@ -1274,12 +1269,10 @@
                                         <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                             <i class="fa fa-eye" (click)="onlyViewOfferDetails(item.id)"></i>
                                         </button>
-                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
                                             <i class="fa fa-edit" data-toggle="modal" data-target="#offerModal"
                                                 (click)="viewOfferDetails(item)"></i>
                                         </button>
-                                        &nbsp;
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                                             (click)="removeHaribhaktList(item.userId)">
                                             <i class="fa fa-times"></i>
@@ -1320,6 +1313,11 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <h5 style="color: red; text-align: center;">*Please Update Your Family Relations.</h5>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead class="text-primary">
@@ -1350,14 +1348,12 @@
                             <td class="text-right">
                                 <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm">
                                     <i class="fa fa-eye" (click)="openViewInfo(item)"></i>
-                                </button> &nbsp;&nbsp;
+                                </button>
                                 <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm"
                                     (click)="removeHaribhaktList(item.userId)">
                                     <i class="fa fa-times"></i>
                                 </button>
                             </td>
-
-
                         </tr>
                     </tbody>
                 </table>
@@ -1372,18 +1368,25 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-11 col-sm-11 col-xl-11 col-lg-11">
-                            <h5 class="text-center" *ngIf="item.index==0 && item.title==undefined">Add Details For Head of the Family first</h5>
-                            <h5 class="text-center" *ngIf="item.index==1 && item.title==undefined">Add Your details</h5>
-                            <h5 class="text-center" *ngIf="item.index>1 && item.title==undefined">Add details for Member {{ind+1}}</h5>
-                            <h6 class="text-danger text-center" *ngIf="item.title=='update relation'">Please Update your relation </h6>
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xl-1 col-lg-1">
-                            <button type="button" rel="tooltip" class="btn btn-dangerbtn-icon btn-sm"
-                                (click)="closeModal(ind)">
-                                <i class="fa fa-close"></i>
+                        <div class="col-xs-6 col-sm-6 col-md-11 col-xl-11 col-lg-11"></div>
+                        <div class="col-xs-2 col-sm-2 col-md-1 col-xl-1 col-lg-1">
+                            <button type="button" class="close" aria-hidden="true" (click)="closeModal(ind)">
+                                <i class="nc-icon nc-simple-remove"></i>
                             </button>
                         </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                            <h5 class="text-center" *ngIf="item.index==0 && item.title==undefined">Add Details For Head
+                                of the Family first</h5>
+                            <h5 class="text-center" *ngIf="item.index==1 && item.title==undefined">Add Your details</h5>
+                            <h5 class="text-center" *ngIf="item.index>1 && item.title==undefined">Add details for Member
+                                {{ind+1}}</h5>
+                            <h6 class="text-danger text-center" *ngIf="item.title=='update relation'">Please Update your
+                                relation </h6>
+                        </div>
+
                     </div>
                     <!-- <h1 class="small text-muted text-center" ></h1>
                     <h4 class="small text-muted text-center" ></h4>
@@ -2034,14 +2037,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="ml-md-auto">
-                                <div class="btn btn-warning" (click)="savePersonalInfo(item,ind)">Save Draft</div>
-                                <!-- <div class="btn btn-success">Submit</div> -->
-                                &nbsp;&nbsp;&nbsp;
-                            </div>
-                        </div>
+
                     </form>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-10 col-xl-10 col-lg-10 col-xs-4 col-sm-4"></div>
+                        <div class="col-md-2 col-xl-2 col-lg-2 col-xs-2 col-sm-2">
+                            <div class="btn btn-block btn-warning" (click)="savePersonalInfo(item,ind)">Save Draft</div>
+                            <!-- <div class="btn btn-success">Submit</div> -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2053,6 +2059,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title text-center">
                         Add Number of Family Members
+                        <br>
+                        (તમારા પરિવાર ની સંખ્યાં લખો.)
                         <br>
                         <small class="text-muted" style="font-weight: 600;">(Including You)</small>
                     </h5>
@@ -2081,11 +2089,11 @@
 
                 </div>
                 <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!tot_mem"
-                            (click)="AddMoreMember()">Save
-                            changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="button" class="btn btn-danger"
-                            data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!tot_mem"
+                        (click)="AddMoreMember()">Save
+                        changes</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger"
+                        data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;
 
                 </div>
             </div>
@@ -2098,7 +2106,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title ">
-                        Family with this Contact number is registered Already !
+                        Family with this Contact number is registered Already ! <br>
+                        ( આ નંબર થી એક પરિવાર જોડાયેલો છે.)
+                        <!-- શું તમે એ પરિવાર માં જોડાવા માંગો છો? -->
                     </h6>
                 </div>
                 <div class="modal-body">
@@ -2151,18 +2161,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer ">
                     <div class="row">
-                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                            <button class="btn btn-warning" *ngIf="timeLeft==0" (click)="resendOTP()">Resend</button>
-                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                            <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!otp"
-                                (click)="AddExistUser()">Submit</button>
-                        </div>
+                        <button class="btn btn-warning" *ngIf="timeLeft==0" (click)="resendOTP()">Resend</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="!otp"
+                            (click)="AddExistUser()">Submit</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

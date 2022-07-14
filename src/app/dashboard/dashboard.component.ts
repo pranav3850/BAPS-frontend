@@ -156,9 +156,9 @@ export class DashboardComponent implements OnInit {
     this.getMandalType();
   }
   getOldDetails(data) {
-    debugger
+     
     this.dashboardService.getOldDetails(data).subscribe((res: any) => {
-      debugger
+       
       this.tot_mem = res[0].nooffamily - res.length;
       if (res != 'no family' && res.length > 0) {
         this.familyId = res[0].familyId;
@@ -190,7 +190,7 @@ export class DashboardComponent implements OnInit {
   }
   viewEditHaribhakatDetails(data) {
     this.professionViewModel = data;
-    debugger
+     
     
     this.professionViewModel.general = false;
     this.professionViewModel.medium = false;
@@ -287,7 +287,7 @@ export class DashboardComponent implements OnInit {
   }
   getAllFamily() {
     this.dashboardService.getAllFamilyList().subscribe((res: any) => {
-      debugger
+       
       this.totalFamily = res;
       this.tFamily = res;
       for (let i = 0; i < this.totalFamily.length; i++) {
@@ -831,7 +831,7 @@ export class DashboardComponent implements OnInit {
       }
     }
     this.professionModel.forEach((ele,ind)=>{
-      debugger
+       
       ele.index = ind;
     })
     // this.professionModel.length = this.tot_mem;
@@ -1023,14 +1023,14 @@ export class DashboardComponent implements OnInit {
   }
 
   openOTPforAddUser() {
-    debugger
+     
     let data = {
       contactno: this.duplicateUser.contactNo
     };
     this.timeLeft=120;
     this.startTimer();
     this.dashboardService.saveAndSendOtp(data).subscribe((data: any) => {
-      debugger
+       
       if (data == 'sent') {
         this.apiService.showNotification('top', 'right', 'OTP Sent Successfully.', 'success');
         $(document).ready(function () {
@@ -1045,7 +1045,7 @@ export class DashboardComponent implements OnInit {
   openViewInfo(data) {
     this.professionViewModel = data;
     this.professionViewModel.oldno = this.professionViewModel.contactNo;
-    debugger
+     
     // if(this.professionViewModel.isForeignCountry==true){
     //   this.isForigenOpen(true);
     // }
